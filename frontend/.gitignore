@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+
+# yarn zero-install
 .yarn/*
 !.yarn/cache
 !.yarn/patches
@@ -11,6 +13,7 @@
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
 # testing
 /coverage
 
