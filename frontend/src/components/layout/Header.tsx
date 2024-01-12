@@ -9,6 +9,7 @@ const Header = () => {
       <button onClick={() => navigate("/")}>리스트</button>
       <button onClick={() => navigate("/login")}>로그인</button>
       <button onClick={() => navigate("/signup")}>회원가입</button>
+      <button onClick={() => navigate("/create")}>등록</button>
     </div>
   );
 };
