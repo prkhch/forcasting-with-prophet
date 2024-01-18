@@ -2,10 +2,11 @@ import React, { useState, useRef } from "react";
 import axios from "axios";
 
 const ChartCreatePage = () => {
+  // 파일
   const fileInput = useRef<HTMLInputElement>(null);
-  const [file, setFile] = useState<File | null>(null);
   const formData = new FormData();
 
+  // 차트 정보
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [memberId, setMemberId] = useState("");
@@ -22,9 +23,8 @@ const ChartCreatePage = () => {
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files) return;
-    setFile(files[0]);
-    if (!file) return;
-    formData.append("file", file);
+    formData.append("file", files[0]);
+    console.log(formData.get("file"));
   };
 
   const handleClickUpload = () => {
@@ -50,6 +50,18 @@ const ChartCreatePage = () => {
       });
   };
 
+  const ApiPostExcelFile = () => {
+    console.log(formData.get("file"));
+    axios
+      .post("/api/xls", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div>
       <div>등록 페이지</div>
@@ -60,7 +72,8 @@ const ChartCreatePage = () => {
         style={{ display: "none" }}
       />
       <button onClick={handleClickUpload}>업로드</button>
-      <button onClick={ApiPostCreateChart}>전송</button>
+      <button onClick={ApiPostExcelFile}>엑셀전송</button>
+      <br />
       <input type="text" onChange={handleChangeTitle} defaultValue="제목" />
       <input
         type="textarea"
@@ -72,6 +85,7 @@ const ChartCreatePage = () => {
         onChange={handleChangeMemberId}
         defaultValue="작성자"
       />
+      <button onClick={ApiPostCreateChart}>차트전송</button>
     </div>
   );
 };
