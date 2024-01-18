@@ -13,4 +13,5 @@ public class XlsFileResponse {
     private String fileName;
     private long fileSize;
     private String fileType;
+    private byte[] fileData;
 }
