@@ -27,10 +27,12 @@ public class FlaskService {
 
         // 바디
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("fileName", xlsFileResponse.getFileName());
-        body.add("fileSize", xlsFileResponse.getFileSize());
-        body.add("fileType", xlsFileResponse.getFileType());
-        body.add("fileData", new ByteArrayResource(xlsFileResponse.getFileData()));
+        body.add("file", new ByteArrayResource(xlsFileResponse.getFileData()) {
+            @Override
+            public String getFilename() {
+                return xlsFileResponse.getFileName();
+            }
+        });
 
         // RequestEntity
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
