@@ -40,7 +40,7 @@ public class ChartController {
         xlsFileResponse.setFileData(file.getBytes());;
         System.out.println("xlsFile : " + xlsFileResponse);
 
-        ResponseEntity<String> flaskResponse = flaskService.sendFileToPandas(xlsFileResponse);
+        ResponseEntity<String> flaskResponse = flaskService.sendFileToFlask(xlsFileResponse);
 
         return flaskResponse;
     }

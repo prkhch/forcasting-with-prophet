@@ -18,8 +18,8 @@ public class FlaskService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public ResponseEntity<String> sendFileToPandas(XlsFileResponse xlsFileResponse) {
-        String url = "http://127.0.0.1:5000/xls";
+    public ResponseEntity<String> sendFileToFlask(XlsFileResponse xlsFileResponse) {
+        String url = "http://127.0.0.1:5000/api/prophet";
 
         // 헤더
         HttpHeaders headers = new HttpHeaders();
