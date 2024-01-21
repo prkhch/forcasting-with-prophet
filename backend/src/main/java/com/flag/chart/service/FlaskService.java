@@ -19,7 +19,29 @@ public class FlaskService {
     private RestTemplate restTemplate;
 
     public ResponseEntity<String> sendFileToPandas(XlsFileResponse xlsFileResponse) {
-        String url = "http://127.0.0.1:5000/xls";
+        String url = "http://127.0.0.1:5000/api/pandas";
+
+        // 헤더
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        // 바디
+        MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+        body.add("file", new ByteArrayResource(xlsFileResponse.getFileData()) {
+            @Override
+            public String getFilename() {
+                return xlsFileResponse.getFileName();
+            }
+        });
+
+        // RequestEntity
+        HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
+
+        return restTemplate.postForEntity(url, requestEntity, String.class);
+    }
+
+    public ResponseEntity<String> sendFileToProphet(XlsFileResponse xlsFileResponse) {
+        String url = "http://127.0.0.1:5000/api/prophet";
 
         // 헤더
         HttpHeaders headers = new HttpHeaders();
