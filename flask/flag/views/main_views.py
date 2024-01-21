@@ -1,22 +1,27 @@
+import random
+import seaborn as sns
+import numpy as np
 from flask import Blueprint, request
 from io import BytesIO
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import random
-import seaborn as sns
 from prophet import Prophet
+from prophet.plot import add_changepoints_to_plot, plot_weekly, plot_yearly
+import holidays
+import matplotlib
+matplotlib.use('Agg')
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
 
-import pandas as pd
+h = holidays.country_holidays('KR')
+print(h)
 
-def read_file(file_stream):
-    file_extension = file_stream.name.split('.')[-1]
+def read_file(fileData):
+    file_extension = fileData.filename.split('.')[-1]
+    file_stream = BytesIO(fileData.read())
 
     if file_extension.lower() == 'csv':
-        df = pd.read_csv(file_stream)
+        df = pd.read_csv(file_stream, encoding='cp949')
     elif file_extension.lower() in ['xls', 'xlsx']:
         df = pd.read_excel(file_stream, engine='openpyxl')
     else:
@@ -30,19 +35,32 @@ def postXlsFile():
     fileData = request.files.get('file')
 
     if fileData:
-        file_stream = BytesIO(fileData.read())
-        df = pd.read_excel(file_stream, engine="openpyxl")
+        df = read_file(fileData)
 
-        for column in df.keys()[1:] :
-            single_df = df[['Date', column]]
-            single_df = single_df.rename(columns={'Date': 'ds', column: 'y'})
+        for column in df.keys()[1:]:
+            print(column)
+            single_df = df[['Date', column]]  # 데이터셋 분리
+            single_df = single_df.rename(columns={'Date': 'ds', column: 'y'})  # 데이터셋 열이름 변경
+            m = Prophet()  # 모델 생성
+            m.add_country_holidays(country_name='KR') # 공휴일 국가코드 설정
+            m.fit(single_df)  # 피팅
+            if 'yearly' in m.seasonalities:
+                plot_yearly(m)
+            if 'weekly' in m.seasonalities:
+                plot_weekly(m)
+            future = m.make_future_dataframe(periods=365)  # 365일 간
+            forecast = m.predict(future)  # 예측
+            print(forecast)
 
-            m = Prophet()
-            m.fit(single_df)
+            #
+            fig1 = m.plot(forecast) # 이미지 저장
+            add_changepoints_to_plot(fig1.gca(), m, forecast) # change_points
+            fig1.savefig('static/images/prophet_plot.png')
 
-            future = m.make_future_dataframe(periods = 365)
-            forcast = m.predict(future)
-            print(forcast)
+            #
+            fig2 = m.plot_components(forecast)
+            fig2.savefig('static/images/prophet_plot2.png')
+
         return df.to_json(orient='records')
         # return "Good"
     else:
