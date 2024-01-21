@@ -24,11 +24,22 @@ public class ChartController {
     private final ChartService chartService;
     private final FlaskService flaskService;
 
-    @PostMapping("/api/chart")
-    public ResponseEntity<Chart> createChart(@RequestBody @Validated CreateChartRequest request) {
+    @PostMapping("/api/article")
+    public ResponseEntity<Chart> createArticle(@RequestBody @Validated CreateChartRequest request) {
         Chart savedChart = chartService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedChart);
+    }
+
+    @PostMapping("/api/pandas")
+    public ResponseEntity<String> postPandas(@RequestParam("file") MultipartFile file) throws IOException {
+        XlsFileResponse xlsFileResponse = new XlsFileResponse();
+        xlsFileResponse.setFileName(file.getOriginalFilename());
+        xlsFileResponse.setFileSize(file.getSize());
+        xlsFileResponse.setFileType(file.getContentType());
+        xlsFileResponse.setFileData(file.getBytes());;
+        ResponseEntity<String> flaskResponse = flaskService.sendFileToPandas(xlsFileResponse);
+        return flaskResponse;
     }
 
     @PostMapping("/api/xls")
@@ -40,7 +51,7 @@ public class ChartController {
         xlsFileResponse.setFileData(file.getBytes());;
         System.out.println("xlsFile : " + xlsFileResponse);
 
-        ResponseEntity<String> flaskResponse = flaskService.sendFileToFlask(xlsFileResponse);
+        ResponseEntity<String> flaskResponse = flaskService.sendFileToProphet(xlsFileResponse);
 
         return flaskResponse;
     }

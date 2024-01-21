@@ -29,9 +29,17 @@ def read_file(fileData):
 
     return df
 
+@bp.route("/api/pandas", methods=['POST'])
+def toPandas():
+    fileData = request.files.get('file')
+    if fileData:
+        df = read_file(fileData)
+        return df.to_json(orient='records')
+    else:
+        return "File not received"
 
 @bp.route("/api/prophet", methods=['POST'])
-def postXlsFile():
+def toProphet():
     fileData = request.files.get('file')
 
     if fileData:
@@ -41,7 +49,7 @@ def postXlsFile():
             print(column)
             single_df = df[['Date', column]]  # 데이터셋 분리
             single_df = single_df.rename(columns={'Date': 'ds', column: 'y'})  # 데이터셋 열이름 변경
-            m = Prophet()  # 모델 생성
+            m = Prophet(changepoints=['2022-05-12', '2022-10-23', '2022-02-03', '2022-07-07', '2022-06-06', '2022-03-03', '2022-04-05', '2022-08-08', '2022-09-09'])  # 모델 생성
             m.add_country_holidays(country_name='KR') # 공휴일 국가코드 설정
             m.fit(single_df)  # 피팅
             if 'yearly' in m.seasonalities:
