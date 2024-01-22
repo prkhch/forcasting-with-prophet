@@ -1,52 +1,97 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
-import { DataItem } from "types/DataItem";
+import { Charts, DataItem } from "types/DataItem";
 import useForamatDate from "hooks/useForamatDate";
+import { ProphetOptions } from "types/ProphetOptions";
 
 const ChartCreatePage = () => {
+  const formData = useRef(new FormData());
+
   // 파일
   const fileInput = useRef<HTMLInputElement>(null);
-  var formData = new FormData();
+  const [file, setFile] = useState<File>();
 
   // 게시글 정보
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [memberId, setMemberId] = useState("");
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
-  };
-  const handleChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContent(e.target.value);
-  };
-  const handleChangeMemberId = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMemberId(e.target.value);
-  };
+  const [chartsArr, setChartsArr] = useState<Charts>({});
 
   // 데이터셋 전송, Prophet
   const [dataSet, setDataSet] = useState<DataItem[]>([]);
-  const handleInputChange = (index: number, key: string, value: string) => {
-    const newData = [...dataSet];
-    const newItem = { ...newData[index], [key]: value };
-    newData[index] = newItem;
-    setDataSet(newData);
-  };
-  useEffect(() => {}, [dataSet]);
+
+  // const handleChangeText = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const { name, value } = e.target;
+
+  //   switch (name) {
+  //     case "title":
+  //       setTitle(value);
+  //       break;
+  //     case "content":
+  //       setContent(value);
+  //       break;
+  //     case "memberId":
+  //       setMemberId(value);
+  //       break;
+  //     case "growth":
+  //       setGrowth(value);
+  //       break;
+  //     case "dfCap":
+  //       setDfCap(value);
+  //       break;
+  //     case "dfFloor":
+  //       setDfFloor(value);
+  //       break;
+  //     case "ftCap":
+  //       setftCap(value);
+  //       break;
+  //     case "ftFloor":
+  //       setftFloor(value);
+  //       break;
+  //     case "cpScale":
+  //       setCpScale(value);
+  //       break;
+  //     case "cpList":
+  //       setCpList(value);
+  //       break;
+  //     case "cpThreshold":
+  //       setCpThreshold(value);
+  //       break;
+  //     case "periods":
+  //       setPeriods(value);
+  //       break;
+  //     case "holidays":
+  //       setHolidays(value);
+  //       break;
+  //     case "holidayScale":
+  //       setHolidayScale(value);
+  //       break;
+  //     case "yearlyScale":
+  //       setYearlyScale(value);
+  //       break;
+  //     case "weeklyScale":
+  //       setWeeklyScale(value);
+  //       break;
+  //     case "seasonMode":
+  //       setSeasonMode(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
+
+  // pandas
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    formData = new FormData();
     const files = e.target.files;
     if (!files) return;
-    formData.append("file", files[0]);
-    console.log(formData.get("file"));
+    formData.current.append("file", files[0]);
+    setFile(files[0]);
+    ApiPandas();
   };
-  // const handleClickUpload = () => {
-  //   fileInput.current?.click();
-  // };
-  const ApiPostExcelFile = () => {
-    console.log(formData.get("file"));
+  const ApiPandas = () => {
     axios
-      .post("/api/pandas", formData)
+      .post("/api/pandas", formData.current)
       .then((res) => {
-        console.log(res);
         console.log(res.data);
         setDataSet(res.data);
       })
@@ -55,27 +100,47 @@ const ChartCreatePage = () => {
       });
   };
 
+  // prophet
+  const ApiProphet = () => {
+    console.log(formData.current.get("file"));
+    console.log(formData.current.get("options"));
+    axios
+      .post("/api/prophet", formData.current)
+      .then((res) => {
+        setChartsArr(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    console.log(chartsArr);
+    console.log(chartsArr.length);
+  }, [chartsArr]);
+
   // 옵션
-  const [growth, setGrowth] = useState("linear"); // 선형 || 로지스틱
+  const [options, setOptions] = useState<ProphetOptions>({
+    growth: "linear",
+    dfCap: 6,
+    dfFloor: 1.5,
+    ftCap: 6,
+    ftFloor: 1.5,
+    cpScale: 0.5,
+    cpList: ["2022-05-05"],
+    cpThreshold: 0.01,
+    periods: 365,
+    holidays: "KR",
+    holidayScale: 10,
+    yearlyScale: 10,
+    weeklyScale: 10,
+    seasonMode: "additive",
+  });
 
-  // 로지스틱 선택 시 추가 옵션
-  const [dfCap, setDfCap] = useState(); // 데이터프레임 상한
-  const [dfFloor, setDfFloor] = useState(); // 데이터프레임 하한
-  const [ftCap, setftCap] = useState(); // 미래DF 상한
-  const [ftFloor, setftFloor] = useState(); // 미래DF 하한
-
-  // FLAG
-  const [cpScale, setCpScale] = useState(); // changepoint_prior_scale
-  const [cpList, setCpList] = useState<[]>(); // changepoints 추가
-  const [cpThreshold, setCpThreshold] = useState(0.01); // 특정 임계값 이상의 cp를 선별
-
-  const [periods, setPeriods] = useState(365); // 예측 기간
-
-  const [holidays, setHolidays] = useState(); // 공휴일 국가 코드
-  const [holidayScale, setHolidayScale] = useState(); // holidays_prior_scale
-  const [yearlyScale, setYearlyScale] = useState(); // yearly_prior_scale
-  const [weeklyScale, setWeeklyScale] = useState(); // weekly_prior_scale
-  const [seasonMode, setSeasonMode] = useState("addtive"); // addtive || multiplicative
+  useEffect(() => {
+    const optionsString = JSON.stringify(options);
+    formData.current.append("options", optionsString);
+  }, []);
 
   // 등록
   const ApiPostCreateChart = () => {
@@ -103,23 +168,43 @@ const ChartCreatePage = () => {
 
       <hr />
 
-      <input type="text" onChange={handleChangeTitle} defaultValue="제목" />
-      <input
-        type="textarea"
-        onChange={handleChangeContent}
-        defaultValue="내용"
-      />
-      <input
-        type="text"
-        onChange={handleChangeMemberId}
-        defaultValue="작성자"
-      />
+      {/* <input name="title" type="text" onChange={handleChangeText} placeholder="제목" />
+      <input name="content" type="textarea" onChange={handleChangeText} placeholder="내용" />
+      <input name="memberId" type="text" onChange={handleChangeText} placeholder="작성자" /> */}
 
       <hr />
 
       <input type="file" ref={fileInput} onChange={handleChangeUpload} />
-      {/* <button onClick={handleClickUpload}>업로드</button> */}
-      <button onClick={ApiPostExcelFile}>엑셀전송</button>
+      {/* <img src={`data:image/jpeg;base64,${charts.keys()}`} alt="" /> */}
+
+      {chartsArr && (
+        <div>
+          {Object.keys(chartsArr).map((columnName, idx) => (
+            <div key={idx}>
+              <div>{columnName} </div>
+              {chartsArr[columnName].map((chart, chartIdx) => (
+                <img src={`data:image/jpeg;base64,${chart}`} alt={columnName} key={chartIdx} />
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* <input name="growth" type="text" onChange={handleChangeText} placeholder="(linear/logistic)" />
+      <input name="dfCap" type="number" onChange={handleChangeText} placeholder="데이터프레임 상한" />
+      <input name="dfFloor" type="number" onChange={handleChangeText} placeholder="데이터프레임 하한" />
+      <input name="ftCap" type="number" onChange={handleChangeText} placeholder="미래 DF 상한" />
+      <input name="ftFloor" type="number" onChange={handleChangeText} placeholder="미래 DF 하한" />
+      <input name="cpScale" type="number" onChange={handleChangeText} placeholder="변화점 우선 순위 척도" />
+      <input name="cpList" type="text" onChange={handleChangeText} placeholder="추가 변화점 리스트" />
+      <input name="cpThreshold" type="number" onChange={handleChangeText} placeholder="특정 임계값 이상의 변화점" />
+      <input name="periods" type="number" onChange={handleChangeText} placeholder="예측 기간" />
+      <input name="holidays" type="text" onChange={handleChangeText} placeholder="공휴일 국가 코드" />
+      <input name="holidayScale" type="number" onChange={handleChangeText} placeholder="공휴일 우선 순위 척도" />
+      <input name="yearlyScale" type="number" onChange={handleChangeText} placeholder="연간 우선 순위 척도" />
+      <input name="weeklyScale" type="number" onChange={handleChangeText} placeholder="주간 우선 순위 척도" />
+      <input name="seasonMode" type="text" onChange={handleChangeText} placeholder="(additive/multiplicative)" /> */}
+      {file && <button onClick={ApiProphet}>차트전송</button>}
 
       {dataSet.length > 0 && (
         <div>
@@ -141,8 +226,6 @@ const ChartCreatePage = () => {
       ))}
 
       <hr />
-
-      <button onClick={ApiPostCreateChart}>차트전송</button>
     </div>
   );
 };
