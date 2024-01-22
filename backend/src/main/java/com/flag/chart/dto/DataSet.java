@@ -9,7 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-public class XlsFileResponse {
+public class DataSet {
     private String fileName;
     private long fileSize;
     private String fileType;

@@ -1,6 +1,7 @@
 package com.flag.chart.service;
 
-import com.flag.chart.dto.XlsFileResponse;
+import com.flag.chart.dto.DataSet;
+import com.flag.chart.dto.ProphetOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -11,14 +12,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class FlaskService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public ResponseEntity<String> sendFileToPandas(XlsFileResponse xlsFileResponse) {
+    public ResponseEntity<String> sendFileToPandas(DataSet dataSet) {
         String url = "http://127.0.0.1:5000/api/pandas";
 
         // 헤더
@@ -27,10 +27,10 @@ public class FlaskService {
 
         // 바디
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", new ByteArrayResource(xlsFileResponse.getFileData()) {
+        body.add("file", new ByteArrayResource(dataSet.getFileData()) {
             @Override
             public String getFilename() {
-                return xlsFileResponse.getFileName();
+                return dataSet.getFileName();
             }
         });
 
@@ -40,7 +40,7 @@ public class FlaskService {
         return restTemplate.postForEntity(url, requestEntity, String.class);
     }
 
-    public ResponseEntity<String> sendFileToProphet(XlsFileResponse xlsFileResponse) {
+    public ResponseEntity<String> sendFileToProphet(DataSet dataSet, ProphetOptions options) {
         String url = "http://127.0.0.1:5000/api/prophet";
 
         // 헤더
@@ -49,12 +49,14 @@ public class FlaskService {
 
         // 바디
         MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-        body.add("file", new ByteArrayResource(xlsFileResponse.getFileData()) {
+        body.add("file", new ByteArrayResource(dataSet.getFileData()) {
             @Override
             public String getFilename() {
-                return xlsFileResponse.getFileName();
+                return dataSet.getFileName();
             }
         });
+
+        body.add("options", options);
 
         // RequestEntity
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
