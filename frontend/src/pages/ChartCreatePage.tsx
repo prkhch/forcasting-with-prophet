@@ -132,9 +132,10 @@ const ChartCreatePage = () => {
     periods: 365,
     holidays: "KR",
     holidayScale: 10,
-    yearlyScale: 10,
-    weeklyScale: 10,
+    yearlyScale: "auto",
+    weeklyScale: "auto",
     seasonMode: "additive",
+    seasonScale: 10,
   });
 
   useEffect(() => {
