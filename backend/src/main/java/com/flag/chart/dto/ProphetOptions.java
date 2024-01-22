@@ -21,7 +21,8 @@ public class ProphetOptions {
     private long periods;
     private String holidays;
     private double holidayScale;
-    private double yearlyScale;
-    private double weeklyScale;
+    private Object yearlyScale;
+    private Object weeklyScale;
     private String seasonMode;
+    private double seasonScale;
 }
