@@ -1,20 +1,23 @@
-import random
-import seaborn as sns
-import numpy as np
 from flask import Blueprint, request
 from io import BytesIO
 import pandas as pd
 from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot, plot_weekly, plot_yearly
-import holidays
 import matplotlib
-matplotlib.use('Agg')
+from PIL import Image
+import base64
+import json
 
+matplotlib.use('Agg')
 bp = Blueprint('main', __name__, url_prefix='/')
 
-
-h = holidays.country_holidays('KR')
-print(h)
+def encode_image_to_base64(fig):
+    buf = BytesIO()
+    fig.savefig(buf, format='png')
+    buf.seek(0)
+    image_base64 = base64.b64encode(buf.read()).decode('utf-8')
+    buf.close()
+    return image_base64
 
 def read_file(fileData):
     file_extension = fileData.filename.split('.')[-1]
@@ -41,9 +44,13 @@ def toPandas():
 @bp.route("/api/prophet", methods=['POST'])
 def toProphet():
     fileData = request.files.get('file')
+    options = request.form.get("options")
+
+    print("asdasdasdsd@@@@@@@@@@@@", options)
 
     if fileData:
         df = read_file(fileData)
+        images_dict = {}
 
         for column in df.keys()[1:]:
             print(column)
@@ -60,16 +67,21 @@ def toProphet():
             forecast = m.predict(future)  # 예측
             print(forecast)
 
-            #
+            # y ds
             fig1 = m.plot(forecast) # 이미지 저장
             add_changepoints_to_plot(fig1.gca(), m, forecast) # change_points
-            fig1.savefig('static/images/prophet_plot.png')
+            # fig1.savefig('static/images/prophet_plot.png')
 
-            #
+            # components ds
             fig2 = m.plot_components(forecast)
-            fig2.savefig('static/images/prophet_plot2.png')
+            # fig2.savefig('static/images/prophet_plot2.png')
 
-        return df.to_json(orient='records')
-        # return "Good"
+            # image to json
+            encoded_fig1 = encode_image_to_base64(fig1)
+            encoded_fig2 = encode_image_to_base64(fig2)
+            images_dict[column] = [encoded_fig1, encoded_fig2]
+
+        images_json = json.dumps(images_dict)
+        return images_json
     else:
         return "File not received"
