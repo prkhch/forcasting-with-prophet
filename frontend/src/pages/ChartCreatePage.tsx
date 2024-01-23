@@ -46,7 +46,8 @@ const ChartCreatePage = () => {
 
   // prophet
   const ApiProphet = () => {
-    console.log(formData.current.get("options"));
+    formData.current.append("prophetOptions", optionString);
+    console.log(formData.current.get("prophetOptions"));
     axios
       .post("/api/prophet", formData.current)
       .then((res) => {
@@ -79,14 +80,18 @@ const ChartCreatePage = () => {
   useEffect(() => {
     const tmp = JSON.stringify(options);
     setOptionString(tmp);
-    formData.current.append("options", tmp);
   }, []);
+
+  useEffect(() => {
+    const tmp = JSON.stringify(options);
+    setOptionString(tmp);
+  }, [options]);
 
   const addFilesToFormData = (chartsObj: Charts) => {
     Object.entries(chartsObj).forEach(([key, base64Array]) => {
       base64Array.forEach((base64, index) => {
-        const blob = useBase64ToBlob(base64, "image/png");
-        const file = new File([blob], `${key}_${index}.png`, { type: "image/png" });
+        const blob = useBase64ToBlob(base64, "image/jpeg");
+        const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
         formData.current.append("files", file);
       });
     });
@@ -102,8 +107,6 @@ const ChartCreatePage = () => {
     formData.current.append("memberId", memberId);
     // files already append
     // options already append
-    // formData.current.append("dataSet", JSON.stringify(dataSet));
-    // formData.current.append("files", JSON.stringify(chartsObj));
     console.log(formData.current.get("files"));
     axios
       .post("/api/article", formData.current)
