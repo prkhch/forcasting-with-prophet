@@ -26,6 +26,17 @@ public class FlagController {
     private final FlaskService flaskService;
     private final StorageService storageService;
 
+//    @GetMapping("api/articles")
+//    public String getArticles() {
+//        List<ArticleListViewResponse> articles = articleService.findAll()
+//                .stream()
+//                .map(ArticleListViewResponse::new)
+//                .toList();
+//        model.addAttribute("articles", articles);
+//
+//        return "articleList";
+//    }
+
     @PostMapping("/api/article")
     public ResponseEntity<Article> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
         Article savedArticle = articleService.save(request);
@@ -48,7 +59,7 @@ public class FlagController {
     @PostMapping("/api/prophet")
     public ResponseEntity<String> postProphet(@ModelAttribute ProphetRequestDTO request) throws IOException {
         MultipartFile file = request.getFiles();
-        String optionsString = request.getOptions();
+        String optionsString = request.getProphetOptions();
 
         DataFileFlask dataFileFlask = new DataFileFlask();
         ProphetOptionsDTO options = new ObjectMapper().readValue(optionsString, ProphetOptionsDTO.class);

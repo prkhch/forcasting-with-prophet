@@ -12,5 +12,5 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 public class ProphetRequestDTO {
     private MultipartFile files;
-    private String options;
+    private String prophetOptions;
 }

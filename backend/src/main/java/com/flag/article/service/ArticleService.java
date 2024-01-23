@@ -20,6 +20,10 @@ public class ArticleService {
     private final FlagRepository flagRepository;
     private final StorageService storageService;
     private final StorageRepository storageRepository;
+
+    public List<Article> findAll() {
+        return flagRepository.findAll();
+    }
     public Article save(CreateArticleRequest request) throws JsonProcessingException {
         Article article = flagRepository.save(request.toEntity());
 
