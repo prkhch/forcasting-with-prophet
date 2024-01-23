@@ -11,6 +11,7 @@ import json
 matplotlib.use('Agg')
 bp = Blueprint('main', __name__, url_prefix='/')
 
+
 def encode_image_to_base64(fig):
     buf = BytesIO()
     fig.savefig(buf, format='png')
@@ -18,6 +19,7 @@ def encode_image_to_base64(fig):
     image_base64 = base64.b64encode(buf.read()).decode('utf-8')
     buf.close()
     return image_base64
+
 
 def read_file(fileData):
     file_extension = fileData.filename.split('.')[-1]
@@ -32,6 +34,7 @@ def read_file(fileData):
 
     return df
 
+
 @bp.route("/api/pandas", methods=['POST'])
 def toPandas():
     fileData = request.files.get('file')
@@ -41,25 +44,21 @@ def toPandas():
     else:
         return "File not received"
 
+
 @bp.route("/api/prophet", methods=['POST'])
 def toProphet():
     file_data = request.files.get('file')
     string_options = request.form.get("options")
     options = json.loads(string_options)
 
-
-
-    print(options["cpList"])
-    print(options["ftCap"])
-
     if file_data:
         df = read_file(file_data)
         images_dict = {}
 
-        if options["growth"] == 'logistic' :
-            if options["dfCap"] :
+        if options["growth"] == 'logistic':
+            if options["dfCap"]:
                 df['cap'] = options["dfCap"]
-            if options["dfFloor"] :
+            if options["dfFloor"]:
                 df['floor'] = options["dfFloor"]
 
         for column in df.keys()[1:]:
@@ -76,7 +75,7 @@ def toProphet():
                 seasonality_mode=options["seasonMode"],
                 seasonality_prior_scale=options["seasonScale"]
             )  # 모델 생성
-            m.add_country_holidays(country_name=options["holidays"]) # 공휴일 국가코드 설정
+            m.add_country_holidays(country_name=options["holidays"])  # 공휴일 국가코드 설정
             m.fit(single_df)  # 피팅
             if 'yearly' in m.seasonalities:
                 plot_yearly(m)
@@ -101,8 +100,8 @@ def toProphet():
             print(m.country_holidays)
 
             # y ds
-            fig1 = m.plot(forecast) # 이미지 저장
-            add_changepoints_to_plot(fig1.gca(), m, forecast, threshold=options["cpThreshold"]) # change_points
+            fig1 = m.plot(forecast)  # 이미지 저장
+            add_changepoints_to_plot(fig1.gca(), m, forecast, threshold=options["cpThreshold"])  # change_points
 
             # components ds
             fig2 = m.plot_components(forecast)
