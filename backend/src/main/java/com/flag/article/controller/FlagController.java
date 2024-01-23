@@ -3,10 +3,7 @@ package com.flag.article.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flag.article.domain.Article;
-import com.flag.article.dto.CreateArticleRequest;
-import com.flag.article.dto.ProphetOptionsDTO;
-import com.flag.article.dto.DataFileFlask;
-import com.flag.article.dto.ProphetRequestDTO;
+import com.flag.article.dto.*;
 import com.flag.article.service.ArticleService;
 import com.flag.article.service.StorageService;
 import com.flag.article.service.FlaskService;
@@ -17,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -26,16 +24,14 @@ public class FlagController {
     private final FlaskService flaskService;
     private final StorageService storageService;
 
-//    @GetMapping("api/articles")
-//    public String getArticles() {
-//        List<ArticleListViewResponse> articles = articleService.findAll()
-//                .stream()
-//                .map(ArticleListViewResponse::new)
-//                .toList();
-//        model.addAttribute("articles", articles);
-//
-//        return "articleList";
-//    }
+    @GetMapping("api/articles")
+    public List<ArticleListResponse> getArticles() {
+        List<ArticleListResponse> articles = articleService.findAll()
+                .stream()
+                .map(ArticleListResponse::new)
+                .toList();
+        return articles;
+    }
 
     @PostMapping("/api/article")
     public ResponseEntity<Article> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
