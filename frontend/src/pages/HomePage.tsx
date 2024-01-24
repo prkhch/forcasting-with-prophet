@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Article } from "types/Article";
 
-const ChartListPage = () => {
+const HomePage = () => {
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
 
-  // getLst
+  // getList
   const ApiGetArtilceList = () => {
     axios
-      .get("/api/articles", {})
+      .get("/api/articles")
       .then((res) => {
         console.log(res.data);
         setArticleList(res.data);
@@ -30,7 +30,7 @@ const ChartListPage = () => {
 
       <div>
         {articleList.map((article, idx) => (
-          <div key={idx} onClick={() => navigate(`article/${article.id}`)}>
+          <div key={idx} onClick={() => navigate(`${article.id}`, { state: { id: article.id } })}>
             <div>{article.id}</div>
             <div>{article.title}</div>
             <div>{article.content}</div>
@@ -41,4 +41,4 @@ const ChartListPage = () => {
   );
 };
 
-export default ChartListPage;
+export default HomePage;

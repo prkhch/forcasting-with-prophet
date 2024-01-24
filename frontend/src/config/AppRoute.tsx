@@ -1,9 +1,9 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import MainLayout from "layout/MainLayout";
-import ChartCreatePage from "pages/ChartCreatePage";
-import ChartDetailPage from "pages/ChartDetailPage";
-import ChartListPage from "pages/ChartListPage";
+import ArticleCreatePage from "pages/ArticleCreatePage";
+import ArticleDetailPage from "pages/ArticleDetailPage";
+import HomePage from "pages/HomePage";
 import LoginPage from "pages/LoginPage";
 import SignUpPage from "pages/SignUpPage";
 
@@ -14,9 +14,9 @@ const AppRoute = () => {
         <Route element={<MainLayout />}>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
-          <Route index element={<ChartListPage />} />
-          <Route path="/:id" element={<ChartDetailPage />} />
-          <Route path="/create" element={<ChartCreatePage />} />
+          <Route index element={<HomePage />} />
+          <Route path="/:id" element={<ArticleDetailPage />} />
+          <Route path="/create" element={<ArticleCreatePage />} />
         </Route>
         {/* 404 */}
         <Route></Route>

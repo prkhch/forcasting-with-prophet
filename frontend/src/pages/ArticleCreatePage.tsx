@@ -6,7 +6,7 @@ import { ProphetOptions } from "types/ProphetOptions";
 import { Charts } from "types/Charts";
 import useBase64ToBlob from "hooks/useBase64ToBlob";
 
-const ChartCreatePage = () => {
+const ArticleCreatePage = () => {
   const formData = useRef(new FormData());
 
   // 파일
@@ -167,4 +167,4 @@ const ChartCreatePage = () => {
   );
 };
 
-export default ChartCreatePage;
+export default ArticleCreatePage;
