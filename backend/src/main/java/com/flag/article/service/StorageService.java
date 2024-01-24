@@ -1,6 +1,7 @@
 package com.flag.article.service;
 
 import com.flag.article.domain.DataFile;
+import com.flag.article.dto.DataFileResponse;
 import com.flag.article.repository.StorageRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,10 +38,16 @@ public class StorageService {
         return path;
     }
 
-    public String getFilePath(Long id) {
-        DataFile dataFile = storageRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("DataFile not found for id: " + id));
-        return dataFile.getFilePath();
+    public List<DataFileResponse> getFilesByArticleId(Long articleId) {
+        List<DataFile> dataFiles = storageRepository.findByArticleId(articleId);
+        return dataFiles.stream()
+                .map(DataFileResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public DataFile getFileById(Long fileId) {
+        return storageRepository.findById(fileId)
+                .orElseThrow(() -> new EntityNotFoundException("DataFile not found for id: " + fileId));
     }
 
 }

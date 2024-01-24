@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -22,14 +23,16 @@ public class ArticleService {
     private final StorageService storageService;
     private final StorageRepository storageRepository;
 
-    public List<Article> findAll() {
-        return flagRepository.findAll();
+    public List<ArticleResponse> findAll() {
+        return flagRepository.findAll()
+                .stream()
+                .map(ArticleResponse::new)
+                .collect(Collectors.toList());
     }
 
     public ArticleResponse findById(long id) {
         Article article = flagRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
-
         return new ArticleResponse(article);
     }
 
