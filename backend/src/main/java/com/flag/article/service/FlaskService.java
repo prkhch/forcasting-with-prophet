@@ -2,6 +2,7 @@ package com.flag.article.service;
 
 import com.flag.article.dto.DataFileFlask;
 import com.flag.article.dto.ProphetOptionsDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
@@ -13,10 +14,10 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
+@RequiredArgsConstructor
 @Service
 public class FlaskService {
-    @Autowired
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     public ResponseEntity<String> sendFileToPandas(DataFileFlask dataFileFlask) {
         String url = "http://127.0.0.1:5000/api/pandas";

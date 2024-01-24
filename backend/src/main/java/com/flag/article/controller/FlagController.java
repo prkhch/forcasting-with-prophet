@@ -3,6 +3,7 @@ package com.flag.article.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flag.article.domain.Article;
+import com.flag.article.domain.DataFile;
 import com.flag.article.dto.*;
 import com.flag.article.service.ArticleService;
 import com.flag.article.service.StorageService;
@@ -24,13 +25,25 @@ public class FlagController {
     private final FlaskService flaskService;
     private final StorageService storageService;
 
-    @GetMapping("api/articles")
-    public List<ArticleListResponse> getArticles() {
-        List<ArticleListResponse> articles = articleService.findAll()
+    @GetMapping("/api/articles")
+    public List<ArticleResponse> getArticles() {
+        List<ArticleResponse> articles = articleService.findAll()
                 .stream()
-                .map(ArticleListResponse::new)
+                .map(ArticleResponse::new)
                 .toList();
         return articles;
+    }
+
+    @GetMapping("/api/articles/{id}")
+    public ArticleResponse getArticle(@PathVariable Long id) {
+        ArticleResponse article = articleService.findById(id);
+        return article;
+    }
+
+    @GetMapping("/api/datafile/{id}")
+    public String getDataFile(@PathVariable Long id) {
+        String filePath = storageService.getFilePath(id);
+        return filePath;
     }
 
     @PostMapping("/api/article")

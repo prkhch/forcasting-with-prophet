@@ -3,6 +3,7 @@ package com.flag.article.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.flag.article.domain.Article;
 import com.flag.article.domain.DataFile;
+import com.flag.article.dto.ArticleResponse;
 import com.flag.article.dto.CreateArticleRequest;
 import com.flag.article.repository.FlagRepository;
 import com.flag.article.repository.StorageRepository;
@@ -24,6 +25,14 @@ public class ArticleService {
     public List<Article> findAll() {
         return flagRepository.findAll();
     }
+
+    public ArticleResponse findById(long id) {
+        Article article = flagRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("not found : " + id));
+
+        return new ArticleResponse(article);
+    }
+
     public Article save(CreateArticleRequest request) throws JsonProcessingException {
         Article article = flagRepository.save(request.toEntity());
 
