@@ -7,7 +7,14 @@ const ArticleDetailPage = () => {
   const location = useLocation();
   const { id } = location.state;
 
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [prophetOptions, setProphetOptions] = useState();
+
   const [fileList, setFileList] = useState<FileResponse[]>([]);
+  const [fileData, setFileData] = useState();
+  const [fileName, setFileName] = useState();
+  const [fileId, setFileId] = useState();
 
   // getArticle
   const ApiGetArtilceDetail = () => {
@@ -15,6 +22,9 @@ const ArticleDetailPage = () => {
       .get(`/api/articles/${id}`)
       .then((res) => {
         console.log(res.data);
+        setTitle(res.data.title);
+        setContent(res.data.content);
+        setProphetOptions(res.data.prophetOptions);
       })
       .catch((err) => {
         console.log(err);
@@ -28,26 +38,51 @@ const ArticleDetailPage = () => {
       .then((res) => {
         console.log(res.data);
         setFileList(res.data);
+        setFileId(res.data[0].id);
+        setFileName(res.data[0].fileName);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  const ApiGetFile = (fileId: number) => {
+    axios
+      .get(`/api/files/download/${fileId}`, { responseType: "blob" })
+      .then((res) => {
+        setFileData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // getDownload
   const ApiDownload = (fileId: number, fileName: string) => {
     axios
       .get(`/api/files/download/${fileId}`, { responseType: "blob" })
       .then((res) => {
-        // Blob 데이터로부터 URL을 생성합니다.
         const url = window.URL.createObjectURL(new Blob([res.data]));
-        // 가상의 a 태그를 생성하고 다운로드 링크를 설정합니다.
         const link = document.createElement("a");
         link.href = url;
-        link.setAttribute("download", fileName); // 다운로드할 파일 이름을 설정합니다.
+        link.setAttribute("download", fileName);
         document.body.appendChild(link);
-        link.click(); // 클릭 이벤트를 발생시켜 다운로드를 시작합니다.
-        document.body.removeChild(link); // a 태그를 제거합니다.
-        window.URL.revokeObjectURL(url); // 생성된 URL을 정리합니다.
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const ApiPandas = (fileData: Blob, fileName: string) => {
+    const formData = new FormData();
+    formData.append("files", fileData, fileName);
+    axios
+      .post("/api/pandas", formData)
+      .then((res) => {
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -59,11 +94,27 @@ const ArticleDetailPage = () => {
     ApiGetArtilceDataFilePath();
   }, []);
 
+  useEffect(() => {
+    if (fileId) {
+      ApiGetFile(fileId);
+    }
+  }, [fileId]);
+
+  useEffect(() => {
+    if (fileData && fileName) {
+      ApiPandas(fileData, fileName);
+    }
+  }, [fileData]);
+
   return (
     <div>
       <div>디테일페이지 {id}번</div>
+      <div>{title}</div>
+      <div>{content}</div>
+      <div>{prophetOptions}</div>
       {fileList.map((file, idx) => (
         <div key={idx}>
+          {file.fileName}
           {idx === 0 ? (
             <a onClick={() => ApiDownload(file.id, file.fileName)}>{file.fileName}</a>
           ) : (
