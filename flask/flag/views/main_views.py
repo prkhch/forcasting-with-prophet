@@ -38,6 +38,7 @@ def read_file(fileData):
 @bp.route("/api/pandas", methods=['POST'])
 def toPandas():
     fileData = request.files.get('file')
+    print('@@@@@@@@', fileData)
     if fileData:
         df = read_file(fileData)
         return df.to_json(orient='records')

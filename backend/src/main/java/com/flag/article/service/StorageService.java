@@ -1,5 +1,10 @@
 package com.flag.article.service;
 
+import com.flag.article.domain.DataFile;
+import com.flag.article.dto.DataFileResponse;
+import com.flag.article.repository.StorageRepository;
+import jakarta.persistence.EntityNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -9,9 +14,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
+import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 @Service
 public class StorageService {
+
+    private final StorageRepository storageRepository;
 
     public Path saveFile(MultipartFile file, Long id) {
         String fileDir = "src/main/resources/article/" + id;
@@ -19,7 +29,6 @@ public class StorageService {
 
         Path path = Paths.get(fileDir + File.separator +fileName);
 
-        System.out.println("@@@@@@@@" + path);
         try {
             Files.createDirectories(path.getParent());
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
@@ -27,6 +36,18 @@ public class StorageService {
         }
 
         return path;
+    }
+
+    public List<DataFileResponse> getFilesByArticleId(Long articleId) {
+        List<DataFile> dataFiles = storageRepository.findByArticleId(articleId);
+        return dataFiles.stream()
+                .map(DataFileResponse::new)
+                .collect(Collectors.toList());
+    }
+
+    public DataFile getFileById(Long fileId) {
+        return storageRepository.findById(fileId)
+                .orElseThrow(() -> new EntityNotFoundException("DataFile not found for id: " + fileId));
     }
 
 }
