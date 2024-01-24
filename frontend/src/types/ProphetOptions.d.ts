@@ -10,7 +10,8 @@ export interface ProphetOptions {
   periods: number;
   holidays: string;
   holidayScale: number;
-  yearlyScale: number;
-  weeklyScale: number;
+  yearlyScale: number | string | boolean;
+  weeklyScale: number | string | boolean;
   seasonMode: string;
+  seasonScale: number;
 }
