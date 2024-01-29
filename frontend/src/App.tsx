@@ -1,11 +1,11 @@
-import React from "react";
+import "./App.css";
 import AppRoute from "config/AppRoute";
 
 function App() {
   return (
-    <div>
+    <>
       <AppRoute />
-    </div>
+    </>
   );
 }
 
