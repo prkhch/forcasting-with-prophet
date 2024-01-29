@@ -11,6 +11,8 @@ import com.flag.flag.service.FlaskService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -35,8 +37,8 @@ public class FlagController {
     private final StorageService storageService;
 
     @GetMapping("/api/articles")
-    public List<ArticleResponse> getArticles() {
-        List<ArticleResponse> articles = articleService.findAll();
+    public Page<ArticleResponse> getArticles(Pageable pageable) {
+        Page<ArticleResponse> articles = articleService.findAll(pageable);
         return articles;
     }
 
