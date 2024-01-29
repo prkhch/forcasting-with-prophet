@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import StyledFooter from "styles/StyledFooter";
-import StyledFooterLink from "styles/StyledFooterLink";
-import StyledFooterText from "styles/StyledFooterText";
+import StyledFooter from "styles/footer/StyledFooter";
+import StyledFooterLink from "styles/footer/StyledFooterLink";
+import StyledFooterText from "styles/footer/StyledFooterText";
 
 const Footer = () => {
   const navigate = useNavigate();

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledHeaderText = styled.text`
+const StyledHeaderText = styled.div`
   font-family: "Body2", sans-serif;
   font-size: 18px;
   color: white;

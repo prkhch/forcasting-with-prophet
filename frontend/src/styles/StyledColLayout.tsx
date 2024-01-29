@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-const Layout = styled.div`
+const StyledColLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
 
-export default Layout;
+export default StyledColLayout;

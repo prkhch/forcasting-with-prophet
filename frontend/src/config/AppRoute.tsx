@@ -4,14 +4,12 @@ import MainLayout from "layout/MainLayout";
 import ArticleCreatePage from "pages/ArticleCreatePage";
 import ArticleDetailPage from "pages/ArticleDetailPage";
 import HomePage from "pages/HomePage";
-import LoginPage from "pages/LoginPage";
 
 const AppRoute = () => {
   return (
     <div>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/login" element={<LoginPage />} />
           <Route index element={<HomePage />} />
           <Route path="/:id" element={<ArticleDetailPage />} />
           <Route path="/create" element={<ArticleCreatePage />} />
