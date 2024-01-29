@@ -9,6 +9,8 @@ const Footer = () => {
 
   return (
     <StyledFooter>
+      <StyledFooterText>@prkhch</StyledFooterText>
+      <StyledFooterText>|</StyledFooterText>
       <StyledFooterText>shjc4623@gmail.com</StyledFooterText>
       <StyledFooterText>|</StyledFooterText>
       <StyledFooterLink href="https://facebook.github.io/prophet/" target="_blank" rel="noopener noreferrer">

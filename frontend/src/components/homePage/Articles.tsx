@@ -20,7 +20,7 @@ const Articles = () => {
 
   const ApiGetArticleList = (pageNumber: number) => {
     axios
-      .get(`/api/articles?page=${pageNumber}&size=5&sort=id,desc`)
+      .get(`/api/articles?page=${pageNumber}&size=6&sort=id,desc`)
       .then((res) => {
         console.log(res.data);
         setArticleList(res.data.content);

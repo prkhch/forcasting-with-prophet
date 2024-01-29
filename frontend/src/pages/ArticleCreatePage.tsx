@@ -13,8 +13,8 @@ const ArticleCreatePage = () => {
   const fileInput = useRef<HTMLInputElement>(null);
 
   // 게시글 정보
-  const [title, setTitle] = useState("title");
-  const [content, setContent] = useState("content");
+  const [title, setTitle] = useState("제목");
+  const [content, setContent] = useState("내용");
   const [memberId, setMemberId] = useState("1");
   const [files, setFiles] = useState<File>();
   const [optionString, setOptionString] = useState("");
@@ -60,16 +60,16 @@ const ArticleCreatePage = () => {
 
   // 옵션
   const [options, setOptions] = useState<ProphetOptions>({
-    growth: "linear",
+    growth: "logistic",
     dfCap: 6,
     dfFloor: 1.5,
     ftCap: 6,
     ftFloor: 1.5,
     cpScale: 0.5,
-    cpList: ["2022-05-05"],
+    cpList: [],
     cpThreshold: 0.01,
     periods: 365,
-    holidays: "KR",
+    holidays: "UK",
     holidayScale: 10,
     yearlyScale: "auto",
     weeklyScale: "auto",
