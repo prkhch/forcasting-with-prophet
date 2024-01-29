@@ -1,16 +1,19 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import StyledHeaderText from "styles/StyledHeaderText";
+import StyledHeader from "styles/StyledHeader";
 
 const Header = () => {
   const navigate = useNavigate();
   return (
-    <div>
-      <div>헤더</div>
-      <button onClick={() => navigate("/")}>리스트</button>
-      <button onClick={() => navigate("/login")}>로그인</button>
-      <button onClick={() => navigate("/signup")}>회원가입</button>
-      <button onClick={() => navigate("/create")}>등록</button>
-    </div>
+    <StyledHeader>
+      <div>
+        <StyledHeaderText onClick={() => navigate("/")}>FLAG</StyledHeaderText>
+      </div>
+      <div>
+        <StyledHeaderText onClick={() => navigate("/login")}>Login</StyledHeaderText>
+      </div>
+    </StyledHeader>
   );
 };
 
