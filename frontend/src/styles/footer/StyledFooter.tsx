@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const StyledFooter = styled.div`
   width: 100%;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   justify-content: center;
   bottom: 0;
