@@ -73,11 +73,11 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.periods}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>yearlyScale :</StyledOptionKey>
+          <StyledOptionKey>yearly_scale :</StyledOptionKey>
           <StyledOptionValue>{options?.yearlyScale}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>weeklyScale : </StyledOptionKey>
+          <StyledOptionKey>weekly_scale : </StyledOptionKey>
           <StyledOptionValue>{options?.weeklyScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
@@ -87,17 +87,17 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.holidays}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>holidayScale : </StyledOptionKey>
+          <StyledOptionKey>holiday_scale : </StyledOptionKey>
           <StyledOptionValue>{options?.holidayScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
       <StyledOptionRow>
         <StyledOption>
-          <StyledOptionKey>seasonMode : </StyledOptionKey>
+          <StyledOptionKey>season_mode : </StyledOptionKey>
           <StyledOptionValue>{options?.seasonMode}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>seasonScale :</StyledOptionKey>
+          <StyledOptionKey>season_scale :</StyledOptionKey>
           <StyledOptionValue>{options?.seasonScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>

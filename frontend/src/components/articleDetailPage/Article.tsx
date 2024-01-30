@@ -147,8 +147,16 @@ const Article = ({ id }: { id: string }) => {
       </StyledDataSet>
 
       <Options optionsString={prophetOptions} />
+
       {fileList.map((file, idx) => (
-        <div key={idx}>{idx > 0 && <img src={`/api/files/download/${file.id}`} alt={file.fileName} />}</div>
+        <div key={idx}>
+          {idx > 0 && (
+            <>
+              <img src={`/api/files/download/${file.id}`} alt={file.fileName} />
+              {file.fileName}
+            </>
+          )}
+        </div>
       ))}
     </StyledArticle>
   );
