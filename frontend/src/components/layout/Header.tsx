@@ -24,7 +24,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <div>
-        <StyledHeaderText onClick={() => navigate("/")}>FLAG</StyledHeaderText>
+        <StyledHeaderText onClick={() => navigate("/")}>시계열 분석 with Prophet</StyledHeaderText>
       </div>
       <div>
         <StyledHeaderText onClick={handleGoogleLogin}>Login</StyledHeaderText>

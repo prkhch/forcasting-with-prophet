@@ -20,6 +20,22 @@ const Options = ({ optionsString }: { optionsString: string }) => {
   return (
     <StyledOptions>
       <StyledBoldText>Options</StyledBoldText>
+
+      <StyledOptionRow>
+        <StyledOption>
+          <StyledOptionKey>changepoints :</StyledOptionKey>
+          <StyledOptionValue>{options?.cpList}</StyledOptionValue>
+        </StyledOption>
+        <StyledOption>
+          <StyledOptionKey>changepoint_prior_scale :</StyledOptionKey>{" "}
+          <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
+        </StyledOption>
+        <StyledOption>
+          <StyledOptionKey>changepoint_threshold :</StyledOptionKey>
+          <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
+        </StyledOption>
+      </StyledOptionRow>
+
       {options?.growth != "logistic" && (
         <StyledOptionRow>
           <StyledOption>
@@ -52,21 +68,7 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           </StyledOption>
         </StyledOptionRow>
       )}
-      <StyledOptionRow>
-        <StyledOption>
-          <img src="icons/flag_small.svg" />
-          <StyledOptionKey>changepoints :</StyledOptionKey>
-          <StyledOptionValue>{options?.cpList}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledOptionKey>changepoint_prior_scale :</StyledOptionKey>{" "}
-          <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledOptionKey>changepoint_threshold :</StyledOptionKey>
-          <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
-        </StyledOption>
-      </StyledOptionRow>
+
       <StyledOptionRow>
         <StyledOption>
           <StyledOptionKey>periods :</StyledOptionKey>
@@ -77,10 +79,11 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.yearlyScale}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>weekly_scale : </StyledOptionKey>
+          <StyledOptionKey>weeklyscale : </StyledOptionKey>
           <StyledOptionValue>{options?.weeklyScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
+
       <StyledOptionRow>
         <StyledOption>
           <StyledOptionKey>holidays : </StyledOptionKey>
@@ -91,6 +94,7 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.holidayScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
+
       <StyledOptionRow>
         <StyledOption>
           <StyledOptionKey>season_mode : </StyledOptionKey>
