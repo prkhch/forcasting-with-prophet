@@ -4,7 +4,6 @@ import pandas as pd
 from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot, plot_weekly, plot_yearly
 import matplotlib
-from PIL import Image
 import base64
 import json
 
@@ -56,14 +55,7 @@ def toProphet():
         df = read_file(file_data)
         images_dict = {}
 
-        if options["growth"] == 'logistic':
-            if options["dfCap"]:
-                df['cap'] = options["dfCap"]
-            if options["dfFloor"]:
-                df['floor'] = options["dfFloor"]
-
         for column in df.keys()[1:]:
-            print(column)
             single_df = df[['Date', column]]  # 데이터셋 분리
             single_df = single_df.rename(columns={'Date': 'ds', column: 'y'})  # 데이터셋 열이름 변경
             m = Prophet(
@@ -76,6 +68,11 @@ def toProphet():
                 seasonality_mode=options["seasonMode"],
                 seasonality_prior_scale=options["seasonScale"]
             )  # 모델 생성
+            if options["growth"] == 'logistic':
+                if options["dfCap"]:
+                    single_df['cap'] = options["dfCap"]
+                if options["dfFloor"]:
+                    single_df['floor'] = options["dfFloor"]
             m.add_country_holidays(country_name=options["holidays"])  # 공휴일 국가코드 설정
             m.fit(single_df)  # 피팅
             if 'yearly' in m.seasonalities:
@@ -90,22 +87,22 @@ def toProphet():
                     future['floor'] = options["ftFloor"]
             forecast = m.predict(future)  # 예측
             # print(forecast)
-            print(m.growth)
-            print(m.changepoint_prior_scale)
-            print(m.changepoints)
-            print(m.holidays_prior_scale)
-            print(m.yearly_seasonality)
-            print(m.weekly_seasonality)
-            print(m.seasonality_mode)
-            print(m.seasonality_prior_scale)
-            print(m.country_holidays)
+            # print(m.growth)
+            # print(m.changepoint_prior_scale)
+            # print(m.changepoints)
+            # print(m.holidays_prior_scale)
+            # print(m.yearly_seasonality)
+            # print(m.weekly_seasonality)
+            # print(m.seasonality_mode)
+            # print(m.seasonality_prior_scale)
+            # print(m.country_holidays)
 
             # y ds
-            fig1 = m.plot(forecast)  # 이미지 저장
+            fig1 = m.plot(forecast, figsize=(8, 8))  # 이미지 저장
             add_changepoints_to_plot(fig1.gca(), m, forecast, threshold=options["cpThreshold"])  # change_points
 
             # components ds
-            fig2 = m.plot_components(forecast)
+            fig2 = m.plot_components(forecast, figsize=(8, 8))
 
             # save local
             # fig1.savefig('static/images/prophet_plot.png')

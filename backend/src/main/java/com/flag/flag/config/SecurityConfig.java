@@ -42,7 +42,7 @@ public class SecurityConfig {
                 // 접근 권한 설정부
                 .and().authorizeHttpRequests()
                 .requestMatchers(HttpMethod.OPTIONS).permitAll() // CORS Preflight 방지
-                .requestMatchers("/", "/h2-console/**", "/member/login/**").permitAll()
+                .requestMatchers("/", "/h2-console/**", "/member/login/**", "/api/**").permitAll()
                 .anyRequest().authenticated()
 
                 // JWT 토큰 예외처리부

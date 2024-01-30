@@ -8,6 +8,8 @@ import com.flag.flag.dto.CreateArticleRequest;
 import com.flag.flag.repository.FlagRepository;
 import com.flag.flag.repository.StorageRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,11 +24,9 @@ public class ArticleService {
     private final StorageService storageService;
     private final StorageRepository storageRepository;
 
-    public List<ArticleResponse> findAll() {
-        return flagRepository.findAll()
-                .stream()
-                .map(ArticleResponse::new)
-                .collect(Collectors.toList());
+    public Page<ArticleResponse> findAll(Pageable pageable) {
+        Page<Article> articles = flagRepository.findAll(pageable);
+        return articles.map(ArticleResponse::new);
     }
 
     public ArticleResponse findById(long id) {
