@@ -10,6 +10,7 @@ import StyledLink from "styles/articleDetailPage/StyledLink";
 import StyledTitle from "styles/articleDetailPage/StyledTitle";
 import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
+import Carousel from "./Carousel";
 import Options from "./Options";
 
 const Article = ({ id }: { id: string }) => {
@@ -148,7 +149,7 @@ const Article = ({ id }: { id: string }) => {
 
       <Options optionsString={prophetOptions} />
 
-      {fileList.map((file, idx) => (
+      {/* {fileList.map((file, idx) => (
         <div key={idx}>
           {idx > 0 && (
             <>
@@ -157,7 +158,8 @@ const Article = ({ id }: { id: string }) => {
             </>
           )}
         </div>
-      ))}
+      ))} */}
+      <Carousel fileList={fileList} />
     </StyledArticle>
   );
 };

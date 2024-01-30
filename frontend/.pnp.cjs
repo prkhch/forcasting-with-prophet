@@ -34,15 +34,16 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.47"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/react-slick", "npm:0.23.13"],\
+          ["@types/slick-carousel", "npm:1.6.40"],\
           ["@types/styled-components", "npm:5.1.34"],\
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
           ["axios", "npm:1.6.5"],\
           ["react", "npm:18.2.0"],\
-          ["react-carousel", "npm:4.3.0"],\
           ["react-dom", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:18.2.0"],\
           ["react-router-dom", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:6.21.2"],\
           ["react-scripts", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:5.0.1"],\
           ["react-slick", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:0.30.1"],\
+          ["slick-carousel", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.8.1"],\
           ["styled-components", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:6.1.8"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
@@ -4869,6 +4870,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/jquery", [\
+      ["npm:3.5.29", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-jquery-npm-3.5.29-4029cf7fc3-10c0.zip/node_modules/@types/jquery/",\
+        "packageDependencies": [\
+          ["@types/jquery", "npm:3.5.29"],\
+          ["@types/sizzle", "npm:2.3.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/json-schema", [\
       ["npm:7.0.15", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-json-schema-npm-7.0.15-fd16381786-10c0.zip/node_modules/@types/json-schema/",\
@@ -5082,6 +5093,25 @@ const RAW_RUNTIME_STATE =
           ["@types/http-errors", "npm:2.0.4"],\
           ["@types/mime", "npm:3.0.4"],\
           ["@types/node", "npm:20.11.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/sizzle", [\
+      ["npm:2.3.8", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-sizzle-npm-2.3.8-b4e813dde8-10c0.zip/node_modules/@types/sizzle/",\
+        "packageDependencies": [\
+          ["@types/sizzle", "npm:2.3.8"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/slick-carousel", [\
+      ["npm:1.6.40", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/@types-slick-carousel-npm-1.6.40-b2e7e9c1a1-10c0.zip/node_modules/@types/slick-carousel/",\
+        "packageDependencies": [\
+          ["@types/slick-carousel", "npm:1.6.40"],\
+          ["@types/jquery", "npm:3.5.29"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7803,15 +7833,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["debounce", [\
-      ["npm:1.2.1", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/debounce-npm-1.2.1-b09266a260-10c0.zip/node_modules/debounce/",\
-        "packageDependencies": [\
-          ["debounce", "npm:1.2.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["debug", [\
       ["npm:2.6.9", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/debug-npm-2.6.9-7d4cb597dc-10c0.zip/node_modules/debug/",\
@@ -9644,15 +9665,16 @@ const RAW_RUNTIME_STATE =
           ["@types/react", "npm:18.2.47"],\
           ["@types/react-dom", "npm:18.2.18"],\
           ["@types/react-slick", "npm:0.23.13"],\
+          ["@types/slick-carousel", "npm:1.6.40"],\
           ["@types/styled-components", "npm:5.1.34"],\
           ["@types/testing-library__jest-dom", "npm:6.0.0"],\
           ["axios", "npm:1.6.5"],\
           ["react", "npm:18.2.0"],\
-          ["react-carousel", "npm:4.3.0"],\
           ["react-dom", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:18.2.0"],\
           ["react-router-dom", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:6.21.2"],\
           ["react-scripts", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:5.0.1"],\
           ["react-slick", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:0.30.1"],\
+          ["slick-carousel", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.8.1"],\
           ["styled-components", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:6.1.8"],\
           ["typescript", "patch:typescript@npm%3A4.9.5#optional!builtin<compat/typescript>::version=4.9.5&hash=289587"],\
           ["web-vitals", "npm:2.1.4"]\
@@ -15205,15 +15227,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["range", [\
-      ["npm:0.0.3", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/range-npm-0.0.3-a47d8217ff-10c0.zip/node_modules/range/",\
-        "packageDependencies": [\
-          ["range", "npm:0.0.3"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["range-parser", [\
       ["npm:1.2.1", {\
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/range-parser-npm-1.2.1-1a470fa390-10c0.zip/node_modules/range-parser/",\
@@ -15257,17 +15270,6 @@ const RAW_RUNTIME_STATE =
           ["raf", "npm:3.4.1"],\
           ["regenerator-runtime", "npm:0.13.11"],\
           ["whatwg-fetch", "npm:3.6.20"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
-    ["react-carousel", [\
-      ["npm:4.3.0", {\
-        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/react-carousel-npm-4.3.0-876d5a6cb5-10c0.zip/node_modules/react-carousel/",\
-        "packageDependencies": [\
-          ["react-carousel", "npm:4.3.0"],\
-          ["debounce", "npm:1.2.1"],\
-          ["range", "npm:0.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -16351,6 +16353,28 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/slash-npm-4.0.0-ce4bbc4a80-10c0.zip/node_modules/slash/",\
         "packageDependencies": [\
           ["slash", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["slick-carousel", [\
+      ["npm:1.8.1", {\
+        "packageLocation": "../../../../AppData/Local/Yarn/Berry/cache/slick-carousel-npm-1.8.1-8382d373c2-10c0.zip/node_modules/slick-carousel/",\
+        "packageDependencies": [\
+          ["slick-carousel", "npm:1.8.1"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.8.1", {\
+        "packageLocation": "./.yarn/__virtual__/slick-carousel-virtual-4f1384836d/5/AppData/Local/Yarn/Berry/cache/slick-carousel-npm-1.8.1-8382d373c2-10c0.zip/node_modules/slick-carousel/",\
+        "packageDependencies": [\
+          ["slick-carousel", "virtual:d9650954c7f1725ea712d2e40695de9ea5d1c0fa9b89379134c62909d440d91b03d6c37e2823804a3404472b90a5bec73c82193190dd3c4db4c9e9edd75db91e#npm:1.8.1"],\
+          ["@types/jquery", null],\
+          ["jquery", null]\
+        ],\
+        "packagePeers": [\
+          "@types/jquery",\
+          "jquery"\
         ],\
         "linkType": "HARD"\
       }]\
