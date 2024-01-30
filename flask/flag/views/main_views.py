@@ -1,11 +1,9 @@
-import matplotlib.pyplot as plt
 from flask import Blueprint, request
 from io import BytesIO
 import pandas as pd
 from prophet import Prophet
 from prophet.plot import add_changepoints_to_plot, plot_weekly, plot_yearly
 import matplotlib
-from PIL import Image
 import base64
 import json
 
@@ -100,7 +98,7 @@ def toProphet():
             # print(m.country_holidays)
 
             # y ds
-            fig1 = m.plot(forecast, figsize=(8, 6))  # 이미지 저장
+            fig1 = m.plot(forecast, figsize=(8, 8))  # 이미지 저장
             add_changepoints_to_plot(fig1.gca(), m, forecast, threshold=options["cpThreshold"])  # change_points
 
             # components ds

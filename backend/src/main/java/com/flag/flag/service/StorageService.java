@@ -25,7 +25,7 @@ public class StorageService {
 
     public Path saveFile(MultipartFile file, Long id) {
         String fileDir = "src/main/resources/article/" + id;
-        String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+        String fileName = file.getOriginalFilename();
 
         Path path = Paths.get(fileDir + File.separator +fileName);
 
