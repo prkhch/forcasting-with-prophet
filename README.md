@@ -1,5 +1,4 @@
 **Time-Series Analysis with Prophet**
-<hr>
 
 - FE
     - Yarn Berry
@@ -20,7 +19,6 @@
     - Prophet
     - Matplotlib
   
-<hr>
 
 <div align="center">
 
@@ -29,5 +27,4 @@
 | [<img src = "https://github.com/prkhch.png" width = 100>](https://github.com/prkhch) |
 | :----------------------------------------------------------------------------------------------------------: |
 |                                                    박희창                                                    |
-|                                                                                                              |
 </div>
