@@ -20,11 +20,9 @@
     - Matplotlib
   
 
-<div align="center">
 
 **Contributors**
 
 | [<img src = "https://github.com/prkhch.png" width = 100>](https://github.com/prkhch) |
 | :----------------------------------------------------------------------------------------------------------: |
 |                                                    박희창                                                    |
-</div>
