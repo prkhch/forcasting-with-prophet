@@ -4,7 +4,7 @@ const StyledImage = styled.img`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
+  width: 90%;
   margin: 1rem auto;
 `;
 

@@ -2,7 +2,6 @@ import { styled } from "styled-components";
 
 const StyledDataRow = styled.div`
   display: flex;
-  border-radius: 4px;
   width: 1920px;
 
   &:nth-child(even) {

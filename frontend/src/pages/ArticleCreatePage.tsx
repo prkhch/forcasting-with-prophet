@@ -5,6 +5,9 @@ import useForamatDate from "hooks/useForamatDate";
 import { ProphetOptions } from "types/ProphetOptions";
 import { Charts } from "types/Charts";
 import useBase64ToBlob from "hooks/useBase64ToBlob";
+import StyledSmallButton from "styles/StyledSmallButton";
+import StyledColLayout from "styles/StyledColLayout";
+import Carousel from "components/articleDetailPage/Carousel";
 
 const ArticleCreatePage = () => {
   const formData = useRef(new FormData());
@@ -52,6 +55,7 @@ const ArticleCreatePage = () => {
       .post("/api/prophet", formData.current)
       .then((res) => {
         setChartsObj(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -119,11 +123,7 @@ const ArticleCreatePage = () => {
   };
 
   return (
-    <div>
-      <div>등록 페이지</div>
-
-      <hr />
-
+    <StyledColLayout>
       <input type="file" ref={fileInput} onChange={handleChangeUpload} />
 
       {chartsObj && (
@@ -139,8 +139,11 @@ const ArticleCreatePage = () => {
         </div>
       )}
 
-      {files && <button onClick={ApiProphet}>Run Prophet</button>}
+      {/* <Carousel fileList={chartsObj} /> */}
 
+      {files && <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>}
+
+      {/* 데이터셋 */}
       {dataSet.length > 0 && (
         <div>
           {Object.keys(dataSet[0]).map((key, idx) => (
@@ -160,10 +163,8 @@ const ArticleCreatePage = () => {
         </div>
       ))}
 
-      <hr />
-
-      <button onClick={ApiCreateArticle}>등록</button>
-    </div>
+      <StyledSmallButton onClick={ApiCreateArticle}>등록</StyledSmallButton>
+    </StyledColLayout>
   );
 };
 
