@@ -11,6 +11,7 @@ const StyledCarousel = styled.div`
   }
 
   margin: 1rem 0 4rem 0;
+  width: 90%;
 `;
 
 export default StyledCarousel;

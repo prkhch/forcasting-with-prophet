@@ -3,18 +3,18 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FileResponse } from "types/FileResponse";
-import StyledCarousel from "styles/articleDetailPage/StyledCarousel";
+import StyledCarousel from "styles/StyledCarousel";
 import StyledRowLayout from "styles/StyledRowLayout";
 import StyledColLayout from "styles/StyledColLayout";
 import StyledImage from "styles/articleDetailPage/StyledImage";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const settings = {
-    dots: true, // 슬라이드 하단에 점 표시
+    dots: true,
     arrows: true,
-    infinite: false, // 무한 순환
-    slidesToShow: 1, // 한 번에 보여줄 슬라이드 수
-    slidesToScroll: 1, // 슬라이드 스크롤 수
+    infinite: false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   return (
