@@ -130,9 +130,7 @@ const Article = () => {
   return (
     <StyledArticle>
       <StyledColLayout>
-        <div>
-          <input type="file" ref={fileInput} onChange={handleChangeUpload} />
-        </div>
+        <input type="file" ref={fileInput} onChange={handleChangeUpload} />
       </StyledColLayout>
 
       {/* 데이터셋 */}
