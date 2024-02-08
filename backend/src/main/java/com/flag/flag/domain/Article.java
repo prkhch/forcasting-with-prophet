@@ -1,10 +1,7 @@
 package com.flag.flag.domain;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,6 +13,7 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Entity
 @Getter
+@Setter
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,8 +23,11 @@ public class Article {
     private String title;
     @Column(name = "content")
     private String content;
-    @Column(name = "member_id")
-    private String memberId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     @Column(name = "prophet_options")
     private String prophetOptions;
 
@@ -44,11 +45,11 @@ public class Article {
     @Builder
     public Article(String title,
                    String content,
-                   String memberId,
-                   String prophetOptions) {
+                   String prophetOptions,
+                   Category category) {
         this.title = title;
         this.content = content;
-        this.memberId = memberId;
+        this.category = category;
         this.prophetOptions = prophetOptions;
     }
 

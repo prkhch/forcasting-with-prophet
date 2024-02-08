@@ -16,16 +16,14 @@ public class CreateArticleRequest {
 
     private String title;
     private String content;
-    private String memberId;
     private String prophetOptions;
-
+    private Long categoryId;
     private List<MultipartFile> files;
 
     public Article toEntity() throws JsonProcessingException {
         return Article.builder()
                 .title(title)
                 .content(content)
-                .memberId(memberId)
                 .prophetOptions(prophetOptions)
                 .build();
     }
