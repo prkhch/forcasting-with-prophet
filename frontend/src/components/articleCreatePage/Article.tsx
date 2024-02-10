@@ -12,6 +12,7 @@ import { Charts } from "types/Charts";
 import { DataItem } from "types/DataItem";
 import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
+import TitleInput from "./TitleInput";
 
 const Article = () => {
   const formData = useRef(new FormData());
@@ -20,9 +21,9 @@ const Article = () => {
   const fileInput = useRef<HTMLInputElement>(null);
 
   // 게시글 정보
-  const [title, setTitle] = useState("제목");
-  const [content, setContent] = useState("내용");
-  const [memberId, setMemberId] = useState("1");
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  // const [memberId, setMemberId] = useState("1");
   const [files, setFiles] = useState<File>();
   const [optionString, setOptionString] = useState("");
   const [dataSet, setDataSet] = useState<DataItem[]>([]);
@@ -112,7 +113,6 @@ const Article = () => {
     addFilesToFormData(chartsObj);
     formData.current.append("title", title);
     formData.current.append("content", content);
-    formData.current.append("memberId", memberId);
     // files already append
     // options already append
     console.log(formData.current.get("files"));
@@ -129,6 +129,9 @@ const Article = () => {
 
   return (
     <StyledArticle>
+      <StyledColLayout>
+        <TitleInput title={title} setTitle={setTitle} />
+      </StyledColLayout>
       <StyledColLayout>
         <input type="file" ref={fileInput} onChange={handleChangeUpload} />
       </StyledColLayout>
