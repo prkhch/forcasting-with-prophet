@@ -5,7 +5,7 @@ import StyledOptions from "styles/articleDetailPage/StyledOptions";
 import { ProphetOptions } from "types/ProphetOptions";
 import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledBoldText from "styles/StyledHeaderText";
+import StyledBoldText from "styles/common/StyledHeaderText";
 
 const Options = ({ optionsString }: { optionsString: string }) => {
   const [options, setOptions] = useState<ProphetOptions>();

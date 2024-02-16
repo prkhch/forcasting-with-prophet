@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import StyledCarousel from "styles/StyledCarousel";
-import StyledRowLayout from "styles/StyledRowLayout";
-import StyledColLayout from "styles/StyledColLayout";
+import StyledCarousel from "styles/common/StyledCarousel";
 import StyledImage from "styles/articleDetailPage/StyledImage";
 import { Charts } from "types/Charts";
 

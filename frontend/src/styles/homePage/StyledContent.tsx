@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 const StyledContent = styled.div`
-  font-family: "Body2", sans-serif;
+  font-family: "SuiteRegular", sans-serif;
   font-size: 18px;
   color: #393939;
   overflow: hidden;

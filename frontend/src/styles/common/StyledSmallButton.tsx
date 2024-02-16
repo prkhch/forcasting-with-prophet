@@ -5,7 +5,7 @@ const StyledSmallButton = styled.button`
   border-radius: 4px;
   width: 80px;
   height: 32px;
-  font-family: "Caption", sans-serif;
+  font-family: "SuiteLight", sans-serif;
   color: white;
   cursor: pointer;
   &:hover {

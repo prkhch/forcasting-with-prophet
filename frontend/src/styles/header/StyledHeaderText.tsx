@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledHeaderText = styled.div`
-  font-family: "Body2", sans-serif;
+  font-family: "SuiteRegular", sans-serif;
   font-size: 18px;
   color: white;
   cursor: pointer;

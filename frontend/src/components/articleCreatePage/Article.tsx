@@ -7,12 +7,13 @@ import StyledArticle from "styles/articleDetailPage/StyledArticle";
 import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
 import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
 import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
-import StyledColLayout from "styles/StyledColLayout";
-import StyledSmallButton from "styles/StyledSmallButton";
+import StyledColLayout from "styles/common/StyledColLayout";
+import StyledSmallButton from "styles/common/StyledSmallButton";
 import { Charts } from "types/Charts";
 import { DataItem } from "types/DataItem";
 import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
+import CategoryInput from "./CategoryInput";
 import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 
@@ -134,6 +135,10 @@ const Article = () => {
 
   return (
     <StyledArticle>
+      <StyledColLayout>
+        <CategoryInput categoryId={categoryId} setCategoryId={setCategoryId} />
+      </StyledColLayout>
+
       <StyledColLayout>
         <TitleInput title={title} setTitle={setTitle} />
       </StyledColLayout>

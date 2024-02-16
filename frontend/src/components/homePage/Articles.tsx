@@ -6,7 +6,7 @@ import StyledArticles from "styles/homePage/StyledArticles";
 import StyledArticle from "styles/homePage/StyledArticle";
 import StyledContent from "styles/homePage/StyledContent";
 import StyledTitle from "styles/homePage/StyledTitle";
-import StyledRowLayout from "styles/StyledRowLayout";
+import StyledRowLayout from "styles/common/StyledRowLayout";
 import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 import DisabledLeftButton from "./DisabledLeftButton";

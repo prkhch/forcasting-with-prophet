@@ -1,37 +1,16 @@
 @font-face {
-  font-family: "Headline1";
+  font-family: "SuiteBold";
   src: url("./fonts/SUITE-Bold.otf");
-  /* font-size: 80; */
 }
 
 @font-face {
-  font-family: "Headline2";
-  src: url("./fonts/SUITE-Bold.otf");
-  /* font-size: 60; */
-}
-
-@font-face {
-  font-family: "Subtitle";
-  src: url("./fonts/SUITE-Bold.otf");
-  /* font-size: 30; */
-}
-
-@font-face {
-  font-family: "Body1";
+  font-family: "SuiteRegular";
   src: url("./fonts/SUITE-Regular.otf");
-  /* font-size: 24; */
 }
 
 @font-face {
-  font-family: "Body2";
-  src: url("./fonts/SUITE-Regular.otf");
-  /* font-size: 18; */
-}
-
-@font-face {
-  font-family: "Caption";
+  font-family: "SuiteLight";
   src: url("./fonts/SUITE-Light.otf");
-  /* font-size: 14; */
 }
 
 html, body, div, span, applet, object, iframe,
