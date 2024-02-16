@@ -8,17 +8,8 @@ import StyledColLayout from "styles/common/StyledColLayout";
 import StyledImage from "styles/articleDetailPage/StyledImage";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
-  const settings = {
-    dots: true,
-    arrows: true,
-    infinite: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-
-  return (
-    <StyledCarousel>
-      <Slider {...settings}>
+  return {
+    /* <Slider {...settings}>
         {fileList.map(
           (file, idx) =>
             idx > 0 && (
@@ -28,9 +19,8 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
               </div>
             )
         )}
-      </Slider>
-    </StyledCarousel>
-  );
+      </Slider> */
+  };
 };
 
 export default Carousel;

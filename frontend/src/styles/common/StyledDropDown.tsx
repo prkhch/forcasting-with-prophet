@@ -23,6 +23,7 @@ const DropAnimation = keyframes`
   `;
 
 export const StyledUl = styled.ul`
+  position: fixed;
   margin-bottom: 1rem;
   animation: ${DropAnimation} 0.2s forwards ease-in;
 `;
@@ -30,11 +31,9 @@ export const StyledUl = styled.ul`
 export const StyledLi = styled.li`
   background-color: #ffffff;
   cursor: pointer;
-  border-radius: 4px;
   text-align: center;
-  width: 5rem;
-  padding: 0.2rem;
-  margin-top: 0.1rem;
+  width: 6rem;
+  padding: 0.3rem;
   &:hover {
     outline: none;
     border: none;
@@ -47,9 +46,8 @@ export const StyledSelect = styled.div`
   justify-content: space-around;
   background-color: #ffffff;
   cursor: pointer;
-  border-radius: 4px;
   text-align: center;
-  width: 5rem;
+  width: 6rem;
   margin-top: 0.5rem;
   padding: 0.3rem;
   font-family: "SuiteLight";

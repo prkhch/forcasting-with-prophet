@@ -10,7 +10,7 @@ import StyledLink from "styles/articleDetailPage/StyledLink";
 import StyledTitle from "styles/articleDetailPage/StyledTitle";
 import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
-import Carousel from "./Carousel";
+import Carousel from "components/common/Carousel";
 import Options from "./Options";
 
 const Article = ({ id }: { id: string }) => {
@@ -85,19 +85,19 @@ const Article = ({ id }: { id: string }) => {
       });
   };
 
-  const ApiPandas = (fileData: Blob, fileName: string) => {
-    const formData = new FormData();
-    formData.append("files", fileData, fileName);
-    axios
-      .post("/api/pandas", formData)
-      .then((res) => {
-        console.log(res.data);
-        setDataSet(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const ApiPandas = (fileData: Blob, fileName: string) => {
+  //   const formData = new FormData();
+  //   formData.append("files", fileData, fileName);
+  //   axios
+  //     .post("/api/pandas", formData)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setDataSet(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   useEffect(() => {
     ApiGetArtilceDetail();
@@ -112,7 +112,7 @@ const Article = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (fileData && fileName) {
-      ApiPandas(fileData, fileName);
+      // ApiPandas(fileData, fileName);
     }
   }, [fileData]);
 

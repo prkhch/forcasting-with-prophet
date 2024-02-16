@@ -31,7 +31,7 @@ const Article = () => {
   const [categoryId, setCategoryId] = useState("1");
   const [files, setFiles] = useState<File>();
   const [optionString, setOptionString] = useState("");
-  const [dataSet, setDataSet] = useState<DataItem[]>([]);
+  // const [dataSet, setDataSet] = useState<DataItem[]>([]);
   const [chartsObj, setChartsObj] = useState<Charts>({});
 
   // Upload, (csv, xls, xlsx)
@@ -40,22 +40,22 @@ const Article = () => {
     if (!files) return;
     formData.current.append("files", files[0]);
     setFiles(files[0]);
-    ApiPandas();
+    // ApiPandas();
   };
 
   // pandas
-  const ApiPandas = () => {
-    console.log(formData.current.get("files"));
-    axios
-      .post("/api/pandas", formData.current)
-      .then((res) => {
-        console.log(res.data);
-        setDataSet(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const ApiPandas = () => {
+  //   console.log(formData.current.get("files"));
+  //   axios
+  //     .post("/api/pandas", formData.current)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setDataSet(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   // prophet
   const ApiProphet = () => {
@@ -137,22 +137,15 @@ const Article = () => {
     <StyledArticle>
       <StyledColLayout>
         <CategoryInput categoryId={categoryId} setCategoryId={setCategoryId} />
-      </StyledColLayout>
 
-      <StyledColLayout>
         <TitleInput title={title} setTitle={setTitle} />
-      </StyledColLayout>
 
-      <StyledColLayout>
         <ContentInput content={content} setContent={setContent} />
-      </StyledColLayout>
 
-      <StyledColLayout>
         <input type="file" ref={fileInput} onChange={handleChangeUpload} />
-      </StyledColLayout>
 
-      {/* 데이터셋 */}
-      {dataSet.length > 0 && (
+        {/* 데이터셋 */}
+        {/* {dataSet.length > 0 && (
         <StyledDataSet>
           <StyledDataRow>
             {Object.keys(dataSet[0]).map((key, idx) => (
@@ -171,25 +164,18 @@ const Article = () => {
             </StyledDataRow>
           ))}
         </StyledDataSet>
-      )}
+      )} */}
 
-      {Object.keys(chartsObj).length > 0 && (
-        <StyledColLayout>
-          <Carousel chartsObj={chartsObj} />
-        </StyledColLayout>
-      )}
+        {Object.keys(chartsObj).length > 0 && <Carousel chartsObj={chartsObj} />}
 
-      {files && Object.keys(chartsObj).length == 0 && (
-        <StyledColLayout>
+        {files && Object.keys(chartsObj).length == 0 && (
           <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
-        </StyledColLayout>
-      )}
+        )}
 
-      {files && Object.keys(chartsObj).length > 0 && (
-        <StyledColLayout>
+        {files && Object.keys(chartsObj).length > 0 && (
           <StyledSmallButton onClick={ApiCreateArticle}>Submit</StyledSmallButton>
-        </StyledColLayout>
-      )}
+        )}
+      </StyledColLayout>
     </StyledArticle>
   );
 };

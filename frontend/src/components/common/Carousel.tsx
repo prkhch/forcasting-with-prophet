@@ -10,61 +10,48 @@ import StyledColLayout from "styles/common/StyledColLayout";
 import StyledRowLayout from "styles/common/StyledRowLayout";
 import StyledHeaderText from "styles/common/StyledHeaderText";
 import { StyledIndicator } from "styles/common/StyledIndicator";
+import { FileResponse } from "types/FileResponse";
 
-const Carousel = ({ chartsObj }: { chartsObj: Charts }) => {
-  const [imageList, setImageList] = useState<string[]>([]);
-  const [colName, setColName] = useState<string[]>([]);
-  useEffect(() => {
-    const newImageList: string[] = [];
-    const newColName: string[] = [];
-    Object.values(chartsObj).forEach((charts) => {
-      charts.forEach((chart) => {
-        newImageList.push(chart);
-      });
-    });
-    Object.keys(chartsObj).forEach((columnName) => {
-      newColName.push(columnName);
-    });
-    setColName(newColName);
-    setImageList(newImageList);
-  }, [chartsObj]);
-
-  const [pageNumber, setPageNumber] = useState(0);
+const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
+  const [pageNumber, setPageNumber] = useState(1);
+  console.log(fileList);
 
   return (
     <StyledColLayout>
-      <StyledHeaderText>{colName[pageNumber / 2]}</StyledHeaderText>
+      {fileList.length > 0 && <StyledHeaderText>{fileList[pageNumber].fileName}</StyledHeaderText>}
 
       <StyledContainer>
-        {pageNumber > 0 && (
+        {pageNumber > 1 && (
           <LeftButton
             func={() => {
               setPageNumber(pageNumber - 2);
             }}
           />
         )}
-        {pageNumber == 0 && <DisabledLeftButton />}
+        {pageNumber == 1 && <DisabledLeftButton />}
 
-        {imageList.length > 0 && (
+        {fileList.length > 0 && (
           <StyledRowLayout>
-            <StyledImage src={`data:image/jpeg;base64,${imageList[pageNumber]}`} alt="chartImage" />
-            <StyledImage src={`data:image/jpeg;base64,${imageList[pageNumber + 1]}`} alt="component" />
+            <StyledImage src={`/api/files/download/${fileList[pageNumber].id}`} alt={fileList[pageNumber].fileName} />
+            <StyledImage
+              src={`/api/files/download/${fileList[pageNumber + 1].id}`}
+              alt={fileList[pageNumber].fileName}
+            />
           </StyledRowLayout>
         )}
 
-        {pageNumber < imageList.length - 2 && (
+        {pageNumber < fileList.length - 2 && (
           <RightButton
             func={() => {
               setPageNumber(pageNumber + 2);
             }}
           />
         )}
-        {pageNumber == imageList.length - 2 && <DisabledRightButton />}
+        {pageNumber == fileList.length - 2 && <DisabledRightButton />}
       </StyledContainer>
-
       <StyledRowLayout>
-        {Array.from({ length: imageList.length / 2 }, (_, i) => (
-          <StyledIndicator key={i} onClick={() => setPageNumber(i * 2)} selected={pageNumber === i * 2}>
+        {Array.from({ length: fileList.length / 2 }, (_, i) => (
+          <StyledIndicator key={i} onClick={() => setPageNumber(i * 2 + 1)} selected={pageNumber === i * 2 + 1}>
             ●
           </StyledIndicator>
         ))}
