@@ -1,7 +1,20 @@
 import React from "react";
+import { styled } from "styled-components";
+import StyledContent from "styles/articleDetailPage/StyledContent";
+import StyledInput from "styles/StyledInput";
+import StyledLabel from "styles/StyledLabel";
 
 const TitleInput = ({ title, setTitle }: { title: string; setTitle: React.Dispatch<React.SetStateAction<string>> }) => {
-  return <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />;
+  return (
+    <StyledInputForm>
+      <StyledLabel>Title</StyledLabel>
+      <StyledInput type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+    </StyledInputForm>
+  );
 };
 
 export default TitleInput;
+
+const StyledInputForm = styled.div`
+  width: 100%;
+`;

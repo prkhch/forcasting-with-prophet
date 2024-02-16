@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 const StyledArticle = styled.div`
-  width: 70%;
+  width: 60%;
   padding: 1rem;
   > * {
     margin-bottom: 6px;

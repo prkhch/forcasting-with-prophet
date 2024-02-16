@@ -79,7 +79,7 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.yearlyScale}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>weeklyscale : </StyledOptionKey>
+          <StyledOptionKey>weekly_scale : </StyledOptionKey>
           <StyledOptionValue>{options?.weeklyScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>

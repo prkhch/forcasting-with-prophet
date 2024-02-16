@@ -2,6 +2,7 @@ import axios from "axios";
 import useBase64ToBlob from "hooks/useBase64ToBlob";
 import useForamatDate from "hooks/useForamatDate";
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import StyledArticle from "styles/articleDetailPage/StyledArticle";
 import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
 import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
@@ -12,9 +13,11 @@ import { Charts } from "types/Charts";
 import { DataItem } from "types/DataItem";
 import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
+import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 
 const Article = () => {
+  const navigate = useNavigate();
   const formData = useRef(new FormData());
 
   // 파일
@@ -24,6 +27,7 @@ const Article = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   // const [memberId, setMemberId] = useState("1");
+  const [categoryId, setCategoryId] = useState("1");
   const [files, setFiles] = useState<File>();
   const [optionString, setOptionString] = useState("");
   const [dataSet, setDataSet] = useState<DataItem[]>([]);
@@ -113,6 +117,7 @@ const Article = () => {
     addFilesToFormData(chartsObj);
     formData.current.append("title", title);
     formData.current.append("content", content);
+    formData.current.append("categoryId", categoryId);
     // files already append
     // options already append
     console.log(formData.current.get("files"));
@@ -120,18 +125,23 @@ const Article = () => {
       .post("/api/article", formData.current)
       .then((res) => {
         console.log(res);
+        navigate(-1);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-  console.log(chartsObj);
 
   return (
     <StyledArticle>
       <StyledColLayout>
         <TitleInput title={title} setTitle={setTitle} />
       </StyledColLayout>
+
+      <StyledColLayout>
+        <ContentInput content={content} setContent={setContent} />
+      </StyledColLayout>
+
       <StyledColLayout>
         <input type="file" ref={fileInput} onChange={handleChangeUpload} />
       </StyledColLayout>
@@ -172,7 +182,7 @@ const Article = () => {
 
       {files && Object.keys(chartsObj).length > 0 && (
         <StyledColLayout>
-          <StyledSmallButton onClick={ApiCreateArticle}>등록</StyledSmallButton>
+          <StyledSmallButton onClick={ApiCreateArticle}>Submit</StyledSmallButton>
         </StyledColLayout>
       )}
     </StyledArticle>

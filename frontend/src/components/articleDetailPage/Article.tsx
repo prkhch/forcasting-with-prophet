@@ -125,9 +125,9 @@ const Article = ({ id }: { id: string }) => {
           {fileList[0].fileName}
         </StyledLink>
       )}
-
+      <hr />
       {/* 데이터셋 */}
-      {dataSet.length > 0 && (
+      {/* {dataSet.length > 0 && (
         <StyledDataSet>
           <StyledDataRow>
             {Object.keys(dataSet[0]).map((key, idx) => (
@@ -146,9 +146,10 @@ const Article = ({ id }: { id: string }) => {
             </StyledDataRow>
           ))}
         </StyledDataSet>
-      )}
+      )} */}
 
       <Options optionsString={prophetOptions} />
+      <hr />
 
       <Carousel fileList={fileList} />
     </StyledArticle>
