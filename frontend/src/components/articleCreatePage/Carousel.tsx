@@ -10,6 +10,7 @@ import StyledColLayout from "styles/common/StyledColLayout";
 import StyledRowLayout from "styles/common/StyledRowLayout";
 import StyledHeaderText from "styles/common/StyledHeaderText";
 import { StyledIndicator } from "styles/common/StyledIndicator";
+import StyledLabel from "styles/common/StyledLabel";
 
 const Carousel = ({ chartsObj }: { chartsObj: Charts }) => {
   const [imageList, setImageList] = useState<string[]>([]);
@@ -33,7 +34,7 @@ const Carousel = ({ chartsObj }: { chartsObj: Charts }) => {
 
   return (
     <StyledColLayout>
-      <StyledHeaderText>{colName[pageNumber / 2]}</StyledHeaderText>
+      <StyledLabel>{colName[pageNumber / 2]}</StyledLabel>
 
       <StyledContainer>
         {pageNumber > 0 && (

@@ -46,5 +46,5 @@ const CategoryInput = ({
 export default CategoryInput;
 
 const StyledInputForm = styled.div`
-  width: 100%;
+  width: 60%;
 `;

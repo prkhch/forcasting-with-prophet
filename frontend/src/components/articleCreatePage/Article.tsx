@@ -1,21 +1,22 @@
 import axios from "axios";
 import useBase64ToBlob from "hooks/useBase64ToBlob";
-import useForamatDate from "hooks/useForamatDate";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StyledArticle from "styles/articleDetailPage/StyledArticle";
+import { DataItem } from "types/DataItem";
 import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
 import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
 import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
 import StyledColLayout from "styles/common/StyledColLayout";
 import StyledSmallButton from "styles/common/StyledSmallButton";
+import { StyledUploadButton, StyledHiddendInput } from "styles/common/StyledUploadInput";
 import { Charts } from "types/Charts";
-import { DataItem } from "types/DataItem";
 import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
 import CategoryInput from "./CategoryInput";
 import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
+import UploadInput from "./UploadInput";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const Article = () => {
   // const [memberId, setMemberId] = useState("1");
   const [categoryId, setCategoryId] = useState("1");
   const [files, setFiles] = useState<File>();
+  const [fileName, setFileName] = useState("");
   const [optionString, setOptionString] = useState("");
   // const [dataSet, setDataSet] = useState<DataItem[]>([]);
   const [chartsObj, setChartsObj] = useState<Charts>({});
@@ -40,6 +42,8 @@ const Article = () => {
     if (!files) return;
     formData.current.append("files", files[0]);
     setFiles(files[0]);
+    setFileName(files[0].name);
+    console.log(files);
     // ApiPandas();
   };
 
@@ -142,7 +146,7 @@ const Article = () => {
 
         <ContentInput content={content} setContent={setContent} />
 
-        <input type="file" ref={fileInput} onChange={handleChangeUpload} />
+        <UploadInput fileInput={fileInput} handleChangeUpload={handleChangeUpload} fileName={fileName} />
 
         {/* 데이터셋 */}
         {/* {dataSet.length > 0 && (

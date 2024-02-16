@@ -30,5 +30,5 @@ const ContentInput = ({
 export default ContentInput;
 
 const StyledInputForm = styled.div`
-  width: 100%;
+  width: 60%;
 `;

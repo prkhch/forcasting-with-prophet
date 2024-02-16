@@ -16,5 +16,5 @@ const TitleInput = ({ title, setTitle }: { title: string; setTitle: React.Dispat
 export default TitleInput;
 
 const StyledInputForm = styled.div`
-  width: 100%;
+  width: 60%;
 `;
