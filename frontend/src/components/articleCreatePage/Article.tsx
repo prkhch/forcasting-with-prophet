@@ -17,6 +17,7 @@ import CategoryInput from "./CategoryInput";
 import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 import UploadInput from "./UploadInput";
+import Options from "./Options/Options";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -76,35 +77,6 @@ const Article = () => {
       });
   };
 
-  // 옵션
-  const [options, setOptions] = useState<ProphetOptions>({
-    growth: "logistic",
-    dfCap: 6,
-    dfFloor: 1.5,
-    ftCap: 6,
-    ftFloor: 1.5,
-    cpScale: 0.5,
-    cpList: [],
-    cpThreshold: 0.01,
-    periods: 365,
-    holidays: "UK",
-    holidayScale: 10,
-    yearlyScale: "auto",
-    weeklyScale: "auto",
-    seasonMode: "additive",
-    seasonScale: 10,
-  });
-
-  useEffect(() => {
-    const tmp = JSON.stringify(options);
-    setOptionString(tmp);
-  }, []);
-
-  useEffect(() => {
-    const tmp = JSON.stringify(options);
-    setOptionString(tmp);
-  }, [options]);
-
   const addFilesToFormData = (chartsObj: Charts) => {
     Object.entries(chartsObj).forEach(([key, base64Array]) => {
       base64Array.forEach((base64, index) => {
@@ -145,6 +117,7 @@ const Article = () => {
         <TitleInput title={title} setTitle={setTitle} />
 
         <ContentInput content={content} setContent={setContent} />
+        <Options optionsString={optionString} setOptionString={setOptionString} />
 
         <UploadInput fileInput={fileInput} handleChangeUpload={handleChangeUpload} fileName={fileName} />
 

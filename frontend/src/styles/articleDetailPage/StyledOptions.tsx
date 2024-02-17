@@ -6,6 +6,7 @@ const StyledOptions = styled.div`
   color: #393939;
   padding: 3px;
   margin-top: 6px;
+  width: 60%;
 `;
 
 export default StyledOptions;

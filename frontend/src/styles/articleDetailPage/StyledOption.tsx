@@ -1,9 +1,7 @@
 import { styled } from "styled-components";
 
 const StyledOption = styled.div`
-  display: flex;
-  align-items: center;
-  margin: 0 1rem 0 1rem;
+  margin: 0 0.5rem 0 0;
 `;
 
 export default StyledOption;

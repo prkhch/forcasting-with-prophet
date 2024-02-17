@@ -10,7 +10,7 @@ import StyledLink from "styles/articleDetailPage/StyledLink";
 import StyledTitle from "styles/articleDetailPage/StyledTitle";
 import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
-import Carousel from "components/common/Carousel";
+import Carousel from "./Carousel";
 import Options from "./Options";
 
 const Article = ({ id }: { id: string }) => {
