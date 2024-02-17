@@ -3,15 +3,15 @@ import { styled } from "styled-components";
 import StyledOption from "styles/articleDetailPage/StyledOption";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
 import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
-import { StyledUl, StyledLi, StyledSelect } from "styles/common/StyledDropDown";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLi, StyledSelect, StyledUl } from "styles/common/StyledDropDown";
+import StyledInput from "styles/common/StyledInput";
 import StyledNumberInput from "styles/common/StyledNumberInput";
-import StyledRowLayout from "styles/common/StyledRowLayout";
+import StyledOptionAnimation from "styles/common/StyledOptionAnimation";
 import StyledText from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
-import { COUNTRY } from "constants/COUNTRY";
+import { SEASON } from "constants/SEASON";
 
-const HolidaysInput = ({
+const WeekInput = ({
   options,
   setOptions,
 }: {
@@ -19,34 +19,33 @@ const HolidaysInput = ({
   setOptions: React.Dispatch<React.SetStateAction<ProphetOptions>>;
 }) => {
   const [visible, setVisible] = useState(false);
+  const [selectName, setSelectName] = useState("Auto");
 
-  const [selectName, setSelectName] = useState("- - -");
-
-  const handleCountryChange = (name: string, code: string) => {
-    setOptions((prevOptions) => ({
-      ...prevOptions,
-      holidays: code,
-    }));
-    setSelectName(name);
-  };
+  // const handleGrowthChange = (value: string) => {
+  //   setOptions((prevOptions) => ({
+  //     ...prevOptions,
+  //     growth: value,
+  //   }));
+  // };
 
   return (
     <StyledInputForm>
+      <StyledText>Weekly Seasonality</StyledText>
       <StyledOptionRow>
         <StyledOption>
-          <StyledText>Holidays</StyledText>
           <StyledSelect onClick={() => setVisible(!visible)}>
             {selectName}
             <img src="icons/dropdown_arrow.svg" alt="" />
           </StyledSelect>
           {visible && (
             <StyledUl>
-              {Object.entries(COUNTRY).map(([name, code]) => (
+              {Object.entries(SEASON).map(([name, value]) => (
                 <StyledLi
                   key={name}
                   onClick={() => {
-                    handleCountryChange(name, code);
                     setVisible(false);
+                    setSelectName(name);
+                    setOptions((prev) => ({ ...prev, weeklyScale: value }));
                   }}
                 >
                   {name}
@@ -56,23 +55,21 @@ const HolidaysInput = ({
           )}
         </StyledOption>
 
-        {options.holidays != "none" && (
-          <StyledOption>
-            <StyledText>Holiday Prior Scale</StyledText>
+        <StyledOption>
+          {selectName == "True" && typeof options.weeklyScale == "number" && (
             <StyledNumberInput
               type="number"
-              value={options.holidayScale}
-              onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, holidayScale: Number(e.target.value) }))}
-              step="0.1"
+              value={options.weeklyScale}
+              onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, weeklyScale: Number(e.target.value) }))}
             />
-          </StyledOption>
-        )}
+          )}
+        </StyledOption>
       </StyledOptionRow>
     </StyledInputForm>
   );
 };
 
-export default HolidaysInput;
+export default WeekInput;
 
 const StyledInputForm = styled.div`
   width: 100%;

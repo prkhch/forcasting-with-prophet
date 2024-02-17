@@ -10,7 +10,7 @@ import StyledOptionAnimation from "styles/common/StyledOptionAnimation";
 import StyledText from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
 
-const Growth = ["linear", "logistic"];
+const AutoTF = ["auto", true, false];
 
 const PeriodInput = ({
   options,
@@ -19,17 +19,6 @@ const PeriodInput = ({
   options: ProphetOptions;
   setOptions: React.Dispatch<React.SetStateAction<ProphetOptions>>;
 }) => {
-  const [visible, setVisible] = useState(false);
-  const [selectName, setSelectName] = useState(options.growth);
-
-  const handleGrowthChange = (value: string) => {
-    setOptions((prevOptions) => ({
-      ...prevOptions,
-      growth: value,
-    }));
-    setSelectName(value);
-  };
-
   return (
     <StyledInputForm>
       <StyledOptionRow>
@@ -41,14 +30,6 @@ const PeriodInput = ({
             onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, periods: Number(e.target.value) }))}
           />
         </StyledOption>
-        {/* <StyledOption>
-          <StyledText>Yearly Scale</StyledText>
-          <StyledNumberInput
-            type="number"
-            value={options.yearlyScale}
-            onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, yearlyScale: Number(e.target.value) }))}
-          />
-        </StyledOption> */}
       </StyledOptionRow>
     </StyledInputForm>
   );

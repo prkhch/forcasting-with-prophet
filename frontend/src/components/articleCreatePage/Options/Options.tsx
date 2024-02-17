@@ -12,6 +12,8 @@ import StyledLabel from "styles/common/StyledLabel";
 import StyledText from "styles/common/StyledText";
 import GrowthInput from "./GrowthInput";
 import PeriodInput from "./PeriodInput";
+import YearInput from "./YearInput";
+import WeekInput from "./WeekInput";
 
 const Options = ({
   optionsString,
@@ -22,7 +24,7 @@ const Options = ({
 }) => {
   // 옵션
   const [options, setOptions] = useState<ProphetOptions>({
-    growth: "logistic",
+    growth: "linear",
     dfCap: 6,
     dfFloor: 1.5,
     ftCap: 6,
@@ -75,20 +77,24 @@ const Options = ({
 
       <GrowthInput options={options} setOptions={setOptions} />
 
-      <PeriodInput options={options} setOptions={setOptions} />
-
-      <HolidaysInput options={options} setOptions={setOptions} />
+      <StyledOptionRow>
+        <PeriodInput options={options} setOptions={setOptions} />
+        <YearInput options={options} setOptions={setOptions} />
+        <WeekInput options={options} setOptions={setOptions} />
+      </StyledOptionRow>
 
       <StyledOptionRow>
         <StyledOption>
-          <StyledText>Season Mode</StyledText>
+          <StyledText>Seasonality Mode</StyledText>
           <StyledOptionValue>{options?.seasonMode}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledText>Season Scale</StyledText>
+          <StyledText>Seasonality Prior Scale</StyledText>
           <StyledOptionValue>{options?.seasonScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
+
+      <HolidaysInput options={options} setOptions={setOptions} />
     </StyledOptions>
   );
 };

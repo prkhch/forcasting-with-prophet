@@ -10,6 +10,17 @@ const Animation = keyframes`
   }
   `;
 
+const Init = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const StyledNumberInput = styled.input`
   border: transparent;
   background-color: transparent;
@@ -26,6 +37,7 @@ const StyledNumberInput = styled.input`
   }
   font-family: "SuiteLight";
   font-size: 18px;
+  animation: ${Init} 0.5s forwards ease-in-out;
 `;
 
 export default StyledNumberInput;

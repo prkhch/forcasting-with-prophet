@@ -10,7 +10,7 @@ import StyledOptionAnimation from "styles/common/StyledOptionAnimation";
 import StyledText from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
 
-const Growth = ["linear", "logistic"];
+const GROWTH = ["linear", "logistic"];
 
 const GrowthInput = ({
   options,
@@ -41,7 +41,7 @@ const GrowthInput = ({
           </StyledSelect>
           {visible && (
             <StyledUl>
-              {Growth.map((value, idx) => (
+              {GROWTH.map((value, idx) => (
                 <StyledLi
                   key={idx}
                   onClick={() => {
