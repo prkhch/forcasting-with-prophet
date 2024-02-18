@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 
-import { Outlet } from "react-router-dom";
-
 const LoginPage = () => {
   const handleGoogleLogin = () => {
     const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;

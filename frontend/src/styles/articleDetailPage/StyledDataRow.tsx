@@ -2,8 +2,8 @@ import { styled } from "styled-components";
 
 const StyledDataRow = styled.div`
   display: flex;
-  border-radius: 4px;
-  width: 1920px;
+  /* width: 2000px; */
+  /* width: 120%; */
 
   &:nth-child(even) {
     background-color: #f9f9f9;

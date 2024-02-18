@@ -1,5 +1,5 @@
 import axios from "axios";
-import useForamatDate from "hooks/useForamatDate";
+import handleForamatDelTime from "utils/handleForamatDelTime";
 import { useEffect, useState } from "react";
 import StyledArticle from "styles/articleDetailPage/StyledArticle";
 import StyledContent from "styles/articleDetailPage/StyledContent";
@@ -85,19 +85,19 @@ const Article = ({ id }: { id: string }) => {
       });
   };
 
-  const ApiPandas = (fileData: Blob, fileName: string) => {
-    const formData = new FormData();
-    formData.append("files", fileData, fileName);
-    axios
-      .post("/api/pandas", formData)
-      .then((res) => {
-        console.log(res.data);
-        setDataSet(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // const ApiPandas = (fileData: Blob, fileName: string) => {
+  //   const formData = new FormData();
+  //   formData.append("files", fileData, fileName);
+  //   axios
+  //     .post("/api/pandas", formData)
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setDataSet(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
 
   useEffect(() => {
     ApiGetArtilceDetail();
@@ -112,7 +112,7 @@ const Article = ({ id }: { id: string }) => {
 
   useEffect(() => {
     if (fileData && fileName) {
-      ApiPandas(fileData, fileName);
+      // ApiPandas(fileData, fileName);
     }
   }, [fileData]);
 
@@ -125,40 +125,32 @@ const Article = ({ id }: { id: string }) => {
           {fileList[0].fileName}
         </StyledLink>
       )}
-
-      <StyledDataSet>
-        {dataSet.length > 0 && (
+      <hr />
+      {/* 데이터셋 */}
+      {/* {dataSet.length > 0 && (
+        <StyledDataSet>
           <StyledDataRow>
             {Object.keys(dataSet[0]).map((key, idx) => (
               <StyledDataItem key={idx}>{key}</StyledDataItem>
             ))}
           </StyledDataRow>
-        )}
 
-        {dataSet.map((item, index) => (
-          <StyledDataRow key={index}>
-            {Object.entries(item).map(([key, value]) => {
-              const isDate = key.includes("Date");
-              const inputValue = isDate ? useForamatDate(value) : value;
+          {dataSet.map((item, index) => (
+            <StyledDataRow key={index}>
+              {Object.entries(item).map(([key, value]) => {
+                const isDate = key.includes("Date");
+                const inputValue = isDate ? handleForamatDelTime(value) : value;
 
-              return <StyledDataItem key={key}>{inputValue}</StyledDataItem>;
-            })}
-          </StyledDataRow>
-        ))}
-      </StyledDataSet>
+                return <StyledDataItem key={key}>{inputValue}</StyledDataItem>;
+              })}
+            </StyledDataRow>
+          ))}
+        </StyledDataSet>
+      )} */}
 
       <Options optionsString={prophetOptions} />
+      <hr />
 
-      {/* {fileList.map((file, idx) => (
-        <div key={idx}>
-          {idx > 0 && (
-            <>
-              <img src={`/api/files/download/${file.id}`} alt={file.fileName} />
-              {file.fileName}
-            </>
-          )}
-        </div>
-      ))} */}
       <Carousel fileList={fileList} />
     </StyledArticle>
   );

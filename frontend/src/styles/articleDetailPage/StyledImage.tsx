@@ -4,8 +4,8 @@ const StyledImage = styled.img`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
-  margin: 1rem auto;
+  margin: 1rem;
+  width: 45%;
 `;
 
 export default StyledImage;
