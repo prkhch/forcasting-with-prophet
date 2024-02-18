@@ -1,6 +1,6 @@
 import React from "react";
 
-const useBase64ToBlob = (base64: string, contentType: string) => {
+const handleBase64ToBlob = (base64: string, contentType: string) => {
   const binaryString = atob(base64);
   const len = binaryString.length;
   const bytes = new Uint8Array(len);
@@ -12,4 +12,4 @@ const useBase64ToBlob = (base64: string, contentType: string) => {
   return new Blob([bytes], { type: contentType });
 };
 
-export default useBase64ToBlob;
+export default handleBase64ToBlob;

@@ -14,6 +14,8 @@ import GrowthInput from "./GrowthInput";
 import PeriodInput from "./PeriodInput";
 import YearInput from "./YearInput";
 import WeekInput from "./WeekInput";
+import SeasonalInput from "./SeasonalInput";
+import ChangePointsInput from "./ChangePointsInput";
 
 const Options = ({
   optionsString,
@@ -29,7 +31,7 @@ const Options = ({
     dfFloor: 1.5,
     ftCap: 6,
     ftFloor: 1.5,
-    cpScale: 0.5,
+    cpScale: 0.05,
     cpList: [],
     cpThreshold: 0.01,
     periods: 365,
@@ -61,40 +63,20 @@ const Options = ({
   return (
     <StyledOptions>
       <StyledLabel>Options</StyledLabel>
-      <StyledOptionRow>
-        <StyledOption>
-          <StyledText>Changepoints</StyledText>
-          <StyledOptionValue>{options?.cpList}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledText>Changepoint Prior Scale</StyledText> <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledText>Changepoint Threshold</StyledText>
-          <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
-        </StyledOption>
-      </StyledOptionRow>
+
+      <ChangePointsInput options={options} setOptions={setOptions} />
 
       <GrowthInput options={options} setOptions={setOptions} />
 
-      <StyledOptionRow>
-        <PeriodInput options={options} setOptions={setOptions} />
-        <YearInput options={options} setOptions={setOptions} />
-        <WeekInput options={options} setOptions={setOptions} />
-      </StyledOptionRow>
-
-      <StyledOptionRow>
-        <StyledOption>
-          <StyledText>Seasonality Mode</StyledText>
-          <StyledOptionValue>{options?.seasonMode}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledText>Seasonality Prior Scale</StyledText>
-          <StyledOptionValue>{options?.seasonScale}</StyledOptionValue>
-        </StyledOption>
-      </StyledOptionRow>
-
       <HolidaysInput options={options} setOptions={setOptions} />
+
+      <StyledOptionRow>
+        <WeekInput options={options} setOptions={setOptions} />
+        <YearInput options={options} setOptions={setOptions} />
+        <PeriodInput options={options} setOptions={setOptions} />
+      </StyledOptionRow>
+
+      <SeasonalInput options={options} setOptions={setOptions} />
     </StyledOptions>
   );
 };

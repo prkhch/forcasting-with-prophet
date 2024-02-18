@@ -1,5 +1,5 @@
 import axios from "axios";
-import useForamatDate from "hooks/useForamatDate";
+import handleForamatDelTime from "utils/handleForamatDelTime";
 import { useEffect, useState } from "react";
 import StyledArticle from "styles/articleDetailPage/StyledArticle";
 import StyledContent from "styles/articleDetailPage/StyledContent";
@@ -139,7 +139,7 @@ const Article = ({ id }: { id: string }) => {
             <StyledDataRow key={index}>
               {Object.entries(item).map(([key, value]) => {
                 const isDate = key.includes("Date");
-                const inputValue = isDate ? useForamatDate(value) : value;
+                const inputValue = isDate ? handleForamatDelTime(value) : value;
 
                 return <StyledDataItem key={key}>{inputValue}</StyledDataItem>;
               })}

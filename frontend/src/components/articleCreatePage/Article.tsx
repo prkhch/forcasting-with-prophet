@@ -1,5 +1,5 @@
 import axios from "axios";
-import useBase64ToBlob from "hooks/useBase64ToBlob";
+import handleBase64ToBlob from "utils/handleBase64ToBlob";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StyledArticle from "styles/articleDetailPage/StyledArticle";
@@ -80,7 +80,7 @@ const Article = () => {
   const addFilesToFormData = (chartsObj: Charts) => {
     Object.entries(chartsObj).forEach(([key, base64Array]) => {
       base64Array.forEach((base64, index) => {
-        const blob = useBase64ToBlob(base64, "image/jpeg");
+        const blob = handleBase64ToBlob(base64, "image/jpeg");
         const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
         formData.current.append("files", file);
       });

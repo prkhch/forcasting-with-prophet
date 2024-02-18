@@ -2,12 +2,10 @@ import { css, keyframes, styled } from "styled-components";
 
 const SelectAnimation = keyframes`
   from {
-    border: transparent;
   }
   to {
-    border: #2f70af 2px solid;
-    padding: 1rem;
-    font-size: 18px;
+    background-color: #2f70af;
+    color: white;
   }
   `;
 
@@ -25,7 +23,6 @@ const DropAnimation = keyframes`
 export const StyledUl = styled.ul`
   position: absolute;
   border: 1px #393939 solid;
-  border-radius: 4px;
   animation: ${DropAnimation} 0.2s forwards ease-in;
   z-index: 1;
 `;
@@ -34,7 +31,7 @@ export const StyledLi = styled.li`
   background-color: #f9f9f9;
   cursor: pointer;
   text-align: center;
-  width: 5rem;
+  width: 7rem;
   padding: 0.5rem 0.3rem;
   font-size: 18px;
   &:hover {
@@ -42,7 +39,6 @@ export const StyledLi = styled.li`
     border: none;
     animation: ${SelectAnimation} 0.2s forwards ease-in-out;
   }
-  border-radius: 4px;
 `;
 
 export const StyledSelect = styled.div`
@@ -56,6 +52,4 @@ export const StyledSelect = styled.div`
   padding: 0.3rem;
   font-family: "SuiteLight";
   font-size: 18px;
-  &:hover {
-  }
 `;
