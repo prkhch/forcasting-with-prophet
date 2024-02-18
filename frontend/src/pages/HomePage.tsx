@@ -1,14 +1,7 @@
-import StyledColLayout from "styles/common/StyledColLayout";
-import Articles from "components/homePage/Articles";
-import PlusButton from "components/homePage/PlusButton";
+import Home from "components/homePage/Home";
 
 const HomePage = () => {
-  return (
-    <StyledColLayout>
-      <PlusButton />
-      <Articles />
-    </StyledColLayout>
-  );
+  return <Home />;
 };
 
 export default HomePage;

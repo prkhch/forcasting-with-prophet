@@ -1,8 +1,7 @@
 import { styled } from "styled-components";
 
 const StyledAllAritcles = styled.div`
-  width: 60%;
-  padding: 1rem;
+  width: 100%;
 `;
 
 export default StyledAllAritcles;
