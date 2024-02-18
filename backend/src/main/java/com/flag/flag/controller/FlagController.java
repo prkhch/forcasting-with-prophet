@@ -38,9 +38,15 @@ public class FlagController {
     private final StorageService storageService;
 
     @GetMapping("/api/articles")
-    public Page<ArticleResponse> getArticles(Pageable pageable) {
-        Page<ArticleResponse> articles = articleService.findAll(pageable);
-        return articles;
+    public Page<ArticleResponse> getArticlesByCategory(
+            @RequestParam(required = false) Integer categoryId,
+            Pageable pageable
+    ) {
+        if (categoryId != null) {
+            return articleService.findAllByCategory(categoryId, pageable);
+        } else {
+            return articleService.findAll(pageable);
+        }
     }
 
     @GetMapping("/api/articles/{id}")

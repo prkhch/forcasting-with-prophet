@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,11 @@ public class ArticleService {
 
     public Page<ArticleResponse> findAll(Pageable pageable) {
         Page<Article> articles = flagRepository.findAll(pageable);
+        return articles.map(ArticleResponse::new);
+    }
+
+    public Page<ArticleResponse> findAllByCategory(Integer categoryId, Pageable pageable) {
+        Page<Article> articles = flagRepository.findByCategoryId(categoryId, pageable);
         return articles.map(ArticleResponse::new);
     }
 
