@@ -15,9 +15,10 @@ const StyledInput = styled.input`
   background-color: transparent;
   border-bottom: 1px solid #393939;
   padding-bottom: 0.2rem;
+  padding-top: 0.5rem;
   width: 100%;
   height: 1rem;
-  margin-top: 0.5rem;
+  /* margin-top: 0.5rem; */
   &:focus {
     outline: none;
     border: none;

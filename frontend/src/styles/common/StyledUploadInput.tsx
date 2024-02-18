@@ -25,7 +25,7 @@ export const StyledUploadButton = styled.svg`
   }
 `;
 
-export const StyledFileName = styled.text`
+export const StyledFileName = styled.div`
   font-family: "SuiteLight";
   font-size: 12px;
   color: #b9b9b9;

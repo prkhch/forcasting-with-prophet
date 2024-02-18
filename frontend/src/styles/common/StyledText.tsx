@@ -4,7 +4,7 @@ const StyledText = styled.div`
   font-family: "SuiteRegular", sans-serif;
   font-size: 18px;
   color: #393939;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 `;
 
 export default StyledText;
