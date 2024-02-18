@@ -20,18 +20,14 @@ const CategotyView = ({ name, id }: { name: string; id: string }) => {
     axios
       .get(`/api/articles?page=${pageNumber}&size=3&sort=id,desc&categoryId=${id}`)
       .then((res) => {
-        console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   useEffect(() => {
     ApiGetArticleList(pageNumber);
-    console.log(pageNumber);
   }, [pageNumber]);
 
   return (

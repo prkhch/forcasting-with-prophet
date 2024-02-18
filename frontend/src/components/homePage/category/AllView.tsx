@@ -12,53 +12,61 @@ import React from "react";
 import MoreButton from "../MoreButton";
 import PlusButton from "../PlusButton";
 import StyledColLayout from "styles/common/StyledColLayout";
+import Loading from "components/common/Loading";
 
 const AllView = () => {
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const ApiGetArticleList = (pageNumber: number) => {
+    setIsLoading(true);
     axios
       .get(`/api/articles?page=${pageNumber}&size=9&sort=id,desc`)
       .then((res) => {
-        console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
   useEffect(() => {
     ApiGetArticleList(pageNumber);
-    console.log(pageNumber);
   }, [pageNumber]);
 
   return (
-    <StyledCategoryContainer>
-      <StyledLabelContainer>
-        <StyledCategoryLabel>All</StyledCategoryLabel>
-        <MoreButton
-          func={() => {
-            navigate(`category/all`, { state: { id: 0, name: "All" } });
-          }}
-        />
-      </StyledLabelContainer>
-      <StyledAllAritcles>
-        {articleList.map((article, idx) => (
-          <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
-            <StyledTitle>{article.title}</StyledTitle>
-            <StyledContent>{article.content}</StyledContent>
-          </StyledArticle>
-        ))}
-        <StyledColLayout>
-          <PlusButton />
-        </StyledColLayout>
-      </StyledAllAritcles>
-    </StyledCategoryContainer>
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <StyledCategoryContainer>
+          <StyledLabelContainer>
+            <StyledCategoryLabel>All</StyledCategoryLabel>
+            <MoreButton
+              func={() => {
+                navigate(`category/all`, { state: { id: 0, name: "All" } });
+              }}
+            />
+          </StyledLabelContainer>
+          <StyledAllAritcles>
+            {articleList.map((article, idx) => (
+              <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
+                <StyledTitle>{article.title}</StyledTitle>
+                <StyledContent>{article.content}</StyledContent>
+              </StyledArticle>
+            ))}
+            <StyledColLayout>
+              <PlusButton />
+            </StyledColLayout>
+          </StyledAllAritcles>
+        </StyledCategoryContainer>
+      )}
+    </>
   );
 };
 

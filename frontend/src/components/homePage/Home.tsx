@@ -12,24 +12,6 @@ const Home = () => {
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
-  const ApiGetArticleList = (pageNumber: number) => {
-    axios
-      .get(`/api/articles?page=${pageNumber}&size=6&sort=id,desc`)
-      .then((res) => {
-        console.log(res.data);
-        setArticleList(res.data.content);
-        setTotalPages(res.data.totalPages);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    ApiGetArticleList(pageNumber);
-    console.log(pageNumber);
-  }, [pageNumber]);
-
   return (
     <StyledContainer>
       <StyledColContainer>
