@@ -21,7 +21,6 @@ public class MemberController {
     private final MemberService memberService;
     private final SecurityService securityService;
 
-
     @GetMapping("/login")
     public ResponseEntity login(@RequestParam String code) {
         String email = memberService.getGoogleInfo(code);
