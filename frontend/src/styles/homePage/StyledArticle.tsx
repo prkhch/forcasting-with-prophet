@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 const StyledArticle = styled.div`
-  border-radius: 4px;
+  padding: 0.3rem;
+  border-bottom: 1px #393939 solid;
   cursor: pointer;
   &:hover {
     background-color: #2f70af;

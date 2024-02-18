@@ -6,7 +6,7 @@ const PlusButton = () => {
   const navigate = useNavigate();
 
   return (
-    <StyledPlusButton width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <StyledPlusButton width="36" height="36" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         id="circle"
         fillRule="evenodd"

@@ -10,7 +10,7 @@ import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/S
 import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 import MoreButton from "../MoreButton";
 
-const NatureView = () => {
+const CategotyView = ({ name, id }: { name: string; id: string }) => {
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -18,7 +18,7 @@ const NatureView = () => {
 
   const ApiGetArticleList = (pageNumber: number) => {
     axios
-      .get(`/api/articles?page=${pageNumber}&size=3&sort=id,desc`)
+      .get(`/api/articles?page=${pageNumber}&size=3&sort=id,desc&categoryId=${id}`)
       .then((res) => {
         console.log(res.data);
         setArticleList(res.data.content);
@@ -37,15 +37,18 @@ const NatureView = () => {
   return (
     <StyledCategoryContainer>
       <StyledLabelContainer>
-        <StyledCategoryLabel>Finance</StyledCategoryLabel>
-        <MoreButton func={() => {}} />
+        <StyledCategoryLabel>{name}</StyledCategoryLabel>
+        <MoreButton
+          func={() => {
+            navigate(`category/${name}`, { state: { id: id, name: name } });
+          }}
+        />
       </StyledLabelContainer>
       <StyledAllAritcles>
         {articleList.map((article, idx) => (
-          <StyledArticle key={idx} onClick={() => navigate(`${article.id}`, { state: { id: article.id } })}>
+          <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
             <StyledTitle>{article.title}</StyledTitle>
             <StyledContent>{article.content}</StyledContent>
-            <hr />
           </StyledArticle>
         ))}
       </StyledAllAritcles>
@@ -53,4 +56,4 @@ const NatureView = () => {
   );
 };
 
-export default NatureView;
+export default CategotyView;

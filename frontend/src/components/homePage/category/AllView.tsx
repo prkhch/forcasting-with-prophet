@@ -10,6 +10,8 @@ import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/S
 import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 import React from "react";
 import MoreButton from "../MoreButton";
+import PlusButton from "../PlusButton";
+import StyledColLayout from "styles/common/StyledColLayout";
 
 const AllView = () => {
   const navigate = useNavigate();
@@ -39,16 +41,22 @@ const AllView = () => {
     <StyledCategoryContainer>
       <StyledLabelContainer>
         <StyledCategoryLabel>All</StyledCategoryLabel>
-        <MoreButton func={() => {}} />
+        <MoreButton
+          func={() => {
+            navigate(`category/all`, { state: { id: 0, name: "All" } });
+          }}
+        />
       </StyledLabelContainer>
       <StyledAllAritcles>
         {articleList.map((article, idx) => (
-          <StyledArticle key={idx} onClick={() => navigate(`${article.id}`, { state: { id: article.id } })}>
+          <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
             <StyledTitle>{article.title}</StyledTitle>
             <StyledContent>{article.content}</StyledContent>
-            <hr />
           </StyledArticle>
         ))}
+        <StyledColLayout>
+          <PlusButton />
+        </StyledColLayout>
       </StyledAllAritcles>
     </StyledCategoryContainer>
   );

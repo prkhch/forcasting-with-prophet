@@ -2,19 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Article } from "types/Article";
-import StyledAllAritcles from "styles/homePage/StyledAllAritcles";
-import StyledArticle from "styles/homePage/StyledArticle";
-import StyledContent from "styles/homePage/StyledContent";
-import StyledTitle from "styles/homePage/StyledTitle";
-import { StyledCategoryContainer, StyledColContainer, StyledContainer } from "styles/homePage/StyledContainer";
-import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
+import { StyledColContainer, StyledContainer } from "styles/homePage/StyledContainer";
 import AllView from "./category/AllView";
-import SocialView from "./category/SocialView";
-import ScienceView from "./category/ScienceView";
-import FinanceView from "./category/FinanceView";
-import ResourceView from "./category/ResourceView";
-import HealthView from "./category/HealthView";
-import NatureView from "./category/NatureView";
+import CategotyView from "./category/CategotyView";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -47,15 +37,15 @@ const Home = () => {
       </StyledColContainer>
 
       <StyledColContainer>
-        <SocialView />
-        <ScienceView />
-        <HealthView />
+        <CategotyView name="Social" id="1" />
+        <CategotyView name="Science" id="2" />
+        <CategotyView name="Health" id="4" />
       </StyledColContainer>
 
       <StyledColContainer>
-        <FinanceView />
-        <ResourceView />
-        <NatureView />
+        <CategotyView name="Finance" id="3" />
+        <CategotyView name="Resource" id="5" />
+        <CategotyView name="Nature" id="7" />
       </StyledColContainer>
     </StyledContainer>
   );
