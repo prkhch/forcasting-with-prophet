@@ -12,6 +12,8 @@ import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
 import Carousel from "./Carousel";
 import Options from "./Options";
+import StyledColLayout from "styles/common/StyledColLayout";
+import StyledLabel from "styles/common/StyledLabel";
 
 const Article = ({ id }: { id: string }) => {
   const [title, setTitle] = useState();
@@ -118,16 +120,26 @@ const Article = ({ id }: { id: string }) => {
 
   return (
     <StyledArticle>
-      <StyledTitle>{title}</StyledTitle>
-      <StyledContent>{content}</StyledContent>
-      {fileList[0] && (
-        <StyledLink onClick={() => ApiDownload(fileList[0].id, fileList[0].fileName)}>
-          {fileList[0].fileName}
-        </StyledLink>
-      )}
-      <hr />
-      {/* 데이터셋 */}
-      {/* {dataSet.length > 0 && (
+      <StyledColLayout>
+        <StyledTitle>
+          <StyledLabel>Title</StyledLabel>
+          {title}
+          <div>
+            {fileList[0] && (
+              <StyledLink onClick={() => ApiDownload(fileList[0].id, fileList[0].fileName)}>
+                {fileList[0].fileName}
+              </StyledLink>
+            )}
+          </div>
+        </StyledTitle>
+        <br />
+        <StyledContent>
+          <StyledLabel>Content</StyledLabel>
+          {content}
+        </StyledContent>
+        <br />
+        {/* 데이터셋 */}
+        {/* {dataSet.length > 0 && (
         <StyledDataSet>
           <StyledDataRow>
             {Object.keys(dataSet[0]).map((key, idx) => (
@@ -148,10 +160,11 @@ const Article = ({ id }: { id: string }) => {
         </StyledDataSet>
       )} */}
 
-      <Options optionsString={prophetOptions} />
-      <hr />
+        <Options optionsString={prophetOptions} />
+        <br />
 
-      <Carousel fileList={fileList} />
+        <Carousel fileList={fileList} />
+      </StyledColLayout>
     </StyledArticle>
   );
 };

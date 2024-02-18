@@ -21,16 +21,14 @@ const PeriodInput = ({
 }) => {
   return (
     <StyledInputForm>
-      <StyledOptionRow>
-        <StyledOption>
-          <StyledText>Periods</StyledText>
-          <StyledNumberInput
-            type="number"
-            value={options.periods}
-            onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, periods: Number(e.target.value) }))}
-          />
-        </StyledOption>
-      </StyledOptionRow>
+      <StyledOption>
+        <StyledText>Periods</StyledText>
+        <StyledNumberInput
+          type="number"
+          value={options.periods}
+          onChange={(e) => setOptions((prevOptions) => ({ ...prevOptions, periods: Number(e.target.value) }))}
+        />
+      </StyledOption>
     </StyledInputForm>
   );
 };

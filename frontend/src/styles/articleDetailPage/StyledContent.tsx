@@ -4,7 +4,7 @@ const StyledContent = styled.div`
   font-family: "SuiteRegular", sans-serif;
   font-size: 18px;
   color: #393939;
-  margin-top: 3px;
+  width: 60%;
 `;
 
 export default StyledContent;

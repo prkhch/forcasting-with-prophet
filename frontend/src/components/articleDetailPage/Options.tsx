@@ -6,6 +6,8 @@ import { ProphetOptions } from "types/ProphetOptions";
 import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
 import StyledBoldText from "styles/common/StyledHeaderText";
+import StyledLabel from "styles/common/StyledLabel";
+import StyledText from "styles/common/StyledText";
 
 const Options = ({ optionsString }: { optionsString: string }) => {
   const [options, setOptions] = useState<ProphetOptions>();
@@ -19,27 +21,28 @@ const Options = ({ optionsString }: { optionsString: string }) => {
 
   return (
     <StyledOptions>
-      <StyledBoldText>Options</StyledBoldText>
+      <StyledLabel>Options</StyledLabel>
 
-      <StyledOptionRow>
-        <StyledOption>
-          <StyledOptionKey>changepoints :</StyledOptionKey>
-          <StyledOptionValue>{options?.cpList}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledOptionKey>changepoint_prior_scale :</StyledOptionKey>{" "}
-          <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
-        </StyledOption>
-        <StyledOption>
-          <StyledOptionKey>changepoint_threshold :</StyledOptionKey>
-          <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
-        </StyledOption>
-      </StyledOptionRow>
+      {options?.cpList && options?.cpList.length > 0 && (
+        <StyledOptionRow>
+          <StyledOption>
+            <StyledText>changepoints</StyledText>
+            <StyledOptionValue>{options?.cpList}</StyledOptionValue>
+          </StyledOption>
+          <StyledOption>
+            <StyledText>changepoint_prior_scale</StyledText> <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
+          </StyledOption>
+          <StyledOption>
+            <StyledText>changepoint_threshold</StyledText>
+            <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
+          </StyledOption>
+        </StyledOptionRow>
+      )}
 
       {options?.growth != "logistic" && (
         <StyledOptionRow>
           <StyledOption>
-            <StyledOptionKey>growth :</StyledOptionKey>
+            <StyledText>growth</StyledText>
             <StyledOptionValue>{options?.growth}</StyledOptionValue>
           </StyledOption>
         </StyledOptionRow>
@@ -47,23 +50,23 @@ const Options = ({ optionsString }: { optionsString: string }) => {
       {options?.growth == "logistic" && (
         <StyledOptionRow>
           <StyledOption>
-            <StyledOptionKey>growth :</StyledOptionKey>
+            <StyledText>growth</StyledText>
             <StyledOptionValue>{options?.growth}</StyledOptionValue>
           </StyledOption>
           <StyledOption>
-            <StyledOptionKey>dataframe_cap :</StyledOptionKey>
+            <StyledText>dataframe_cap</StyledText>
             <StyledOptionValue>{options?.dfCap}</StyledOptionValue>
           </StyledOption>
           <StyledOption>
-            <StyledOptionKey>dataframe_floor :</StyledOptionKey>
+            <StyledText>dataframe_floor</StyledText>
             <StyledOptionValue>{options?.dfFloor}</StyledOptionValue>
           </StyledOption>
           <StyledOption>
-            <StyledOptionKey>future_cap :</StyledOptionKey>
+            <StyledText>future_cap</StyledText>
             <StyledOptionValue>{options?.ftCap}</StyledOptionValue>
           </StyledOption>
           <StyledOption>
-            <StyledOptionKey>future_floor :</StyledOptionKey>
+            <StyledText>future_floor</StyledText>
             <StyledOptionValue>{options?.ftFloor}</StyledOptionValue>
           </StyledOption>
         </StyledOptionRow>
@@ -71,37 +74,39 @@ const Options = ({ optionsString }: { optionsString: string }) => {
 
       <StyledOptionRow>
         <StyledOption>
-          <StyledOptionKey>periods :</StyledOptionKey>
+          <StyledText>periods</StyledText>
           <StyledOptionValue>{options?.periods}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>yearly_scale :</StyledOptionKey>
+          <StyledText>yearly_scale</StyledText>
           <StyledOptionValue>{options?.yearlyScale}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>weekly_scale : </StyledOptionKey>
+          <StyledText>weekly_scale</StyledText>
           <StyledOptionValue>{options?.weeklyScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
 
       <StyledOptionRow>
         <StyledOption>
-          <StyledOptionKey>holidays : </StyledOptionKey>
+          <StyledText>holidays</StyledText>
           <StyledOptionValue>{options?.holidays}</StyledOptionValue>
         </StyledOption>
-        <StyledOption>
-          <StyledOptionKey>holiday_scale : </StyledOptionKey>
-          <StyledOptionValue>{options?.holidayScale}</StyledOptionValue>
-        </StyledOption>
+        {options?.holidays != "none" && (
+          <StyledOption>
+            <StyledText>holiday_scale</StyledText>
+            <StyledOptionValue>{options?.holidayScale}</StyledOptionValue>
+          </StyledOption>
+        )}
       </StyledOptionRow>
 
       <StyledOptionRow>
         <StyledOption>
-          <StyledOptionKey>season_mode : </StyledOptionKey>
+          <StyledText>season_mode</StyledText>
           <StyledOptionValue>{options?.seasonMode}</StyledOptionValue>
         </StyledOption>
         <StyledOption>
-          <StyledOptionKey>season_scale :</StyledOptionKey>
+          <StyledText>season_scale</StyledText>
           <StyledOptionValue>{options?.seasonScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>

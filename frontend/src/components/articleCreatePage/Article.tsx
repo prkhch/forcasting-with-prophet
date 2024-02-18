@@ -25,7 +25,6 @@ const Article = () => {
 
   // 파일
   const fileInput = useRef<HTMLInputElement>(null);
-
   // 게시글 정보
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -117,7 +116,8 @@ const Article = () => {
         <TitleInput title={title} setTitle={setTitle} />
 
         <ContentInput content={content} setContent={setContent} />
-        <Options optionsString={optionString} setOptionString={setOptionString} />
+
+        {fileName && <Options optionsString={optionString} setOptionString={setOptionString} />}
 
         <UploadInput fileInput={fileInput} handleChangeUpload={handleChangeUpload} fileName={fileName} />
 

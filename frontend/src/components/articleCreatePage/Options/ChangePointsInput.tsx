@@ -8,6 +8,7 @@ import StyledNumberInput from "styles/common/StyledNumberInput";
 import StyledText from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
 import StyledSmallButton from "styles/common/StyledSmallButton";
+import StyledDateInput from "styles/common/StyledDateInput";
 
 const ChangePointsInput = ({
   options,
@@ -63,7 +64,7 @@ const ChangePointsInput = ({
             <StyledCaption>yyyy-mm-dd</StyledCaption>
           </StyledOptionRow>
           <StyledOptionRow>
-            <StyledInput onChange={handleChange} type="text" value={date} onKeyDown={handleKeyDown} />
+            <StyledDateInput onChange={handleChange} type="text" value={date} onKeyDown={handleKeyDown} />
             <StyledlButton onMouseDown={handleAddDate}>+</StyledlButton>
           </StyledOptionRow>
         </StyledOption>
