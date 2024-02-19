@@ -48,7 +48,7 @@ const AllArticles = ({ name }: { name: string }) => {
   return (
     <StyledArticles>
       {articleList.map((article, idx) => (
-        <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
+        <StyledArticle key={idx} onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}>
           <StyledTitle>{article.title}</StyledTitle>
           <StyledContent>{article.content}</StyledContent>
         </StyledArticle>

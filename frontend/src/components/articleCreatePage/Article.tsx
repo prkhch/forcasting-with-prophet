@@ -103,10 +103,12 @@ const Article = () => {
     axios
       .post("/api/article", formData.current)
       .then((res) => {
+        console.log(res);
         setIsLoading(false);
-        navigate("/");
+        navigate(-1);
       })
       .catch((err) => {
+        console.log(err);
         setIsLoading(false);
       });
   };

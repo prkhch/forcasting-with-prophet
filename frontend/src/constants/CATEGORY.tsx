@@ -6,5 +6,6 @@ export const CATEGORY: Category = {
   "3": "Finance",
   "4": "Health",
   "5": "Resource",
-  "6": "Others",
+  "6": "Nature",
+  "7": "Others",
 };

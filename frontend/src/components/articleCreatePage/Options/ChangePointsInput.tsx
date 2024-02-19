@@ -9,6 +9,7 @@ import StyledText from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
 import StyledSmallButton from "styles/common/StyledSmallButton";
 import StyledDateInput from "styles/common/StyledDateInput";
+import { StyledDate } from "styles/common/StyledLabel";
 
 const ChangePointsInput = ({
   options,
@@ -127,18 +128,4 @@ const StyledCaption = styled.div`
   font-size: 12px;
   color: #b9b9b9;
   margin: 0.7rem 0 0 0.5rem;
-`;
-
-const StyledDate = styled.div`
-  background-color: #2f70af;
-  color: white;
-  font-family: "SuiteBold", sans-serif;
-  font-size: 12px;
-  margin: 0 0.2rem 0 0;
-  padding: 0.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  &:hover {
-    background-color: #00457e;
-  }
 `;

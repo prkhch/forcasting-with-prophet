@@ -13,6 +13,9 @@ export const StyledColContainer = styled.div`
 
 export const StyledCategoryContainer = styled.div`
   margin: 1rem;
+  border: 2px solid #2f70af;
+  border-radius: 4px;
+  padding: 0.5rem;
 `;
 
 export const StyledLabelContainer = styled.div`

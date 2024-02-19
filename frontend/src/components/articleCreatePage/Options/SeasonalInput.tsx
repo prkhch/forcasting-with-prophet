@@ -4,7 +4,7 @@ import StyledOption from "styles/articleDetailPage/StyledOption";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
 import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
 import { StyledUl, StyledLi, StyledSelect } from "styles/common/StyledDropDown";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import StyledNumberInput from "styles/common/StyledNumberInput";
 import StyledRowLayout from "styles/common/StyledRowLayout";
 import StyledText from "styles/common/StyledText";

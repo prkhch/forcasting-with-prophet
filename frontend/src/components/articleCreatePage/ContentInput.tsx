@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { styled } from "styled-components";
 import StyledContentInput from "styles/common/StyledContentInput";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 
 const ContentInput = ({
   content,

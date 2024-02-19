@@ -15,7 +15,6 @@ import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
 
 const CategoryArticles = ({ name, id }: { name: string; id: string }) => {
-  console.log(id);
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -28,7 +27,6 @@ const CategoryArticles = ({ name, id }: { name: string; id: string }) => {
     axios
       .get(`/api/articles?page=${pageNumber}&size=10&sort=id,desc&categoryId=${id}`)
       .then((res) => {
-        console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
         setIsLoading(false);
@@ -49,7 +47,7 @@ const CategoryArticles = ({ name, id }: { name: string; id: string }) => {
   return (
     <StyledArticles>
       {articleList.map((article, idx) => (
-        <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
+        <StyledArticle key={idx} onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}>
           <StyledTitle>{article.title}</StyledTitle>
           <StyledContent>{article.content}</StyledContent>
         </StyledArticle>

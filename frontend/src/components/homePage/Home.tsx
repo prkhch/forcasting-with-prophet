@@ -27,7 +27,7 @@ const Home = () => {
       <StyledColContainer>
         <CategotyView name="Finance" id="3" />
         <CategotyView name="Resource" id="5" />
-        <CategotyView name="Nature" id="7" />
+        <CategotyView name="Nature" id="6" />
       </StyledColContainer>
     </StyledContainer>
   );

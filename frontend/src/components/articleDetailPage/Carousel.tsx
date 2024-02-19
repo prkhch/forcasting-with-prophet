@@ -12,7 +12,7 @@ import StyledHeaderText from "styles/common/StyledHeaderText";
 import { StyledIndicator } from "styles/common/StyledIndicator";
 import { FileResponse } from "types/FileResponse";
 import axios from "axios";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
 

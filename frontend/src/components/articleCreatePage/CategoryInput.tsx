@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { StyledUl, StyledLi, StyledSelect } from "styles/common/StyledDropDown";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import { CATEGORY } from "constants/CATEGORY";
 
 const CategoryInput = ({

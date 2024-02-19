@@ -6,7 +6,7 @@ import { ProphetOptions } from "types/ProphetOptions";
 import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
 import StyledBoldText from "styles/common/StyledHeaderText";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel, StyledDate, StyledDetailDate } from "styles/common/StyledLabel";
 import StyledText from "styles/common/StyledText";
 
 const Options = ({ optionsString }: { optionsString: string }) => {
@@ -27,15 +27,26 @@ const Options = ({ optionsString }: { optionsString: string }) => {
         <StyledOptionRow>
           <StyledOption>
             <StyledText>changepoints</StyledText>
-            <StyledOptionValue>{options?.cpList}</StyledOptionValue>
+            <StyledOptionValue>
+              <StyledOptionRow>
+                {options?.cpList.map((item, idx) => (
+                  <StyledDetailDate key={idx}>{item}</StyledDetailDate>
+                ))}
+              </StyledOptionRow>
+            </StyledOptionValue>
           </StyledOption>
+        </StyledOptionRow>
+      )}
+
+      {options?.cpList && options?.cpList.length > 0 && (
+        <StyledOptionRow>
           <StyledOption>
             <StyledText>changepoint_prior_scale</StyledText> <StyledOptionValue>{options?.cpScale}</StyledOptionValue>
           </StyledOption>
           <StyledOption>
             <StyledText>changepoint_threshold</StyledText>
             <StyledOptionValue>{options?.cpThreshold}</StyledOptionValue>
-          </StyledOption>
+          </StyledOption>{" "}
         </StyledOptionRow>
       )}
 
@@ -110,6 +121,7 @@ const Options = ({ optionsString }: { optionsString: string }) => {
           <StyledOptionValue>{options?.seasonScale}</StyledOptionValue>
         </StyledOption>
       </StyledOptionRow>
+      <hr />
     </StyledOptions>
   );
 };

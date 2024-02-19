@@ -1,5 +1,5 @@
 import StyledColLayout from "styles/common/StyledColLayout";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import { useLocation } from "react-router-dom";
 import StyledCategoryText from "styles/listPage/StyledText";
 import CategoryArticles from "components/listPage/CategoryArticles";

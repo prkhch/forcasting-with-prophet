@@ -1,5 +1,5 @@
 import React from "react";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import { StyledContainer, StyledHiddendInput, StyledFileName } from "styles/common/StyledUploadInput";
 import UploadButton from "./UploadButton";
 

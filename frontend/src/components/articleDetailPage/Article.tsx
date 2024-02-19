@@ -7,13 +7,13 @@ import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
 import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
 import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
 import StyledLink from "styles/articleDetailPage/StyledLink";
-import StyledTitle from "styles/articleDetailPage/StyledTitle";
+import { StyledTitle } from "styles/articleDetailPage/StyledTitle";
 import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
 import Carousel from "./Carousel";
 import Options from "./Options";
 import StyledColLayout from "styles/common/StyledColLayout";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
 
@@ -144,36 +144,36 @@ const Article = ({ id }: { id: string }) => {
             )}
           </div>
         </StyledTitle>
-        <br />
+
         <StyledContent>
           <StyledLabel>Content</StyledLabel>
           {content}
+          <hr />
         </StyledContent>
         <br />
         {/* 데이터셋 */}
         {/* {dataSet.length > 0 && (
-        <StyledDataSet>
+          <StyledDataSet>
           <StyledDataRow>
-            {Object.keys(dataSet[0]).map((key, idx) => (
-              <StyledDataItem key={idx}>{key}</StyledDataItem>
+          {Object.keys(dataSet[0]).map((key, idx) => (
+            <StyledDataItem key={idx}>{key}</StyledDataItem>
             ))}
-          </StyledDataRow>
-
-          {dataSet.map((item, index) => (
-            <StyledDataRow key={index}>
+            </StyledDataRow>
+            
+            {dataSet.map((item, index) => (
+              <StyledDataRow key={index}>
               {Object.entries(item).map(([key, value]) => {
                 const isDate = key.includes("Date");
                 const inputValue = isDate ? handleForamatDelTime(value) : value;
-
+                
                 return <StyledDataItem key={key}>{inputValue}</StyledDataItem>;
               })}
-            </StyledDataRow>
-          ))}
-        </StyledDataSet>
-      )} */}
+              </StyledDataRow>
+              ))}
+              </StyledDataSet>
+            )} */}
 
         <Options optionsString={prophetOptions} />
-        <br />
 
         <Carousel fileList={fileList} />
       </StyledColLayout>
