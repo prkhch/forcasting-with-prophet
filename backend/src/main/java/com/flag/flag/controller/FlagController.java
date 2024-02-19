@@ -38,9 +38,15 @@ public class FlagController {
     private final StorageService storageService;
 
     @GetMapping("/api/articles")
-    public Page<ArticleResponse> getArticles(Pageable pageable) {
-        Page<ArticleResponse> articles = articleService.findAll(pageable);
-        return articles;
+    public Page<ArticleResponse> getArticlesByCategory(
+            @RequestParam(required = false) Integer categoryId,
+            Pageable pageable
+    ) {
+        if (categoryId != null) {
+            return articleService.findAllByCategory(categoryId, pageable);
+        } else {
+            return articleService.findAll(pageable);
+        }
     }
 
     @GetMapping("/api/articles/{id}")
@@ -95,10 +101,11 @@ public class FlagController {
 
 
     @PostMapping("/api/article")
-    public ResponseEntity<Article> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
+    public ResponseEntity<ArticleResponse> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
         Article savedArticle = articleService.save(request);
+        ArticleResponse articleResponse = new ArticleResponse(savedArticle);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedArticle);
+                .body(articleResponse);
     }
 
     @PostMapping("/api/pandas")
