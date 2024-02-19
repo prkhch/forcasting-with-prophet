@@ -18,10 +18,13 @@ import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 import UploadInput from "./UploadInput";
 import Options from "./Options/Options";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 
 const Article = () => {
   const navigate = useNavigate();
   const formData = useRef(new FormData());
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   // 파일
   const fileInput = useRef<HTMLInputElement>(null);
@@ -43,7 +46,6 @@ const Article = () => {
     formData.current.append("files", files[0]);
     setFiles(files[0]);
     setFileName(files[0].name);
-    console.log(files);
     // ApiPandas();
   };
 
@@ -65,14 +67,16 @@ const Article = () => {
   const ApiProphet = () => {
     formData.current.append("prophetOptions", optionString);
     console.log(formData.current.get("prophetOptions"));
+    setIsLoading(true);
     axios
       .post("/api/prophet", formData.current)
       .then((res) => {
         setChartsObj(res.data);
-        console.log(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err.response.data.error);
+        setIsLoading(false);
       });
   };
 
@@ -89,22 +93,21 @@ const Article = () => {
 
   // 등록
   const ApiCreateArticle = () => {
-    console.log(chartsObj);
+    setIsLoading(true);
     addFilesToFormData(chartsObj);
     formData.current.append("title", title);
     formData.current.append("content", content);
     formData.current.append("categoryId", categoryId);
     // files already append
     // options already append
-    console.log(formData.current.get("files"));
     axios
       .post("/api/article", formData.current)
       .then((res) => {
-        console.log(res);
-        navigate(-1);
+        setIsLoading(false);
+        navigate("/");
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 

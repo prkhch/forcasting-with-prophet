@@ -11,6 +11,8 @@ import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 import DisabledLeftButton from "./DisabledLeftButton";
 import DisabledRightButton from "./DisabledRightButton";
+import { loadingState } from "recoils/atoms/loadingState";
+import { useRecoilState } from "recoil";
 
 const AllArticles = ({ name }: { name: string }) => {
   const navigate = useNavigate();
@@ -18,16 +20,20 @@ const AllArticles = ({ name }: { name: string }) => {
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+
   const ApiGetArticleList = (pageNumber: number) => {
+    setIsLoading(true);
     axios
       .get(`/api/articles?page=${pageNumber}&size=10&sort=id,desc`)
       .then((res) => {
         console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 

@@ -9,21 +9,28 @@ import axios from "axios";
 import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
 import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 import MoreButton from "../MoreButton";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 
 const CategotyView = ({ name, id }: { name: string; id: string }) => {
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   const ApiGetArticleList = (pageNumber: number) => {
+    setIsLoading(true);
     axios
       .get(`/api/articles?page=${pageNumber}&size=3&sort=id,desc&categoryId=${id}`)
       .then((res) => {
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
+        setIsLoading(false);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        setIsLoading(false);
+      });
   };
 
   useEffect(() => {

@@ -13,21 +13,26 @@ import { StyledIndicator } from "styles/common/StyledIndicator";
 import { FileResponse } from "types/FileResponse";
 import axios from "axios";
 import StyledLabel from "styles/common/StyledLabel";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   const downloadFile = (fileId: number): Promise<string> => {
+    setIsLoading(true);
     return axios
       .get(`/api/files/download/${fileId}`, {
         responseType: "blob",
       })
       .then((res) => {
+        setIsLoading(false);
         return URL.createObjectURL(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
         return "";
       });
   };

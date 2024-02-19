@@ -14,6 +14,8 @@ import Carousel from "./Carousel";
 import Options from "./Options";
 import StyledColLayout from "styles/common/StyledColLayout";
 import StyledLabel from "styles/common/StyledLabel";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 
 const Article = ({ id }: { id: string }) => {
   const [title, setTitle] = useState();
@@ -27,8 +29,11 @@ const Article = ({ id }: { id: string }) => {
 
   const [dataSet, setDataSet] = useState<DataItem[]>([]);
 
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+
   // getArticle
   const ApiGetArtilceDetail = () => {
+    setIsLoading(true);
     axios
       .get(`/api/articles/${id}`)
       .then((res) => {
@@ -36,14 +41,16 @@ const Article = ({ id }: { id: string }) => {
         setTitle(res.data.title);
         setContent(res.data.content);
         setProphetOptions(res.data.prophetOptions);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
   // getDataFile
   const ApiGetArtilceDataFilePath = () => {
+    setIsLoading(true);
     axios
       .get(`/api/datafile/${id}`)
       .then((res) => {
@@ -51,25 +58,29 @@ const Article = ({ id }: { id: string }) => {
         setFileList(res.data);
         setFileId(res.data[0].id);
         setFileName(res.data[0].fileName);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
   const ApiGetFile = (fileId: number) => {
+    setIsLoading(true);
     axios
       .get(`/api/files/download/${fileId}`, { responseType: "blob" })
       .then((res) => {
         setFileData(res.data);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
   // getDownload
   const ApiDownload = (fileId: number, fileName: string) => {
+    setIsLoading(true);
     axios
       .get(`/api/files/download/${fileId}`, { responseType: "blob" })
       .then((res) => {
@@ -81,9 +92,10 @@ const Article = ({ id }: { id: string }) => {
         link.click();
         document.body.removeChild(link);
         window.URL.revokeObjectURL(url);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 

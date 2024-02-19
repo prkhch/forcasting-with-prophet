@@ -1,8 +1,12 @@
 import React from "react";
 import { keyframes, styled } from "styled-components";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 
 const Loading = () => {
-  return (
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+
+  return isLoading ? (
     <StyledBackground>
       <StyledLoadingContainer>
         <StyledBlueCircle />
@@ -10,7 +14,7 @@ const Loading = () => {
         <StyledNavyCircle />
       </StyledLoadingContainer>
     </StyledBackground>
-  );
+  ) : null;
 };
 
 export default Loading;
