@@ -4,7 +4,7 @@ export const StyledContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
 `;
 
 export const StyledColContainer = styled.div`
@@ -12,7 +12,7 @@ export const StyledColContainer = styled.div`
 `;
 
 export const StyledCategoryContainer = styled.div`
-  margin: 0 1rem;
+  margin: 1rem;
 `;
 
 export const StyledLabelContainer = styled.div`
