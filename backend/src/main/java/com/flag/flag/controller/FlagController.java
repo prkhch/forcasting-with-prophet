@@ -101,10 +101,11 @@ public class FlagController {
 
 
     @PostMapping("/api/article")
-    public ResponseEntity<Article> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
+    public ResponseEntity<ArticleResponse> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
         Article savedArticle = articleService.save(request);
+        ArticleResponse articleResponse = new ArticleResponse(savedArticle);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(savedArticle);
+                .body(articleResponse);
     }
 
     @PostMapping("/api/pandas")
