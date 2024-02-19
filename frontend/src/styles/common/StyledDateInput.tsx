@@ -10,25 +10,15 @@ const Animation = keyframes`
   }
   `;
 
-const Init = keyframes`
-  from {
-    opacity: 0;
-    transform: translateX(-2rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const StyledNumberInput = styled.input`
+const StyledDateInput = styled.input`
   border: transparent;
   background-color: transparent;
   border-bottom: 1px solid #393939;
   padding-bottom: 0.2rem;
-  width: 60%;
+  padding-top: 0.5rem;
+  width: 20%;
   height: 1rem;
-  margin-top: 1rem;
+  /* margin-top: 0.5rem; */
   &:focus {
     outline: none;
     border: none;
@@ -37,7 +27,6 @@ const StyledNumberInput = styled.input`
   }
   font-family: "SuiteLight";
   font-size: 18px;
-  animation: ${Init} 0.5s forwards ease-in-out;
 `;
 
-export default StyledNumberInput;
+export default StyledDateInput;

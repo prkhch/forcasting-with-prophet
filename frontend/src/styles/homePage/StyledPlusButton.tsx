@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledPlusButton = styled.svg`
-  margin-top: 2rem;
+  margin: 1rem;
   cursor: pointer;
 
   &:hover {

@@ -12,6 +12,7 @@ const StyledLink = styled.a`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  margin: 1rem 0;
 `;
 
 export default StyledLink;

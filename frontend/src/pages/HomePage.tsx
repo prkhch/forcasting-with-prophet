@@ -1,14 +1,11 @@
-import StyledColLayout from "styles/common/StyledColLayout";
-import Articles from "components/homePage/Articles";
-import PlusButton from "components/homePage/PlusButton";
+import Loading from "components/common/Loading";
+import Home from "components/homePage/Home";
+import { useState } from "react";
 
 const HomePage = () => {
-  return (
-    <StyledColLayout>
-      <PlusButton />
-      <Articles />
-    </StyledColLayout>
-  );
+  const [isLoading, setIsLoading] = useState(false);
+
+  return <>{isLoading ? <Loading /> : <Home />}</>;
 };
 
 export default HomePage;

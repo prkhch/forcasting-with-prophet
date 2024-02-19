@@ -10,7 +10,7 @@ import StyledColLayout from "styles/common/StyledColLayout";
 import StyledRowLayout from "styles/common/StyledRowLayout";
 import StyledHeaderText from "styles/common/StyledHeaderText";
 import { StyledIndicator } from "styles/common/StyledIndicator";
-import StyledLabel from "styles/common/StyledLabel";
+import { StyledLabel } from "styles/common/StyledLabel";
 
 const Carousel = ({ chartsObj }: { chartsObj: Charts }) => {
   const [imageList, setImageList] = useState<string[]>([]);

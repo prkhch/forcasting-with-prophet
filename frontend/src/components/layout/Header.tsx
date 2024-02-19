@@ -18,7 +18,6 @@ const Header = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get("code");
-    console.log(code);
   });
 
   return (

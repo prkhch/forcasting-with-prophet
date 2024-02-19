@@ -11,29 +11,34 @@ import LeftButton from "./LeftButton";
 import RightButton from "./RightButton";
 import DisabledLeftButton from "./DisabledLeftButton";
 import DisabledRightButton from "./DisabledRightButton";
+import { loadingState } from "recoils/atoms/loadingState";
+import { useRecoilState } from "recoil";
 
-const Articles = () => {
+const AllArticles = ({ name }: { name: string }) => {
   const navigate = useNavigate();
   const [articleList, setArticleList] = useState<Article[]>([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
 
+  const [isLoading, setIsLoading] = useRecoilState(loadingState);
+
   const ApiGetArticleList = (pageNumber: number) => {
+    setIsLoading(true);
     axios
-      .get(`/api/articles?page=${pageNumber}&size=6&sort=id,desc`)
+      .get(`/api/articles?page=${pageNumber}&size=10&sort=id,desc`)
       .then((res) => {
         console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
+        setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
       });
   };
 
   useEffect(() => {
     ApiGetArticleList(pageNumber);
-    console.log(pageNumber);
   }, [pageNumber]);
 
   const handlePage = (num: number) => {
@@ -43,17 +48,10 @@ const Articles = () => {
   return (
     <StyledArticles>
       {articleList.map((article, idx) => (
-        <div key={idx}>
-          <StyledArticle onClick={() => navigate(`${article.id}`, { state: { id: article.id } })}>
-            <div>
-              <StyledTitle>{article.title}</StyledTitle>
-            </div>
-            <div>
-              <StyledContent>{article.content}</StyledContent>
-            </div>
-          </StyledArticle>
-          <hr />
-        </div>
+        <StyledArticle key={idx} onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}>
+          <StyledTitle>{article.title}</StyledTitle>
+          <StyledContent>{article.content}</StyledContent>
+        </StyledArticle>
       ))}
       <StyledRowLayout>
         <div id="pageButton">
@@ -67,4 +65,4 @@ const Articles = () => {
   );
 };
 
-export default Articles;
+export default AllArticles;
