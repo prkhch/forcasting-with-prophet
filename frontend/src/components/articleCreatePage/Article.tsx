@@ -21,6 +21,7 @@ import Options from "./Options/Options";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
 import StyledErrorText from "styles/common/StyledErrorText";
+import StyledRowLayout from "styles/common/StyledRowLayout";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -45,10 +46,13 @@ const Article = () => {
   // Upload, (csv, xls, xlsx)
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    formData.current.append("files", files[0]);
-    setFiles(files[0]);
-    setFileName(files[0].name);
+    if (files) {
+      formData.current.set("files", files[0]);
+      setFiles(files[0]);
+      if (files[0].name) {
+        setFileName(files[0].name);
+      }
+    }
     // ApiPandas();
   };
 
@@ -69,7 +73,8 @@ const Article = () => {
   // prophet
   const ApiProphet = () => {
     formData.current.set("prophetOptions", optionString);
-    console.log(formData.current.get("prophetOptions"));
+    // console.log(formData.current.get("prophetOptions"));
+    setErrorMessage("");
     setIsLoading(true);
     axios
       .post("/api/prophet", formData.current)
@@ -97,6 +102,15 @@ const Article = () => {
 
   // 등록
   const ApiCreateArticle = () => {
+    if (!title.trim()) {
+      setErrorMessage("Please enter a title.");
+      return;
+    }
+    if (!content.trim()) {
+      setErrorMessage("Please enter a content.");
+      return;
+    }
+
     setIsLoading(true);
     addFilesToFormData(chartsObj);
     formData.current.set("title", title);
@@ -155,13 +169,16 @@ const Article = () => {
         {Object.keys(chartsObj).length > 0 && <Carousel chartsObj={chartsObj} />}
 
         <StyledErrorText>{errorMessage}</StyledErrorText>
-        {files && Object.keys(chartsObj).length == 0 && (
-          <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
-        )}
 
-        {files && Object.keys(chartsObj).length > 0 && (
-          <StyledSmallButton onClick={ApiCreateArticle}>Submit</StyledSmallButton>
-        )}
+        <StyledRowLayout>
+          {files && Object.keys(chartsObj).length >= 0 && (
+            <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
+          )}
+
+          {files && Object.keys(chartsObj).length > 0 && (
+            <StyledSmallButton onClick={ApiCreateArticle}>Post</StyledSmallButton>
+          )}
+        </StyledRowLayout>
       </StyledColLayout>
     </StyledArticle>
   );
