@@ -39,6 +39,20 @@ def toPandas():
     fileData = request.files.get('file')
     if fileData:
         df = read_file(fileData)
+
+        if df.columns[0] != 'Date':
+            return jsonify({'error': 'The first column must be named "Date".'}), 400
+
+        try:
+            pd.to_datetime(df['Date'], format='%Y-%m-%d')
+        except ValueError:
+            return jsonify({'error': 'The Date column must be in "yyyy-mm-dd" format.'}), 400
+
+        try:
+            df.iloc[0:, 0:].apply(pd.to_numeric)
+        except ValueError:
+            return jsonify({'error': 'Data must be numeric.'}), 400
+
         return df.to_json(orient='records')
     else:
         return "File not received"
@@ -115,6 +129,14 @@ def toProphet():
                 images_dict[column] = [encoded_fig1, encoded_fig2]
         except ValueError as e :
             return jsonify({'error': str(e)}), 400
+        except RuntimeError as e:
+            error_message = str(e)
+            exception_start = error_message.find("Exception: ")
+            if exception_start != -1:
+                custom_message = error_message[exception_start + len("Exception: "):].strip()
+            else:
+                custom_message = error_message
+            return jsonify({'error': custom_message}), 400
 
         images_json = json.dumps(images_dict)
         return images_json
