@@ -6,7 +6,6 @@ import { ProphetOptions } from "types/ProphetOptions";
 import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
 import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
 import StyledBoldText from "styles/common/StyledHeaderText";
-import { COUNTRY } from "constants/COUNTRY";
 import HolidaysInput from "./HolidaysInput";
 import StyledText from "styles/common/StyledText";
 import GrowthInput from "./GrowthInput";
@@ -43,6 +42,7 @@ const Options = ({
     seasonScale: 10,
   });
 
+  // 초기옵션
   useEffect(() => {
     const tmp = JSON.stringify(options);
     setOptionString(tmp);
@@ -54,10 +54,7 @@ const Options = ({
   }, [options]);
 
   useEffect(() => {
-    try {
-      const parsedOptions = JSON.parse(optionsString) as ProphetOptions;
-      setOptions(parsedOptions);
-    } catch (error) {}
+    console.log(optionsString);
   }, [optionsString]);
 
   return (

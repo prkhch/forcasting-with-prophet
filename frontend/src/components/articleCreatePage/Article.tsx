@@ -20,6 +20,7 @@ import UploadInput from "./UploadInput";
 import Options from "./Options/Options";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
+import StyledErrorText from "styles/common/StyledErrorText";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -38,6 +39,8 @@ const Article = () => {
   const [optionString, setOptionString] = useState("");
   // const [dataSet, setDataSet] = useState<DataItem[]>([]);
   const [chartsObj, setChartsObj] = useState<Charts>({});
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Upload, (csv, xls, xlsx)
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,7 +68,7 @@ const Article = () => {
 
   // prophet
   const ApiProphet = () => {
-    formData.current.append("prophetOptions", optionString);
+    formData.current.set("prophetOptions", optionString);
     console.log(formData.current.get("prophetOptions"));
     setIsLoading(true);
     axios
@@ -76,6 +79,7 @@ const Article = () => {
       })
       .catch((err) => {
         console.log(err.response.data.error);
+        setErrorMessage(err.response.data.error);
         setIsLoading(false);
       });
   };
@@ -85,7 +89,7 @@ const Article = () => {
       base64Array.forEach((base64, index) => {
         const blob = handleBase64ToBlob(base64, "image/jpeg");
         const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
-        formData.current.append("files", file);
+        formData.current.set("files", file);
       });
     });
     return formData;
@@ -95,11 +99,11 @@ const Article = () => {
   const ApiCreateArticle = () => {
     setIsLoading(true);
     addFilesToFormData(chartsObj);
-    formData.current.append("title", title);
-    formData.current.append("content", content);
-    formData.current.append("categoryId", categoryId);
-    // files already append
-    // options already append
+    formData.current.set("title", title);
+    formData.current.set("content", content);
+    formData.current.set("categoryId", categoryId);
+    // files already set
+    // options already set
     axios
       .post("/api/article", formData.current)
       .then((res) => {
@@ -150,6 +154,7 @@ const Article = () => {
 
         {Object.keys(chartsObj).length > 0 && <Carousel chartsObj={chartsObj} />}
 
+        <StyledErrorText>{errorMessage}</StyledErrorText>
         {files && Object.keys(chartsObj).length == 0 && (
           <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
         )}
