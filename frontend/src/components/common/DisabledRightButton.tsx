@@ -1,4 +1,4 @@
-import StyledPageButton from "styles/homePage/StyledPageButton";
+import { StyledPageButton } from "styles/common/StyledButton";
 
 const DisabledRightButton = () => {
   return (

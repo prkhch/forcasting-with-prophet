@@ -1,9 +1,8 @@
-import StyledColLayout from "styles/common/StyledColLayout";
-import { StyledLabel } from "styles/common/StyledLabel";
 import { useLocation } from "react-router-dom";
-import StyledCategoryText from "styles/listPage/StyledText";
-import CategoryArticles from "components/listPage/CategoryArticles";
 import AllArticles from "components/listPage/AllArticles";
+import CategoryArticles from "components/listPage/CategoryArticles";
+import { StyledCategoryText } from "styles/common/StyledText";
+import { StyledColLayout } from "styles/common/StyledLayout";
 
 const ListPage = () => {
   const location = useLocation();

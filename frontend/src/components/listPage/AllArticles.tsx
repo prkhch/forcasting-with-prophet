@@ -2,17 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Article } from "types/Article";
-import StyledArticles from "styles/homePage/StyledArticles";
-import StyledArticle from "styles/homePage/StyledArticle";
-import StyledContent from "styles/homePage/StyledContent";
-import StyledTitle from "styles/homePage/StyledTitle";
-import StyledRowLayout from "styles/common/StyledRowLayout";
-import LeftButton from "./LeftButton";
-import RightButton from "./RightButton";
-import DisabledLeftButton from "./DisabledLeftButton";
-import DisabledRightButton from "./DisabledRightButton";
+import LeftButton from "components/common/LeftButton";
+import RightButton from "components/common/RightButton";
+import DisabledLeftButton from "components/common/DisabledLeftButton";
+import DisabledRightButton from "components/common/DisabledRightButton";
 import { loadingState } from "recoils/atoms/loadingState";
 import { useRecoilState } from "recoil";
+
+import { StyledArticles, StyledArticle, StyledTitle, StyledContent } from "styles/homePage/StyledArticles";
+import { StyledRowLayout } from "styles/common/StyledLayout";
 
 const AllArticles = ({ name }: { name: string }) => {
   const navigate = useNavigate();

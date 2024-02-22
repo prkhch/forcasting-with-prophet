@@ -1,13 +1,8 @@
 import { useEffect, useState } from "react";
-import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
-import StyledOption from "styles/articleDetailPage/StyledOption";
-import StyledOptions from "styles/articleDetailPage/StyledOptions";
 import { ProphetOptions } from "types/ProphetOptions";
-import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
-import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledBoldText from "styles/common/StyledHeaderText";
-import { StyledLabel, StyledDate, StyledDetailDate } from "styles/common/StyledLabel";
-import StyledText from "styles/common/StyledText";
+import { StyledLabel, StyledDetailDate } from "styles/common/StyledLabel";
+import { StyledOptions, StyledOptionRow, StyledOption, StyledOptionValue } from "styles/common/StyledOption";
+import { StyledText } from "styles/common/StyledText";
 
 const Options = ({ optionsString }: { optionsString: string }) => {
   const [options, setOptions] = useState<ProphetOptions>();

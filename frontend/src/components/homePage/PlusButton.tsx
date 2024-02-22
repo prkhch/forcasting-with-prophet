@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import StyledPlusButton from "styles/homePage/StyledPlusButton";
+import { StyledPlusButton } from "styles/common/StyledButton";
 
 const PlusButton = () => {
   const navigate = useNavigate();

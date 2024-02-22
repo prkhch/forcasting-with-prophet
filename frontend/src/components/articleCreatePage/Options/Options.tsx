@@ -1,19 +1,15 @@
 import { useEffect, useState } from "react";
-import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
-import StyledOption from "styles/articleDetailPage/StyledOption";
-import StyledOptions from "styles/articleDetailPage/StyledOptions";
 import { ProphetOptions } from "types/ProphetOptions";
-import StyledOptionKey from "styles/articleDetailPage/StyledOptionKey";
-import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledBoldText from "styles/common/StyledHeaderText";
 import HolidaysInput from "./HolidaysInput";
-import StyledText from "styles/common/StyledText";
 import GrowthInput from "./GrowthInput";
 import PeriodInput from "./PeriodInput";
 import YearInput from "./YearInput";
 import WeekInput from "./WeekInput";
 import SeasonalInput from "./SeasonalInput";
 import ChangePointsInput from "./ChangePointsInput";
+
+import { StyledOptions, StyledOptionRow } from "styles/common/StyledOption";
+import { StyledText, StyledBoldText } from "styles/common/StyledText";
 import { StyledLabel } from "styles/common/StyledLabel";
 
 const Options = ({

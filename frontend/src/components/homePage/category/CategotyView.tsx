@@ -1,16 +1,13 @@
-import StyledAllAritcles from "styles/homePage/StyledAllAritcles";
-import StyledArticle from "styles/homePage/StyledArticle";
-import StyledTitle from "styles/homePage/StyledTitle";
-import StyledContent from "styles/homePage/StyledContent";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Article } from "types/Article";
 import axios from "axios";
-import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
-import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 import MoreButton from "../MoreButton";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
+import { StyledAllArticles, StyledArticle, StyledTitle, StyledContent } from "styles/homePage/StyledArticles";
+import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
+import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 
 const CategotyView = ({ name, id }: { name: string; id: string }) => {
   const navigate = useNavigate();
@@ -47,14 +44,14 @@ const CategotyView = ({ name, id }: { name: string; id: string }) => {
           }}
         />
       </StyledLabelContainer>
-      <StyledAllAritcles>
+      <StyledAllArticles>
         {articleList.map((article, idx) => (
           <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
             <StyledTitle>{article.title}</StyledTitle>
             <StyledContent>{article.content}</StyledContent>
           </StyledArticle>
         ))}
-      </StyledAllAritcles>
+      </StyledAllArticles>
     </StyledCategoryContainer>
   );
 };

@@ -1,6 +1,6 @@
 import Article from "components/articleDetailPage/Article";
 import { useLocation } from "react-router-dom";
-import StyledColLayout from "styles/common/StyledColLayout";
+import { StyledColLayout } from "styles/common/StyledLayout";
 
 const ArticleDetailPage = () => {
   const location = useLocation();

@@ -2,26 +2,20 @@ import axios from "axios";
 import handleBase64ToBlob from "utils/handleBase64ToBlob";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StyledArticle from "styles/articleDetailPage/StyledArticle";
-import { DataItem } from "types/DataItem";
-import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
-import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
-import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
-import StyledColLayout from "styles/common/StyledColLayout";
-import StyledSmallButton from "styles/common/StyledSmallButton";
-import { StyledUploadButton, StyledHiddendInput } from "styles/common/StyledUploadInput";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 import { Charts } from "types/Charts";
-import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
 import CategoryInput from "./CategoryInput";
 import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 import UploadInput from "./UploadInput";
 import Options from "./Options/Options";
-import { useRecoilState } from "recoil";
-import { loadingState } from "recoils/atoms/loadingState";
-import StyledErrorText from "styles/common/StyledErrorText";
-import StyledRowLayout from "styles/common/StyledRowLayout";
+import StyledArticle from "styles/articleDetailPage/StyledArticle";
+// import { StyledDataItem, StyledDataRow, StyledDataSet } from "styles/common/StyledDataSet";
+import { StyledColLayout, StyledRowLayout } from "styles/common/StyledLayout";
+import { StyledButton } from "styles/common/StyledButton";
+import { StyledErrorText } from "styles/common/StyledText";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -182,13 +176,9 @@ const Article = () => {
         <StyledErrorText>{errorMessage}</StyledErrorText>
 
         <StyledRowLayout>
-          {files && Object.keys(chartsObj).length >= 0 && (
-            <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
-          )}
+          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiProphet}>Run Prophet</StyledButton>}
 
-          {files && Object.keys(chartsObj).length >= 0 && (
-            <StyledSmallButton onClick={ApiCreateArticle}>Post</StyledSmallButton>
-          )}
+          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiCreateArticle}>Post</StyledButton>}
         </StyledRowLayout>
       </StyledColLayout>
     </StyledArticle>

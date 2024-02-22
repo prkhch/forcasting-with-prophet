@@ -1,14 +1,10 @@
-import handleFormatDate from "utils/handleFormatDate";
 import React, { useRef, useState } from "react";
 import { styled } from "styled-components";
-import StyledOption from "styles/articleDetailPage/StyledOption";
-import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledInput from "styles/common/StyledInput";
-import StyledNumberInput from "styles/common/StyledNumberInput";
-import StyledText from "styles/common/StyledText";
+import handleFormatDate from "utils/handleFormatDate";
 import { ProphetOptions } from "types/ProphetOptions";
-import StyledSmallButton from "styles/common/StyledSmallButton";
-import StyledDateInput from "styles/common/StyledDateInput";
+import { StyledOptionRow, StyledOption } from "styles/common/StyledOption";
+import { StyledNumberInput, StyledDateInput } from "styles/common/StyledInput";
+import { StyledText } from "styles/common/StyledText";
 import { StyledDate } from "styles/common/StyledLabel";
 
 const ChangePointsInput = ({

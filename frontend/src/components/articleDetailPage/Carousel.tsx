@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import RightButton from "components/homePage/RightButton";
-import { Charts } from "types/Charts";
-import LeftButton from "components/homePage/LeftButton";
-import StyledImage from "styles/articleDetailPage/StyledImage";
-import { styled } from "styled-components";
-import DisabledRightButton from "components/homePage/DisabledRightButton";
-import DisabledLeftButton from "components/homePage/DisabledLeftButton";
-import StyledColLayout from "styles/common/StyledColLayout";
-import StyledRowLayout from "styles/common/StyledRowLayout";
-import StyledHeaderText from "styles/common/StyledHeaderText";
-import { StyledIndicator } from "styles/common/StyledIndicator";
-import { FileResponse } from "types/FileResponse";
 import axios from "axios";
-import { StyledLabel } from "styles/common/StyledLabel";
+import { Charts } from "types/Charts";
+import { FileResponse } from "types/FileResponse";
 import { useRecoilState } from "recoil";
+import RightButton from "components/common/RightButton";
+import LeftButton from "components/common/LeftButton";
+import DisabledRightButton from "components/common/DisabledRightButton";
+import DisabledLeftButton from "components/common/DisabledLeftButton";
 import { loadingState } from "recoils/atoms/loadingState";
+
+import { styled } from "styled-components";
+import { StyledColLayout, StyledRowLayout } from "styles/common/StyledLayout";
+import { StyledIndicator, StyledImage } from "styles/common/StyledCarousel";
+import { StyledLabel } from "styles/common/StyledLabel";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const [pageNumber, setPageNumber] = useState(1);

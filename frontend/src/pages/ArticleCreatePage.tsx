@@ -1,5 +1,5 @@
-import StyledColLayout from "styles/common/StyledColLayout";
 import Article from "components/articleCreatePage/Article";
+import { StyledColLayout } from "styles/common/StyledLayout";
 
 const ArticleCreatePage = () => {
   return (

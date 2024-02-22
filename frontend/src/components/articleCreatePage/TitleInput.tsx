@@ -1,7 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-import StyledContent from "styles/articleDetailPage/StyledContent";
-import StyledInput from "styles/common/StyledInput";
+import { StyledInput } from "styles/common/StyledInput";
 import { StyledLabel } from "styles/common/StyledLabel";
 
 const TitleInput = ({ title, setTitle }: { title: string; setTitle: React.Dispatch<React.SetStateAction<string>> }) => {
