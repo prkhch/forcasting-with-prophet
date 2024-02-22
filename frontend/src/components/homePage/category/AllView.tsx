@@ -1,19 +1,17 @@
-import StyledAllAritcles from "styles/homePage/StyledAllAritcles";
-import StyledArticle from "styles/homePage/StyledArticle";
-import StyledTitle from "styles/homePage/StyledTitle";
-import StyledContent from "styles/homePage/StyledContent";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Article } from "types/Article";
 import axios from "axios";
-import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
-import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
+import { useNavigate } from "react-router-dom";
+import { Article } from "types/Article";
 import MoreButton from "../MoreButton";
 import PlusButton from "../PlusButton";
-import StyledColLayout from "styles/common/StyledColLayout";
 import Loading from "components/common/Loading";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
+
+import { StyledAllArticles, StyledArticle, StyledTitle, StyledContent } from "styles/homePage/StyledArticles";
+import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
+import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
+import { StyledColLayout } from "styles/common/StyledLayout";
 
 const AllView = () => {
   const navigate = useNavigate();
@@ -54,7 +52,7 @@ const AllView = () => {
               }}
             />
           </StyledLabelContainer>
-          <StyledAllAritcles>
+          <StyledAllArticles>
             {articleList.map((article, idx) => (
               <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
                 <StyledTitle>{article.title}</StyledTitle>
@@ -64,7 +62,7 @@ const AllView = () => {
             <StyledColLayout>
               <PlusButton />
             </StyledColLayout>
-          </StyledAllAritcles>
+          </StyledAllArticles>
         </StyledCategoryContainer>
       )}
     </>

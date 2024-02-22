@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import RightButton from "components/homePage/RightButton";
-import { Charts } from "types/Charts";
-import LeftButton from "components/homePage/LeftButton";
-import StyledImage from "styles/articleDetailPage/StyledImage";
+import RightButton from "components/common/RightButton";
+import LeftButton from "components/common/LeftButton";
 import { styled } from "styled-components";
-import DisabledRightButton from "components/homePage/DisabledRightButton";
-import DisabledLeftButton from "components/homePage/DisabledLeftButton";
-import StyledColLayout from "styles/common/StyledColLayout";
-import StyledRowLayout from "styles/common/StyledRowLayout";
-import StyledHeaderText from "styles/common/StyledHeaderText";
-import { StyledIndicator } from "styles/common/StyledIndicator";
+import DisabledRightButton from "components/common/DisabledRightButton";
+import DisabledLeftButton from "components/common/DisabledLeftButton";
 import { FileResponse } from "types/FileResponse";
+
+import { StyledColLayout, StyledRowLayout } from "styles/common/StyledLayout";
+import { StyledBoldText } from "styles/common/StyledText";
+import { StyledIndicator, StyledImage } from "styles/common/StyledCarousel";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const [pageNumber, setPageNumber] = useState(1);
@@ -18,7 +16,7 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
   return (
     <StyledColLayout>
-      {fileList.length > 0 && <StyledHeaderText>{fileList[pageNumber].fileName}</StyledHeaderText>}
+      {fileList.length > 0 && <StyledBoldText>{fileList[pageNumber].fileName}</StyledBoldText>}
 
       <StyledContainer>
         {pageNumber > 1 && (

@@ -1,21 +1,19 @@
-import axios from "axios";
-import handleForamatDelTime from "utils/handleForamatDelTime";
 import { useEffect, useState } from "react";
-import StyledArticle from "styles/articleDetailPage/StyledArticle";
-import StyledContent from "styles/articleDetailPage/StyledContent";
-import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
-import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
-import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
-import StyledLink from "styles/articleDetailPage/StyledLink";
-import { StyledTitle } from "styles/articleDetailPage/StyledTitle";
+import axios from "axios";
 import { DataItem } from "types/DataItem";
 import { FileResponse } from "types/FileResponse";
 import Carousel from "./Carousel";
 import Options from "./Options";
-import StyledColLayout from "styles/common/StyledColLayout";
-import { StyledLabel } from "styles/common/StyledLabel";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
+
+import StyledArticle from "styles/articleDetailPage/StyledArticle";
+import StyledContent from "styles/articleDetailPage/StyledContent";
+// import { StyledDataItem, StyledDataRow, StyledDataSet } from "styles/common/StyledDataSet";
+import StyledLink from "styles/articleDetailPage/StyledLink";
+import { StyledTitle } from "styles/common/StyledText";
+import { StyledColLayout } from "styles/common/StyledLayout";
+import { StyledLabel } from "styles/common/StyledLabel";
 
 const Article = ({ id }: { id: string }) => {
   const [title, setTitle] = useState();

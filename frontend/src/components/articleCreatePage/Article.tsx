@@ -2,24 +2,20 @@ import axios from "axios";
 import handleBase64ToBlob from "utils/handleBase64ToBlob";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StyledArticle from "styles/articleDetailPage/StyledArticle";
-import { DataItem } from "types/DataItem";
-import StyledDataItem from "styles/articleDetailPage/StyledDataItem";
-import StyledDataRow from "styles/articleDetailPage/StyledDataRow";
-import StyledDataSet from "styles/articleDetailPage/StyledDataSet";
-import StyledColLayout from "styles/common/StyledColLayout";
-import StyledSmallButton from "styles/common/StyledSmallButton";
-import { StyledUploadButton, StyledHiddendInput } from "styles/common/StyledUploadInput";
+import { useRecoilState } from "recoil";
+import { loadingState } from "recoils/atoms/loadingState";
 import { Charts } from "types/Charts";
-import { ProphetOptions } from "types/ProphetOptions";
 import Carousel from "./Carousel";
 import CategoryInput from "./CategoryInput";
 import ContentInput from "./ContentInput";
 import TitleInput from "./TitleInput";
 import UploadInput from "./UploadInput";
 import Options from "./Options/Options";
-import { useRecoilState } from "recoil";
-import { loadingState } from "recoils/atoms/loadingState";
+import StyledArticle from "styles/articleDetailPage/StyledArticle";
+// import { StyledDataItem, StyledDataRow, StyledDataSet } from "styles/common/StyledDataSet";
+import { StyledColLayout, StyledRowLayout } from "styles/common/StyledLayout";
+import { StyledButton } from "styles/common/StyledButton";
+import { StyledErrorText } from "styles/common/StyledText";
 
 const Article = () => {
   const navigate = useNavigate();
@@ -33,40 +29,57 @@ const Article = () => {
   const [content, setContent] = useState("");
   // const [memberId, setMemberId] = useState("1");
   const [categoryId, setCategoryId] = useState("1");
-  const [files, setFiles] = useState<File>();
+  const [files, setFiles] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
   const [optionString, setOptionString] = useState("");
   // const [dataSet, setDataSet] = useState<DataItem[]>([]);
   const [chartsObj, setChartsObj] = useState<Charts>({});
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   // Upload, (csv, xls, xlsx)
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (!files) return;
-    formData.current.append("files", files[0]);
-    setFiles(files[0]);
-    setFileName(files[0].name);
-    // ApiPandas();
+    if (files && files[0]) {
+      const fileSize = files[0].size / 1024 / 1024;
+      if (fileSize > 10) {
+        setErrorMessage("File size cannot exceed 10MB.");
+        return;
+      }
+      formData.current.set("files", files[0]);
+      setFiles(files[0]);
+      if (files[0].name) {
+        setFileName(files[0].name);
+        ApiPandas();
+      }
+    }
   };
 
-  // pandas
-  // const ApiPandas = () => {
-  //   console.log(formData.current.get("files"));
-  //   axios
-  //     .post("/api/pandas", formData.current)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setDataSet(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  // pandas;
+  const ApiPandas = () => {
+    console.log(formData.current.get("files"));
+    setErrorMessage("");
+    setIsLoading(true);
+    axios
+      .post("/api/pandas", formData.current)
+      .then((res) => {
+        setIsLoading(false);
+        // setDataSet(res.data);
+      })
+      .catch((err) => {
+        setFileName("");
+        setFiles(null);
+        console.log(err.response.data.error);
+        setErrorMessage(err.response.data.error);
+        setIsLoading(false);
+      });
+  };
 
   // prophet
   const ApiProphet = () => {
-    formData.current.append("prophetOptions", optionString);
-    console.log(formData.current.get("prophetOptions"));
+    formData.current.set("prophetOptions", optionString);
+    // console.log(formData.current.get("prophetOptions"));
+    setErrorMessage("");
     setIsLoading(true);
     axios
       .post("/api/prophet", formData.current)
@@ -76,6 +89,7 @@ const Article = () => {
       })
       .catch((err) => {
         console.log(err.response.data.error);
+        setErrorMessage(err.response.data.error);
         setIsLoading(false);
       });
   };
@@ -85,7 +99,7 @@ const Article = () => {
       base64Array.forEach((base64, index) => {
         const blob = handleBase64ToBlob(base64, "image/jpeg");
         const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
-        formData.current.append("files", file);
+        formData.current.set("files", file);
       });
     });
     return formData;
@@ -93,13 +107,22 @@ const Article = () => {
 
   // 등록
   const ApiCreateArticle = () => {
+    if (!title.trim()) {
+      setErrorMessage("Please enter a title.");
+      return;
+    }
+    if (!content.trim()) {
+      setErrorMessage("Please enter a content.");
+      return;
+    }
+
     setIsLoading(true);
     addFilesToFormData(chartsObj);
-    formData.current.append("title", title);
-    formData.current.append("content", content);
-    formData.current.append("categoryId", categoryId);
-    // files already append
-    // options already append
+    formData.current.set("title", title);
+    formData.current.set("content", content);
+    formData.current.set("categoryId", categoryId);
+    // files already set
+    // options already set
     axios
       .post("/api/article", formData.current)
       .then((res) => {
@@ -150,13 +173,13 @@ const Article = () => {
 
         {Object.keys(chartsObj).length > 0 && <Carousel chartsObj={chartsObj} />}
 
-        {files && Object.keys(chartsObj).length == 0 && (
-          <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
-        )}
+        <StyledErrorText>{errorMessage}</StyledErrorText>
 
-        {files && Object.keys(chartsObj).length > 0 && (
-          <StyledSmallButton onClick={ApiCreateArticle}>Submit</StyledSmallButton>
-        )}
+        <StyledRowLayout>
+          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiProphet}>Run Prophet</StyledButton>}
+
+          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiCreateArticle}>Post</StyledButton>}
+        </StyledRowLayout>
       </StyledColLayout>
     </StyledArticle>
   );

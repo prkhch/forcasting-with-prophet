@@ -1,13 +1,8 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import StyledOption from "styles/articleDetailPage/StyledOption";
-import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
-import { StyledLi, StyledSelect, StyledUl } from "styles/common/StyledDropDown";
-import StyledInput from "styles/common/StyledInput";
-import StyledNumberInput from "styles/common/StyledNumberInput";
-import StyledOptionAnimation from "styles/common/StyledOptionAnimation";
-import StyledText from "styles/common/StyledText";
+import { StyledOption } from "styles/common/StyledOption";
+import { StyledNumberInput } from "styles/common/StyledInput";
+import { StyledText } from "styles/common/StyledText";
 import { ProphetOptions } from "types/ProphetOptions";
 
 const AutoTF = ["auto", true, false];

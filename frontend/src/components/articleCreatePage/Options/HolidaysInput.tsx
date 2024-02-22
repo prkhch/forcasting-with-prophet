@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { styled } from "styled-components";
-import StyledOption from "styles/articleDetailPage/StyledOption";
-import StyledOptionRow from "styles/articleDetailPage/StyledOptionRow";
-import StyledOptionValue from "styles/articleDetailPage/StyledOptionValue";
-import { StyledUl, StyledLi, StyledSelect } from "styles/common/StyledDropDown";
-import { StyledLabel } from "styles/common/StyledLabel";
-import StyledNumberInput from "styles/common/StyledNumberInput";
-import StyledRowLayout from "styles/common/StyledRowLayout";
-import StyledText from "styles/common/StyledText";
-import { ProphetOptions } from "types/ProphetOptions";
 import { COUNTRY } from "constants/COUNTRY";
+import { ProphetOptions } from "types/ProphetOptions";
+import { styled } from "styled-components";
+import { StyledOptionRow, StyledOption } from "styles/common/StyledOption";
+import { StyledUl, StyledLi, StyledSelect } from "styles/common/StyledDropDown";
+import { StyledNumberInput } from "styles/common/StyledInput";
+import { StyledText } from "styles/common/StyledText";
 
 const HolidaysInput = ({
   options,
