@@ -35,7 +35,7 @@ const Article = () => {
   const [content, setContent] = useState("");
   // const [memberId, setMemberId] = useState("1");
   const [categoryId, setCategoryId] = useState("1");
-  const [files, setFiles] = useState<File>();
+  const [files, setFiles] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
   const [optionString, setOptionString] = useState("");
   // const [dataSet, setDataSet] = useState<DataItem[]>([]);
@@ -46,29 +46,40 @@ const Article = () => {
   // Upload, (csv, xls, xlsx)
   const handleChangeUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
-    if (files) {
+    if (files && files[0]) {
+      const fileSize = files[0].size / 1024 / 1024;
+      if (fileSize > 10) {
+        setErrorMessage("File size cannot exceed 10MB.");
+        return;
+      }
       formData.current.set("files", files[0]);
       setFiles(files[0]);
       if (files[0].name) {
         setFileName(files[0].name);
+        ApiPandas();
       }
     }
-    // ApiPandas();
   };
 
-  // pandas
-  // const ApiPandas = () => {
-  //   console.log(formData.current.get("files"));
-  //   axios
-  //     .post("/api/pandas", formData.current)
-  //     .then((res) => {
-  //       console.log(res.data);
-  //       setDataSet(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
+  // pandas;
+  const ApiPandas = () => {
+    console.log(formData.current.get("files"));
+    setErrorMessage("");
+    setIsLoading(true);
+    axios
+      .post("/api/pandas", formData.current)
+      .then((res) => {
+        setIsLoading(false);
+        // setDataSet(res.data);
+      })
+      .catch((err) => {
+        setFileName("");
+        setFiles(null);
+        console.log(err.response.data.error);
+        setErrorMessage(err.response.data.error);
+        setIsLoading(false);
+      });
+  };
 
   // prophet
   const ApiProphet = () => {
@@ -175,7 +186,7 @@ const Article = () => {
             <StyledSmallButton onClick={ApiProphet}>Run Prophet</StyledSmallButton>
           )}
 
-          {files && Object.keys(chartsObj).length > 0 && (
+          {files && Object.keys(chartsObj).length >= 0 && (
             <StyledSmallButton onClick={ApiCreateArticle}>Post</StyledSmallButton>
           )}
         </StyledRowLayout>
