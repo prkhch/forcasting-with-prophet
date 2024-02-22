@@ -53,6 +53,9 @@ def toPandas():
         except ValueError:
             return jsonify({'error': 'Data must be numeric.'}), 400
 
+        if len(df.columns) > 6:
+            return jsonify({'error': 'Cannot exceed 5 "y" columns.'}), 400
+
         return df.to_json(orient='records')
     else:
         return "File not received"

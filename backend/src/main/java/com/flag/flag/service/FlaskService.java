@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
@@ -39,7 +40,16 @@ public class FlaskService {
         // RequestEntity
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
-        return restTemplate.postForEntity(url, requestEntity, String.class);
+        try {
+            return restTemplate.postForEntity(url, requestEntity, String.class);
+        } catch (HttpClientErrorException | HttpServerErrorException e) {
+            return ResponseEntity.status(e.getRawStatusCode()).body(e.getResponseBodyAsString());
+        } catch (RestClientException e) {
+            // 그 외 네트워크 에러 등의 처리
+            return ResponseEntity
+                    .badRequest()
+                    .body("An error occurred: " + e.getMessage());
+        }
     }
 
     public ResponseEntity<String> sendFileToProphet(DataFileFlaskRequest dataFileFlaskRequest, ProphetOptionsDto options) {
