@@ -35,7 +35,6 @@ const ChangePointsInput = ({
           cpList: uniqueCpList,
         };
       });
-      console.log(date);
       setDate("");
     }
   };

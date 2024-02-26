@@ -12,7 +12,6 @@ import { StyledIndicator, StyledImage } from "styles/common/StyledCarousel";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const [pageNumber, setPageNumber] = useState(1);
-  console.log(fileList);
 
   return (
     <StyledColLayout>

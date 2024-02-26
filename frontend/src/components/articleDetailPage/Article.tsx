@@ -35,7 +35,6 @@ const Article = ({ id }: { id: string }) => {
     axios
       .get(`/api/articles/${id}`)
       .then((res) => {
-        console.log(res.data);
         setTitle(res.data.title);
         setContent(res.data.content);
         setProphetOptions(res.data.prophetOptions);
@@ -52,7 +51,6 @@ const Article = ({ id }: { id: string }) => {
     axios
       .get(`/api/datafile/${id}`)
       .then((res) => {
-        console.log(res.data);
         setFileList(res.data);
         setFileId(res.data[0].id);
         setFileName(res.data[0].fileName);
@@ -103,11 +101,9 @@ const Article = ({ id }: { id: string }) => {
   //   axios
   //     .post("/api/pandas", formData)
   //     .then((res) => {
-  //       console.log(res.data);
   //       setDataSet(res.data);
   //     })
   //     .catch((err) => {
-  //       console.log(err);
   //     });
   // };
 

@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <StyledHeader>
       <div>
-        <StyledHeaderText onClick={() => navigate("/")}>Forcasting with Prophet</StyledHeaderText>
+        <StyledHeaderText onClick={() => navigate("/home")}>Forcasting with Prophet</StyledHeaderText>
       </div>
       {/* <div>
       </div> */}

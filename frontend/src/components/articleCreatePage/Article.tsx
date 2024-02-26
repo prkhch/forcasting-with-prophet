@@ -57,7 +57,6 @@ const Article = () => {
 
   // pandas;
   const ApiPandas = () => {
-    console.log(formData.current.get("files"));
     setErrorMessage("");
     setIsLoading(true);
     axios
@@ -69,7 +68,6 @@ const Article = () => {
       .catch((err) => {
         setFileName("");
         setFiles(null);
-        console.log(err.response.data.error);
         setErrorMessage(err.response.data.error);
         setIsLoading(false);
       });
@@ -78,7 +76,6 @@ const Article = () => {
   // prophet
   const ApiProphet = () => {
     formData.current.set("prophetOptions", optionString);
-    // console.log(formData.current.get("prophetOptions"));
     setErrorMessage("");
     setIsLoading(true);
     axios
@@ -88,7 +85,6 @@ const Article = () => {
         setIsLoading(false);
       })
       .catch((err) => {
-        console.log(err.response.data.error);
         setErrorMessage(err.response.data.error);
         setIsLoading(false);
       });
@@ -126,12 +122,10 @@ const Article = () => {
     axios
       .post("/api/article", formData.current)
       .then((res) => {
-        console.log(res);
         setIsLoading(false);
         navigate(-1);
       })
       .catch((err) => {
-        console.log(err);
         setIsLoading(false);
       });
   };
