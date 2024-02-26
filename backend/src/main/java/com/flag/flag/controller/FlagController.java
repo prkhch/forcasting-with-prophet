@@ -37,7 +37,7 @@ public class FlagController {
     private final FlaskService flaskService;
     private final StorageService storageService;
 
-    @GetMapping("/api/articles")
+    @GetMapping("/api/spring/articles")
     public Page<ArticleResponse> getArticlesByCategory(
             @RequestParam(required = false) Integer categoryId,
             Pageable pageable
@@ -49,19 +49,19 @@ public class FlagController {
         }
     }
 
-    @GetMapping("/api/articles/{id}")
+    @GetMapping("/api/spring/articles/{id}")
     public ArticleResponse getArticle(@PathVariable Long id) {
         ArticleResponse article = articleService.findById(id);
         return article;
     }
 
-    @GetMapping("/api/datafile/{id}")
+    @GetMapping("/api/spring/datafile/{id}")
     public List<DataFileResponse> getDataFile(@PathVariable Long id) {
         List<DataFileResponse> filePath = storageService.getFilesByArticleId(id);
         return filePath;
     }
 
-    @GetMapping("/api/files/download/{fileId}")
+    @GetMapping("/api/spring/files/download/{fileId}")
     public ResponseEntity<Resource> downloadFile(@PathVariable Long fileId) throws MalformedURLException, FileNotFoundException {
         DataFile dataFile = storageService.getFileById(fileId);
         String filePath = dataFile.getFilePath();
@@ -100,7 +100,7 @@ public class FlagController {
     }
 
 
-    @PostMapping("/api/article")
+    @PostMapping("/api/spring/article")
     public ResponseEntity<ArticleResponse> createArticle(@ModelAttribute CreateArticleRequest request) throws JsonProcessingException {
         Article savedArticle = articleService.save(request);
         ArticleResponse articleResponse = new ArticleResponse(savedArticle);
@@ -108,7 +108,7 @@ public class FlagController {
                 .body(articleResponse);
     }
 
-    @PostMapping("/api/pandas")
+    @PostMapping("/api/spring/pandas")
     public ResponseEntity<String> postPandas(@RequestParam("files") MultipartFile file) throws IOException {
         DataFileFlaskRequest dataFileFlaskRequest = new DataFileFlaskRequest();
         dataFileFlaskRequest.setFileName(file.getOriginalFilename());
@@ -120,7 +120,7 @@ public class FlagController {
         return flaskResponse;
     }
 
-    @PostMapping("/api/prophet")
+    @PostMapping("/api/spring/prophet")
     public ResponseEntity<String> postProphet(@ModelAttribute ProphetRequestDto request) throws IOException {
         MultipartFile file = request.getFiles();
         String optionsString = request.getProphetOptions();

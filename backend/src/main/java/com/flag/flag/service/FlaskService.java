@@ -22,7 +22,7 @@ public class FlaskService {
     private final RestTemplate restTemplate;
 
     public ResponseEntity<String> sendFileToPandas(DataFileFlaskRequest dataFileFlaskRequest) {
-        String url = "http://127.0.0.1:5000/api/pandas";
+        String url = "http://127.0.0.1:5000/api/flask/pandas";
 
         // 헤더
         HttpHeaders headers = new HttpHeaders();
@@ -53,7 +53,7 @@ public class FlaskService {
     }
 
     public ResponseEntity<String> sendFileToProphet(DataFileFlaskRequest dataFileFlaskRequest, ProphetOptionsDto options) {
-        String url = "http://127.0.0.1:5000/api/prophet";
+        String url = "http://127.0.0.1:5000/api/flask/prophet";
 
         // 헤더
         HttpHeaders headers = new HttpHeaders();

@@ -34,7 +34,7 @@ def read_file(fileData):
     return df
 
 
-@bp.route("/api/pandas", methods=['POST'])
+@bp.route("/api/flask/pandas", methods=['POST'])
 def toPandas():
     fileData = request.files.get('file')
     if fileData:
@@ -61,7 +61,7 @@ def toPandas():
         return "File not received"
 
 
-@bp.route("/api/prophet", methods=['POST'])
+@bp.route("/api/flask/prophet", methods=['POST'])
 def toProphet():
     file_data = request.files.get('file')
     string_options = request.form.get("options")
