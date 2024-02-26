@@ -23,7 +23,7 @@ const AllView = () => {
   const ApiGetArticleList = (pageNumber: number) => {
     setIsLoading(true);
     axios
-      .get(`/api/articles?page=${pageNumber}&size=9&sort=id,desc`)
+      .get(`/api/spring/articles?page=${pageNumber}&size=9&sort=id,desc`)
       .then((res) => {
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
