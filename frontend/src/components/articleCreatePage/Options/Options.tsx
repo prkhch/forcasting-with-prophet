@@ -49,10 +49,6 @@ const Options = ({
     setOptionString(tmp);
   }, [options]);
 
-  useEffect(() => {
-    console.log(optionsString);
-  }, [optionsString]);
-
   return (
     <StyledOptions>
       <StyledLabel>Options</StyledLabel>

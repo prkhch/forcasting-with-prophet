@@ -25,7 +25,6 @@ const AllArticles = ({ name }: { name: string }) => {
     axios
       .get(`/api/articles?page=${pageNumber}&size=10&sort=id,desc`)
       .then((res) => {
-        console.log(res.data);
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
         setIsLoading(false);
