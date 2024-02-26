@@ -29,9 +29,12 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
         {fileList.length > 0 && (
           <StyledRowLayout>
-            <StyledImage src={`/api/files/download/${fileList[pageNumber].id}`} alt={fileList[pageNumber].fileName} />
             <StyledImage
-              src={`/api/files/download/${fileList[pageNumber + 1].id}`}
+              src={`/api/spring/files/download/${fileList[pageNumber].id}`}
+              alt={fileList[pageNumber].fileName}
+            />
+            <StyledImage
+              src={`/api/spring/files/download/${fileList[pageNumber + 1].id}`}
               alt={fileList[pageNumber].fileName}
             />
           </StyledRowLayout>

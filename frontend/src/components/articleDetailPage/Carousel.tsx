@@ -22,7 +22,7 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const downloadFile = (fileId: number): Promise<string> => {
     setIsLoading(true);
     return axios
-      .get(`/api/files/download/${fileId}`, {
+      .get(`/api/spring/files/download/${fileId}`, {
         responseType: "blob",
       })
       .then((res) => {
@@ -65,9 +65,9 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
         {imageUrls.length > 0 && (
           <StyledRowLayout>
-            {/* <StyledImage src={`/api/files/download/${fileList[pageNumber].id}`} alt={fileList[pageNumber].fileName} />
+            {/* <StyledImage src={`/api/spring/files/download/${fileList[pageNumber].id}`} alt={fileList[pageNumber].fileName} />
             <StyledImage
-              src={`/api/files/download/${fileList[pageNumber + 1].id}`}
+              src={`/api/spring/files/download/${fileList[pageNumber + 1].id}`}
               alt={fileList[pageNumber].fileName}
             /> */}
             <StyledImage src={imageUrls[pageNumber - 1]} alt={`Image ${pageNumber - 1}`} />

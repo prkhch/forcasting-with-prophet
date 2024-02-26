@@ -60,7 +60,7 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      .post("/api/pandas", formData.current)
+      .post("/api/spring/pandas", formData.current)
       .then((res) => {
         setIsLoading(false);
         // setDataSet(res.data);
@@ -79,7 +79,7 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      .post("/api/prophet", formData.current)
+      .post("/api/spring/prophet", formData.current)
       .then((res) => {
         setChartsObj(res.data);
         setIsLoading(false);
@@ -120,7 +120,7 @@ const Article = () => {
     // files already set
     // options already set
     axios
-      .post("/api/article", formData.current)
+      .post("/api/spring/article", formData.current)
       .then((res) => {
         setIsLoading(false);
         navigate(-1);

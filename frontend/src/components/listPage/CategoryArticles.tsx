@@ -23,7 +23,7 @@ const CategoryArticles = ({ name, id }: { name: string; id: string }) => {
   const ApiGetArticleList = (pageNumber: number) => {
     setIsLoading(true);
     axios
-      .get(`/api/articles?page=${pageNumber}&size=10&sort=id,desc&categoryId=${id}`)
+      .get(`/api/spring/articles?page=${pageNumber}&size=10&sort=id,desc&categoryId=${id}`)
       .then((res) => {
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
