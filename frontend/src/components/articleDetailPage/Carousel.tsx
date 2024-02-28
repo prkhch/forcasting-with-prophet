@@ -13,10 +13,14 @@ import { styled } from "styled-components";
 import { StyledColLayout, StyledRowLayout } from "styles/common/StyledLayout";
 import { StyledIndicator, StyledImage } from "styles/common/StyledCarousel";
 import { StyledLabel } from "styles/common/StyledLabel";
+import ImageModal from "components/common/ImageModal";
 
 const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const [pageNumber, setPageNumber] = useState(1);
   const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageModal, setImageModal] = useState(false);
+  const [selectImgUrl, setSelectImageUrl] = useState("");
+
   const [isLoading, setIsLoading] = useRecoilState(loadingState);
 
   const downloadFile = (fileId: number): Promise<string> => {
@@ -49,6 +53,11 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
     }
   }, [fileList]);
 
+  const handleImageModal = (url: string) => {
+    setSelectImageUrl(url);
+    setImageModal(true);
+  };
+
   return (
     <StyledColLayout>
       {fileList.length > 0 && <StyledLabel>{fileList[pageNumber].fileName}</StyledLabel>}
@@ -70,10 +79,19 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
               src={`/api/spring/files/download/${fileList[pageNumber + 1].id}`}
               alt={fileList[pageNumber].fileName}
             /> */}
-            <StyledImage src={imageUrls[pageNumber - 1]} alt={`Image ${pageNumber - 1}`} />
-            <StyledImage src={imageUrls[pageNumber]} alt={`Image ${pageNumber}`} />
+            <StyledImage
+              src={imageUrls[pageNumber - 1]}
+              alt={`Image ${pageNumber - 1}`}
+              onClick={() => handleImageModal(imageUrls[pageNumber - 1])}
+            />
+            <StyledImage
+              src={imageUrls[pageNumber]}
+              alt={`Image ${pageNumber}`}
+              onClick={() => handleImageModal(imageUrls[pageNumber])}
+            />
           </StyledRowLayout>
         )}
+        {imageModal && <ImageModal imageUrl={selectImgUrl} setImageModal={setImageModal} />}
 
         {pageNumber < fileList.length - 2 && (
           <RightButton

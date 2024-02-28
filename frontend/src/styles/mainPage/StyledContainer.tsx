@@ -10,7 +10,7 @@ const Animation = keyframes`
 `;
 
 export const StyledContainer = styled.div`
-  background: linear-gradient(90deg, #f9f9f9 50%, #2f70af 50%);
+  background-image: linear-gradient(rgba(255, 255, 255, 1), rgba(47, 112, 175, 0.3)), url("main/bg.jfif");
   background-size: cover;
   background-position: center;
   height: 100vh;
