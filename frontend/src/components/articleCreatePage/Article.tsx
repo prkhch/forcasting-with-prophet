@@ -119,6 +119,7 @@ const Article = () => {
     formData.current.set("categoryId", categoryId);
     // files already set
     // options already set
+    console.log(formData.current);
     axios
       .post("/api/spring/article", formData.current)
       .then((res) => {
