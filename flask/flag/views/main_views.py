@@ -43,10 +43,10 @@ def toPandas():
         if df.columns[0] != 'Date':
             return jsonify({'error': 'The first column must be named "Date".'}), 400
 
-        try:
-            pd.to_datetime(df['Date'], format='%Y-%m-%d')
-        except ValueError:
-            return jsonify({'error': 'The Date column must be in "yyyy-mm-dd" format.'}), 400
+        # try:
+        #     pd.to_datetime(df['Date'], format='%Y-%m-%d')
+        # except ValueError:
+        #     return jsonify({'error': 'The Date column must be in "yyyy-mm-dd" format.'}), 400
 
         # try:
         #     df.iloc[1:, 1:].apply(pd.to_numeric)
