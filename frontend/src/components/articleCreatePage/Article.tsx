@@ -95,7 +95,7 @@ const Article = () => {
       base64Array.forEach((base64, index) => {
         const blob = handleBase64ToBlob(base64, "image/jpeg");
         const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
-        formData.current.set("files", file);
+        formData.current.append("files", file);
       });
     });
     return formData;
