@@ -28,7 +28,7 @@ export const StyledUl = styled.ul`
 `;
 
 export const StyledLi = styled.li`
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   cursor: pointer;
   text-align: center;
   width: 7rem;
@@ -44,7 +44,7 @@ export const StyledLi = styled.li`
 export const StyledSelect = styled.div`
   display: flex;
   justify-content: space-around;
-  background-color: #f9f9f9;
+  /* background-color: #ffffff; */
   cursor: pointer;
   text-align: center;
   width: 5rem;

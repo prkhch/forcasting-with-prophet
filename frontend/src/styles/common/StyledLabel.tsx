@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 export const StyledLabel = styled.div`
   font-family: "SuiteBold", sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   color: #393939;
   margin: 1rem 0;
 `;

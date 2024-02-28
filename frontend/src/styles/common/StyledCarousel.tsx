@@ -27,6 +27,7 @@ export const StyledImage = styled.img`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem;
-  width: 45%;
+  margin: 0rem 4rem 1rem 4rem;
+  width: 40%;
+  cursor: pointer;
 `;
