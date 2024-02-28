@@ -116,11 +116,11 @@ def toProphet():
                 # print(m.country_holidays)
 
                 # y ds
-                fig1 = m.plot(forecast, figsize=(8, 8))  # 이미지 저장
+                fig1 = m.plot(forecast, figsize=(16, 9))  # 이미지 저장
                 add_changepoints_to_plot(fig1.gca(), m, forecast, threshold=options["cpThreshold"])  # change_points
 
                 # components ds
-                fig2 = m.plot_components(forecast, figsize=(8, 8))
+                fig2 = m.plot_components(forecast, figsize=(9, 9))
 
                 # save local
                 # fig1.savefig('static/images/prophet_plot.png')
