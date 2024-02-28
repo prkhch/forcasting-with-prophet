@@ -48,10 +48,10 @@ def toPandas():
         except ValueError:
             return jsonify({'error': 'The Date column must be in "yyyy-mm-dd" format.'}), 400
 
-        try:
-            df.iloc[0:, 0:].apply(pd.to_numeric)
-        except ValueError:
-            return jsonify({'error': 'Data must be numeric.'}), 400
+        # try:
+        #     df.iloc[1:, 1:].apply(pd.to_numeric)
+        # except ValueError:
+        #     return jsonify({'error': 'Data must be numeric.'}), 400
 
         if len(df.columns) > 6:
             return jsonify({'error': 'Cannot exceed 5 "y" columns.'}), 400
