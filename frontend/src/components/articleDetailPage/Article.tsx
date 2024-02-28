@@ -118,11 +118,11 @@ const Article = ({ id }: { id: string }) => {
     }
   }, [fileId]);
 
-  useEffect(() => {
-    if (fileData && fileName) {
-      // ApiPandas(fileData, fileName);
-    }
-  }, [fileData]);
+  // useEffect(() => {
+  //   if (fileData && fileName) {
+  //     // ApiPandas(fileData, fileName);
+  //   }
+  // }, [fileData]);
 
   return (
     <StyledArticle>
