@@ -40,13 +40,13 @@ const CategotyView = ({ name, id }: { name: string; id: string }) => {
         <StyledCategoryLabel>{name}</StyledCategoryLabel>
         <MoreButton
           func={() => {
-            navigate(`category/${name}`, { state: { id: id, name: name } });
+            navigate(`/category/${name}`, { state: { id: id, name: name } });
           }}
         />
       </StyledLabelContainer>
       <StyledAllArticles>
         {articleList.map((article, idx) => (
-          <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
+          <StyledArticle key={idx} onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}>
             <StyledTitle>{article.title}</StyledTitle>
             <StyledContent>{article.content}</StyledContent>
           </StyledArticle>

@@ -48,13 +48,16 @@ const AllView = () => {
             <StyledCategoryLabel>All</StyledCategoryLabel>
             <MoreButton
               func={() => {
-                navigate(`category/all`, { state: { id: 0, name: "All" } });
+                navigate(`/category/all`, { state: { id: 0, name: "All" } });
               }}
             />
           </StyledLabelContainer>
           <StyledAllArticles>
             {articleList.map((article, idx) => (
-              <StyledArticle key={idx} onClick={() => navigate(`article/${article.id}`, { state: { id: article.id } })}>
+              <StyledArticle
+                key={idx}
+                onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}
+              >
                 <StyledTitle>{article.title}</StyledTitle>
                 <StyledContent>{article.content}</StyledContent>
               </StyledArticle>
