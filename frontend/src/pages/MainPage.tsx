@@ -10,12 +10,7 @@ const MainPage = () => {
     <StyledContainer>
       <StyledFirstText>Forcasting with</StyledFirstText>
       <StyledSecondText>Prophet</StyledSecondText>
-      <StyledButton onClick={() => navigate("/home")}>Go</StyledButton>
-      <StyledLogo src="logo.png" alt="logo" />
-      <StyledImage1 src="main/excel.png" alt="img1" />
-      <StyledImage2 src="main/option.png" alt="img2" />
-      <StyledImage3 src="main/graph2.jpeg" alt="img3" />
-      <StyledImage4 src="main/graph1.png" alt="img4" />
+      <StyledButton onClick={() => navigate("/home")}>➡</StyledButton>
     </StyledContainer>
   );
 };
