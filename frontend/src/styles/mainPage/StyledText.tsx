@@ -27,7 +27,7 @@ export const StyledButton = styled.button`
   color: #393939;
   cursor: pointer;
   position: absolute;
-  border-bottom: 4px #393939 solid;
+  border-bottom: 2px #393939 solid;
   top: 33%;
   left: 5%;
 `;
