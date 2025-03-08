@@ -43,7 +43,7 @@
     - JPA
     - MySQL
     - AWS / Nginx
-- **AI / Data**
+
     - Python
     - Flask
     - Pandas
