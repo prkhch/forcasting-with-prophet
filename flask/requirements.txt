@@ -6,6 +6,7 @@ contourpy==1.2.0
 cycler==0.12.1
 et-xmlfile==1.1.0
 Flask==3.0.0
+flask-cors==5.0.1
 fonttools==4.47.2
 holidays==0.41
 importlib-resources==6.1.1
