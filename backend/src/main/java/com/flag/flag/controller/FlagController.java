@@ -29,6 +29,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 public class FlagController {
