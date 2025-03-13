@@ -9,3 +9,4 @@ def create_app():
     app.register_blueprint(main_views.bp)
 
     return app
+
