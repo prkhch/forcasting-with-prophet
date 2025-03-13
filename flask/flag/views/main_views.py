@@ -10,6 +10,7 @@ import json
 matplotlib.use('Agg')
 bp = Blueprint('main', __name__, url_prefix='/')
 
+print("main_views")
 
 def encode_image_to_base64(fig):
     buf = BytesIO()
