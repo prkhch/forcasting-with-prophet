@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const StyledBackGround = styled.div`
   /* background-color: #f9f9f9; */
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
 `;
 
@@ -23,4 +25,8 @@ export const StyledColLayout = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+`;
+
+export const StyledContent = styled.div`
+  flex: 1;
 `;
