@@ -15,7 +15,9 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
   return (
     <StyledColLayout>
-      {fileList.length > 0 && <StyledBoldText>{fileList[pageNumber].fileName}</StyledBoldText>}
+      {fileList.length > 0 && (
+        <StyledBoldText>{fileList[pageNumber].fileName}</StyledBoldText>
+      )}
 
       <StyledContainer>
         {pageNumber > 1 && (
@@ -30,11 +32,13 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
         {fileList.length > 0 && (
           <StyledRowLayout>
             <StyledImage
-              src={`/api/spring/files/download/${fileList[pageNumber].id}`}
+              src={`${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileList[pageNumber].id}`}
               alt={fileList[pageNumber].fileName}
             />
             <StyledImage
-              src={`/api/spring/files/download/${fileList[pageNumber + 1].id}`}
+              src={`${
+                process.env.REACT_APP_API_URL
+              }/api/spring/files/download/${fileList[pageNumber + 1].id}`}
               alt={fileList[pageNumber].fileName}
             />
           </StyledRowLayout>
@@ -51,7 +55,11 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
       </StyledContainer>
       <StyledRowLayout>
         {Array.from({ length: fileList.length / 2 }, (_, i) => (
-          <StyledIndicator key={i} onClick={() => setPageNumber(i * 2 + 1)} selected={pageNumber === i * 2 + 1}>
+          <StyledIndicator
+            key={i}
+            onClick={() => setPageNumber(i * 2 + 1)}
+            selected={pageNumber === i * 2 + 1}
+          >
             ●
           </StyledIndicator>
         ))}

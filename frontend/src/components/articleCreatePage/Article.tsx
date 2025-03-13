@@ -60,7 +60,11 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      .post("/api/spring/pandas", formData.current)
+      // .post("/api/spring/pandas", formData.current)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/spring/pandas`,
+        formData.current
+      )
       .then((res) => {
         setIsLoading(false);
         // setDataSet(res.data);
@@ -79,7 +83,10 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      .post("/api/spring/prophet", formData.current)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/spring/prophet`,
+        formData.current
+      )
       .then((res) => {
         setChartsObj(res.data);
         setIsLoading(false);
@@ -94,7 +101,9 @@ const Article = () => {
     Object.entries(chartsObj).forEach(([key, base64Array]) => {
       base64Array.forEach((base64, index) => {
         const blob = handleBase64ToBlob(base64, "image/jpeg");
-        const file = new File([blob], `${key}_${index}.jpeg`, { type: "image/jpeg" });
+        const file = new File([blob], `${key}_${index}.jpeg`, {
+          type: "image/jpeg",
+        });
         formData.current.append("files", file);
       });
     });
@@ -121,7 +130,10 @@ const Article = () => {
     // options already set
     console.log(formData.current);
     axios
-      .post("/api/spring/article", formData.current)
+      .post(
+        `${process.env.REACT_APP_API_URL}/api/spring/article`,
+        formData.current
+      )
       .then((res) => {
         setIsLoading(false);
         navigate(-1);
@@ -140,9 +152,18 @@ const Article = () => {
 
         <ContentInput content={content} setContent={setContent} />
 
-        {fileName && <Options optionsString={optionString} setOptionString={setOptionString} />}
+        {fileName && (
+          <Options
+            optionsString={optionString}
+            setOptionString={setOptionString}
+          />
+        )}
 
-        <UploadInput fileInput={fileInput} handleChangeUpload={handleChangeUpload} fileName={fileName} />
+        <UploadInput
+          fileInput={fileInput}
+          handleChangeUpload={handleChangeUpload}
+          fileName={fileName}
+        />
 
         {/* 데이터셋 */}
         {/* {dataSet.length > 0 && (
@@ -166,14 +187,20 @@ const Article = () => {
         </StyledDataSet>
       )} */}
 
-        {Object.keys(chartsObj).length > 0 && <Carousel chartsObj={chartsObj} />}
+        {Object.keys(chartsObj).length > 0 && (
+          <Carousel chartsObj={chartsObj} />
+        )}
 
         <StyledErrorText>{errorMessage}</StyledErrorText>
 
         <StyledRowLayout>
-          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiProphet}>Run Prophet</StyledButton>}
+          {files && Object.keys(chartsObj).length >= 0 && (
+            <StyledButton onClick={ApiProphet}>Run Prophet</StyledButton>
+          )}
 
-          {files && Object.keys(chartsObj).length >= 0 && <StyledButton onClick={ApiCreateArticle}>Post</StyledButton>}
+          {files && Object.keys(chartsObj).length >= 0 && (
+            <StyledButton onClick={ApiCreateArticle}>Post</StyledButton>
+          )}
         </StyledRowLayout>
       </StyledColLayout>
     </StyledArticle>

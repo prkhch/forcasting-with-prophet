@@ -8,8 +8,16 @@ import Loading from "components/common/Loading";
 import { useRecoilState } from "recoil";
 import { loadingState } from "recoils/atoms/loadingState";
 
-import { StyledAllArticles, StyledArticle, StyledTitle, StyledContent } from "styles/homePage/StyledArticles";
-import { StyledCategoryContainer, StyledLabelContainer } from "styles/homePage/StyledContainer";
+import {
+  StyledAllArticles,
+  StyledArticle,
+  StyledTitle,
+  StyledContent,
+} from "styles/homePage/StyledArticles";
+import {
+  StyledCategoryContainer,
+  StyledLabelContainer,
+} from "styles/homePage/StyledContainer";
 import { StyledCategoryLabel } from "styles/homePage/StyledLabel";
 import { StyledColLayout } from "styles/common/StyledLayout";
 
@@ -23,7 +31,9 @@ const AllView = () => {
   const ApiGetArticleList = (pageNumber: number) => {
     setIsLoading(true);
     axios
-      .get(`/api/spring/articles?page=${pageNumber}&size=9&sort=id,desc`)
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/spring/articles?page=${pageNumber}&size=9&sort=id,desc`
+      )
       .then((res) => {
         setArticleList(res.data.content);
         setTotalPages(res.data.totalPages);
@@ -56,7 +66,11 @@ const AllView = () => {
             {articleList.map((article, idx) => (
               <StyledArticle
                 key={idx}
-                onClick={() => navigate(`/article/${article.id}`, { state: { id: article.id } })}
+                onClick={() =>
+                  navigate(`/article/${article.id}`, {
+                    state: { id: article.id },
+                  })
+                }
               >
                 <StyledTitle>{article.title}</StyledTitle>
                 <StyledContent>{article.content}</StyledContent>

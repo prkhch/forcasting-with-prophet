@@ -26,9 +26,12 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const downloadFile = (fileId: number): Promise<string> => {
     setIsLoading(true);
     return axios
-      .get(`/api/spring/files/download/${fileId}`, {
-        responseType: "blob",
-      })
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
+        {
+          responseType: "blob",
+        }
+      )
       .then((res) => {
         setIsLoading(false);
         return URL.createObjectURL(res.data);
@@ -60,7 +63,9 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
   return (
     <StyledColLayout>
-      {fileList.length > 0 && <StyledLabel>{fileList[pageNumber].fileName}</StyledLabel>}
+      {fileList.length > 0 && (
+        <StyledLabel>{fileList[pageNumber].fileName}</StyledLabel>
+      )}
 
       <StyledContainer>
         {pageNumber > 1 && (
@@ -91,7 +96,9 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
             />
           </StyledRowLayout>
         )}
-        {imageModal && <ImageModal imageUrl={selectImgUrl} setImageModal={setImageModal} />}
+        {imageModal && (
+          <ImageModal imageUrl={selectImgUrl} setImageModal={setImageModal} />
+        )}
 
         {pageNumber < fileList.length - 2 && (
           <RightButton
@@ -105,7 +112,11 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
 
       <StyledRowLayout>
         {Array.from({ length: fileList.length / 2 }, (_, i) => (
-          <StyledIndicator key={i} onClick={() => setPageNumber(i * 2 + 1)} selected={pageNumber === i * 2 + 1}>
+          <StyledIndicator
+            key={i}
+            onClick={() => setPageNumber(i * 2 + 1)}
+            selected={pageNumber === i * 2 + 1}
+          >
             ●
           </StyledIndicator>
         ))}

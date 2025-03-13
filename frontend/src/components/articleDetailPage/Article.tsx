@@ -33,7 +33,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetArtilceDetail = () => {
     setIsLoading(true);
     axios
-      .get(`/api/spring/articles/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/spring/articles/${id}`)
       .then((res) => {
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -49,7 +49,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetArtilceDataFilePath = () => {
     setIsLoading(true);
     axios
-      .get(`/api/spring/datafile/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/spring/datafile/${id}`)
       .then((res) => {
         setFileList(res.data);
         setFileId(res.data[0].id);
@@ -64,7 +64,10 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetFile = (fileId: number) => {
     setIsLoading(true);
     axios
-      .get(`/api/spring/files/download/${fileId}`, { responseType: "blob" })
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
+        { responseType: "blob" }
+      )
       .then((res) => {
         setFileData(res.data);
         setIsLoading(false);
@@ -78,7 +81,10 @@ const Article = ({ id }: { id: string }) => {
   const ApiDownload = (fileId: number, fileName: string) => {
     setIsLoading(true);
     axios
-      .get(`/api/spring/files/download/${fileId}`, { responseType: "blob" })
+      .get(
+        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
+        { responseType: "blob" }
+      )
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");
@@ -132,7 +138,11 @@ const Article = ({ id }: { id: string }) => {
           {title}
           <div>
             {fileList[0] && (
-              <StyledLink onClick={() => ApiDownload(fileList[0].id, fileList[0].fileName)}>
+              <StyledLink
+                onClick={() =>
+                  ApiDownload(fileList[0].id, fileList[0].fileName)
+                }
+              >
                 {fileList[0].fileName}
               </StyledLink>
             )}
