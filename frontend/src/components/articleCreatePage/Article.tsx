@@ -60,11 +60,7 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      // .post("/api/spring/pandas", formData.current)
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/spring/pandas`,
-        formData.current
-      )
+      .post("/api/spring/pandas", formData.current)
       .then((res) => {
         setIsLoading(false);
         // setDataSet(res.data);
@@ -83,10 +79,7 @@ const Article = () => {
     setErrorMessage("");
     setIsLoading(true);
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/spring/prophet`,
-        formData.current
-      )
+      .post("/api/spring/prophet", formData.current)
       .then((res) => {
         setChartsObj(res.data);
         setIsLoading(false);
@@ -130,10 +123,7 @@ const Article = () => {
     // options already set
     console.log(formData.current);
     axios
-      .post(
-        `${process.env.REACT_APP_API_URL}/api/spring/article`,
-        formData.current
-      )
+      .post("/api/spring/article", formData.current)
       .then((res) => {
         setIsLoading(false);
         navigate(-1);

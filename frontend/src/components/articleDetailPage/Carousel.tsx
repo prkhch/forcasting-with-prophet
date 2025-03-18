@@ -26,12 +26,9 @@ const Carousel = ({ fileList }: { fileList: FileResponse[] }) => {
   const downloadFile = (fileId: number): Promise<string> => {
     setIsLoading(true);
     return axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
-        {
-          responseType: "blob",
-        }
-      )
+      .get(`/api/spring/files/download/${fileId}`, {
+        responseType: "blob",
+      })
       .then((res) => {
         setIsLoading(false);
         return URL.createObjectURL(res.data);

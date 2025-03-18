@@ -33,7 +33,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetArtilceDetail = () => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/spring/articles/${id}`)
+      .get(`/api/spring/articles/${id}`)
       .then((res) => {
         setTitle(res.data.title);
         setContent(res.data.content);
@@ -49,7 +49,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetArtilceDataFilePath = () => {
     setIsLoading(true);
     axios
-      .get(`${process.env.REACT_APP_API_URL}/api/spring/datafile/${id}`)
+      .get(`/api/spring/datafile/${id}`)
       .then((res) => {
         setFileList(res.data);
         setFileId(res.data[0].id);
@@ -64,10 +64,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiGetFile = (fileId: number) => {
     setIsLoading(true);
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
-        { responseType: "blob" }
-      )
+      .get(`/api/spring/files/download/${fileId}`, { responseType: "blob" })
       .then((res) => {
         setFileData(res.data);
         setIsLoading(false);
@@ -81,10 +78,7 @@ const Article = ({ id }: { id: string }) => {
   const ApiDownload = (fileId: number, fileName: string) => {
     setIsLoading(true);
     axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/api/spring/files/download/${fileId}`,
-        { responseType: "blob" }
-      )
+      .get(`/api/spring/files/download/${fileId}`, { responseType: "blob" })
       .then((res) => {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement("a");

@@ -28,7 +28,7 @@ const CategotyView = ({ name, id }: { name: string; id: string }) => {
     setIsLoading(true);
     axios
       .get(
-        `${process.env.REACT_APP_API_URL}/api/spring/articles?page=${pageNumber}&size=3&sort=id,desc&categoryId=${id}`
+        `/api/spring/articles?page=${pageNumber}&size=3&sort=id,desc&categoryId=${id}`
       )
       .then((res) => {
         setArticleList(res.data.content);

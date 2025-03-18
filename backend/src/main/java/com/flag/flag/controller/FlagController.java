@@ -29,7 +29,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 public class FlagController {
@@ -111,6 +110,7 @@ public class FlagController {
 
     @PostMapping("/api/spring/pandas")
     public ResponseEntity<String> postPandas(@RequestParam("files") MultipartFile file) throws IOException {
+        System.out.println("Received file: " + file.getOriginalFilename());
         DataFileFlaskRequest dataFileFlaskRequest = new DataFileFlaskRequest();
         dataFileFlaskRequest.setFileName(file.getOriginalFilename());
         dataFileFlaskRequest.setFileSize(file.getSize());
