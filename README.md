@@ -12,3 +12,4 @@
   
 
 </aside>
+<img width="1863" height="1046" alt="Image" src="https://github.com/user-attachments/assets/f5ab3fcc-5316-485b-900a-64b3f61d50e7" />
